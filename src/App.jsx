@@ -1,10 +1,14 @@
+import { BrowserRouter } from 'react-router-dom';
+import withSplashScreen from './Components/withSplashScreen'
+import MainLayout from './Pages/Layout';
+import 'antd/dist/antd.css';
 
 function App() {
   return (
-   <div className="container">
-     Home
-   </div>
+    <BrowserRouter >
+      <MainLayout />
+    </BrowserRouter>
   );
 }
 
-export default App;
+export default withSplashScreen(App);
