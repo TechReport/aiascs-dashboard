@@ -30,7 +30,7 @@ npm run test
 
 * Twitter: [@dae54](https://twitter.com/dae54)
 * Github: [@dae54](https://github.com/dae54)
-* LinkedIn: [@Daniel Ernest](https://linkedin.com/in/Daniel Ernest)
+* LinkedIn: [@Daniel Ernest](https://www.linkedin.com/in/daniel-ernest-0b0969123/)
 
 ## Show your support
 
