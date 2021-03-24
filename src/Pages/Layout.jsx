@@ -14,7 +14,11 @@ export default function MainLayout() {
                 <Navbar />
                 <Content style={{ padding: '0 10px', backgroundColor: 'white' }}>
                     <Switch>
-                        {routes.map(route => <Route exact path={route.url} component={route.component} />)}
+                        {routes.map(route => route.submenu ?
+                            route.submenu.map(subroute => <Route exact path={subroute.url} component={subroute.component} />)
+                            :
+                            <Route exact path={route.url} component={route.component} />
+                        )}
                     </Switch>
                 </Content>
                 <Footer style={{ textAlign: 'center', backgroundColor: 'white' }}>
