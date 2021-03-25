@@ -1,3 +1,3 @@
-import MainDashboardCard from './MainDashboardCard'
+import DashboardWidgetCard from './DashboardWidgetCard'
 
-export { MainDashboardCard }
+export { DashboardWidgetCard }

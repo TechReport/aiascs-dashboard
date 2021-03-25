@@ -1,4 +1,4 @@
-import { MainDashboardCard } from "../../Components/Reusable"
+import { DashboardWidgetCard } from "../../Components/Reusable"
 
 export default function Dashboard() {
     const data = [
@@ -9,7 +9,7 @@ export default function Dashboard() {
     ]
     return (
         <div className='row mt-3 w-100' gutter={12} >
-            {data.map(item => <MainDashboardCard item={item} />)}
+            {data.map(item => <DashboardWidgetCard item={item} />)}
         </div >
     )
 }
