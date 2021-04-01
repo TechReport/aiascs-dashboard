@@ -1,3 +1,4 @@
-import Users from './Users'
+import UsersHome from './Users/'
+import Products from './Products'
 
-export { Users }
+export { UsersHome as Users, Products }
