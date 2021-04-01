@@ -1,0 +1,33 @@
+/* .login {
+    display: flex;
+    color: whitesmoke;
+    background-color: #264653;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} */
+.login {
+    color: whitesmoke;
+    background-color: #264653;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+/* .login .title{
+    text-align: center;
+    width: 40%;
+    margin:0 auto;
+} */
+
+.login .cont{
+    width: 400px;
+    margin:0 auto;
+}
+/* body .login{
+    background-color: #264653;
+} */
