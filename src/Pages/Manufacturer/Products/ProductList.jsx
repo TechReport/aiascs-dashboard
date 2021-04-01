@@ -1,4 +1,4 @@
-import { Skeleton, Tag } from 'antd'
+import { Skeleton } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { productAPI } from './productAPI'
