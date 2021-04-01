@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import loadSession from '../Services/auth/auth0Client';
+import { BrowserRouter } from 'react-router-dom';
+import Login from '../Pages/Authentication';
+import { authAPI } from '../Services/auth/authAPI';
 import '../Styles/splashscreen.css';
 
 
@@ -27,18 +29,19 @@ function withSplashScreen(WrappedComponent) {
         async componentDidMount() {
             try {
                 console.log('checking...')
-                const resp = await loadSession()
+                const resp = await authAPI.checkSession()
                 console.log(resp)
                 console.log('done...')
                 this.setState({
                     loading: false,
-                    authenticated: resp.status
+                    authenticated: true
                 });
-                
+
             } catch (err) {
                 console.log(err);
                 this.setState({
                     loading: false,
+                    authenticated: false
                 });
             }
         }
@@ -48,7 +51,12 @@ function withSplashScreen(WrappedComponent) {
             if (this.state.loading) return LoadingMessage();
 
             // otherwise, show the desired route
-            return <WrappedComponent {...this.props} />;
+            // return this.state.authenticated ? <WrappedComponent {...this.props} /> : <Login />;
+            return (
+                <BrowserRouter>
+                    {this.state.authenticated ? <WrappedComponent {...this.props} /> : <Login />}
+                </BrowserRouter>
+            )
         }
     };
 }
