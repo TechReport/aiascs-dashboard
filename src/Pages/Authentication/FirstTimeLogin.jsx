@@ -1,10 +1,9 @@
-import { Form, Alert, Button, Input, Space, Steps, notification } from 'antd'
+import { Form, Alert, Button, Input, notification } from 'antd'
 // import React, { useState } from 'react'
 import {
     KeyOutlined,
 } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
-import { Link } from 'react-router-dom';
 import { authAPI } from '../../Services/auth/authAPI';
 import eventEmitter from '../../Services/EventEmitter'
 

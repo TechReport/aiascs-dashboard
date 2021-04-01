@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button, Input, Select, Radio, Space, Form, Alert, notification } from 'antd';
-import { userAPI } from './api'
+import { userAPI } from './userAPI'
 import eventemitter from '../../../Services/EventEmitter'
 
 export default function App({ handleOk }) {

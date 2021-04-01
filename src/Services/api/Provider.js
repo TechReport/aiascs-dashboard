@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { handleResponse, handleError } from './response';
-
-const BASE_URL = 'http://localhost:8500/api/v1';
+import { handleResponse, handleError } from './Response';
 
 /** @param {string} resource */
-const getAll = (resource) => {
+const getAll = (resource, selector) => {
     return axios
-        .get(`${BASE_URL}/${resource}`)
+        .get(`/${resource}`, {
+            params: { select: selector }
+        })
         .then(handleResponse)
         .catch(handleError);
 };
@@ -14,18 +14,20 @@ const getAll = (resource) => {
 
 /** @param {string} resource @param {string} id */
 const getSingle = (resource, id) => {
+    // console.log(resource)
+    // console.log(id)
     return axios
-        .get(`${BASE_URL}/${resource}/${id}`)
+        .get(`/${resource}/${id}`)
         .then(handleResponse)
         .catch(handleError);
 };
 
 /** @param {string} resource @param {object} model */
 const post = (resource, model) => {
-    console.log(resource)
-    console.log(model)
+    // console.log(resource)
+    // console.log(model)
     return axios
-        .post(`${BASE_URL}/${resource}`, model)
+        .post(`/${resource}`, model)
         .then(handleResponse)
         .catch(handleError);
 };

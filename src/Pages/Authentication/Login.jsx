@@ -1,7 +1,5 @@
 import { Form, Alert, Button, Input, Space, Steps } from 'antd'
-import React, { useState } from 'react'
 import '../../Styles/login.css'
-import axios from 'axios';
 
 import {
     UserOutlined
@@ -18,33 +16,15 @@ export default function Login() {
     }
 
     const onFinish = async (userDetails) => {
-        console.log(userDetails)
-
-        // const {data, error} = await authAPI.login(userDetails)
-        // const data = await authAPI.login(userDetails)
-
-        // console.log(data)
-        // console.log(error)
-
-
         await authAPI.login(userDetails)
             .then(data => {
-                console.log(data)
-                console.log(data.data)
-                console.log(data.data.target)
                 if (data.data.target === 'firstTimeLoginStatus') {
                     sessionStorage.setItem('ftl', data.data.tempToken)
-                    // axios.defaults.headers.common['Authorization'] = `Bearer ${data.data.tempToken}`;
-                    // axios.defaults.headers.at
                     return eventEmitter.emit('goto', 1)
                 }
                 localStorage.setItem('token', data.data.token)
                 localStorage.setItem('user', JSON.stringify(data.data.user))
-                // const hist = useHistory()
                 window.location.reload()
-                // hist.replace('/')
-                // goto(1)
-                // eventEmitter.emit('goto', 1)
             }).catch(err => {
                 console.log(err)
             })

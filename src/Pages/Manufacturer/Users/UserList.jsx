@@ -1,7 +1,7 @@
 import { Skeleton, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
-import { userAPI } from './api'
+import { userAPI } from './userAPI'
 import eventEmitter from '../../../Services/EventEmitter'
 
 export default function UserList() {

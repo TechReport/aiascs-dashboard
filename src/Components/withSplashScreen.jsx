@@ -28,11 +28,11 @@ function withSplashScreen(WrappedComponent) {
 
         async componentDidMount() {
             try {
-                console.log('checking...')
-                const resp = await authAPI.checkSession()
-                console.log(resp)
-                console.log('done...')
-                this.setState({
+                // console.log('checking...')
+                await authAPI.checkSession()
+                // console.log(resp)
+                // console.log('done...')
+                return this.setState({
                     loading: false,
                     authenticated: true
                 });
