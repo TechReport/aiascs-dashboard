@@ -18,9 +18,17 @@ export function handleResponse(response) {
 
 export function handleError(error) {
     // console.log(error.response)
+    // console.log(error)
     if (error.message === 'Network Error') {
         // eslint-disable-next-line
-        throw { status: 'error', response: [{ message: 'Network Error', data: { dev_error: error, descriptions: 'Something is temporarily wrong with your network connection. Please make sure you are connected to the internet and then try again' } }] }
+        throw {
+            message: error.message,
+            descriptions: 'Something is temporarily wrong with your network connection. Please make sure you are connected to the internet and then try again',
+            debug: {
+                dev_error: error.message,
+                stack: error
+            }
+        }
     } else {
         if (error.response.data.category === 'invalidInput') {
             // eslint-disable-next-line
@@ -36,7 +44,7 @@ export function handleError(error) {
             // eslint-disable-next-line
             throw {
                 message: error.response.data.message,
-                descriptions: 'Please login to access the resource',
+                descriptions: 'Please login again to access the resources',
                 debug: {
                     dev_error: error.response.data.developerMessage,
                     stack: error.response.data.stack
