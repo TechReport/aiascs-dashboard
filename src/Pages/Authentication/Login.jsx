@@ -1,21 +1,26 @@
-import { Form, Alert, Button, Input, Space, Steps } from 'antd'
+import { Form, Button, Input, Alert } from 'antd'
 import '../../Styles/login.css'
 
 import {
     UserOutlined
 } from '@ant-design/icons';
+import { useState } from 'react';
+
 import Avatar from 'antd/lib/avatar/avatar';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { authAPI } from '../../Services/auth/authAPI';
 
 import eventEmitter from '../../Services/EventEmitter'
 
 export default function Login() {
+    const [error, setError] = useState({ status: false, message: '', descriptions: '' })
+
     const onFinishFailed = async (e) => {
         console.log(e)
     }
 
     const onFinish = async (userDetails) => {
+        setError({ status: false, message: '', descriptions: '' })
         await authAPI.login(userDetails)
             .then(data => {
                 if (data.data.target === 'firstTimeLoginStatus') {
@@ -27,6 +32,7 @@ export default function Login() {
                 window.location.reload()
             }).catch(err => {
                 console.log(err)
+                setError({ status: true, message: err.message, descriptions: err.descriptions })
             })
     }
 
@@ -54,13 +60,13 @@ export default function Login() {
                 </Form.Item>
                 <p>Forgot Password ? <Link>Reset</Link> </p>
                 <p>Don't have account? <Link to='/'>Contact Admin</Link></p>
-                {/* {error.status &&
-                <Alert
-                    message={error.message}
-                    description={error.descriptions}
-                    type="error"
-                />
-            } */}
+                {error.status &&
+                    <Alert
+                        message={error.message}
+                        description={error.descriptions}
+                        type="error"
+                    />
+                }
             </Form>
         </div>
     )
