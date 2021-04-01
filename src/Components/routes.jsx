@@ -1,4 +1,4 @@
-import Login from '../Pages/Authentication/Login'
+import Login from '../Pages/Authentication'
 
 import {
     DesktopOutlined,
@@ -6,7 +6,7 @@ import {
     FundProjectionScreenOutlined
 } from '@ant-design/icons';
 import Dashboard from '../Pages/Dashboard';
-import { Users } from '../Pages/Manufacturer';
+import { Products, Users } from '../Pages/Manufacturer';
 
 const routes = [
     {
@@ -35,11 +35,17 @@ const routes = [
                 key: 21
             },
             {
+                name: 'Agents',
+                url: '/manufacturers/agents',
+                component: 'Users',
+                key: 22
+            },
+            {
                 name: 'Products',
                 url: '/manufacturers/products',
                 icon: UserOutlined,
-                component: 'Users',
-                key: 22
+                component: Products,
+                key: 23
             },
             // {
             //     name: 'Users',
@@ -61,7 +67,6 @@ const routes = [
             {
                 name: 'Users',
                 url: '/manufacturers/users',
-                icon: UserOutlined,
                 component: Users,
                 key: 31
             },
