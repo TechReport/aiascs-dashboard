@@ -5,20 +5,20 @@ export class ApiCore {
     constructor(options) {
 
         if (options.getAll) {
-            this.getAll = () => {
-                return apiProvider.getAll(options.url);
+            this.getAll = (resource, selector) => {
+                return apiProvider.getAll(resource, selector);
             };
         }
 
         if (options.getSingle) {
-            this.getSingle = (id) => {
-                return apiProvider.getSingle(options.url, id);
+            this.getSingle = (resource, id) => {
+                return apiProvider.getSingle(resource, id);
             };
         }
 
         if (options.post) {
-            this.post = (model) => {
-                return apiProvider.post(options.url, model);
+            this.post = (resource, model) => {
+                return apiProvider.post(resource, model);
             };
         }
 
