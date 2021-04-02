@@ -6,6 +6,8 @@
   </a>
 </p>
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c24d951d-d599-4516-b250-809e33a44671/deploy-status)](https://app.netlify.com/sites/youthful-curie-26e419/deploys)
+
 ## Install
 
 ```sh
