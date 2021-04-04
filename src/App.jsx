@@ -17,8 +17,7 @@ axios.defaults.baseURL = baseURL
 function App() {
   return (
     <BrowserRouter >
-    hellow there
-      {/* <MainLayout /> */}
+      <MainLayout />
     </BrowserRouter>
   );
 }
