@@ -3,7 +3,6 @@ import {
     AppstoreAddOutlined
 } from '@ant-design/icons';
 import { Button, Modal } from "antd"
-import { DashboardWidgetCard } from "../../../Components/Reusable"
 import AddNewProduct from './AddNewProduct';
 import ProductList from './ProductList';
 
@@ -21,22 +20,6 @@ export default function Products() {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
-
-
-    const data = [
-        {
-            title: 'Products',
-            body: '132 k', percent: '+20%',
-            descriptions: 'coming soon',
-            x: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
-            y: [30, 40, 75, 70, 99, 120, 300, 401, 500]
-        },
-        // {
-        //     title: 'Agents',
-        //     body: '37', percent: '-20%',
-        //     descriptions: 'coming soon'
-        // }
-    ]
     return (
         <div>
             {/* <div className='row mt-4 mx-0' styl={{ width: '100%' }}>
@@ -60,7 +43,7 @@ export default function Products() {
 
             <div className="container-fluid mt-4">
                 <div className="row">
-                    <div className="col-6">
+                    <div className="col-xl-8">
                         <div className="card shadow">
                             <div className="card-header bg-white">
                                 <div className="title h5 text-muted">List</div>
@@ -72,27 +55,6 @@ export default function Products() {
                     </div>
                 </div>
             </div>
-            {/*
-            <div className="container-fluid mt-4">
-                <div className="card shadow">
-                    <div className="card-body">
-                        <Tabs>
-                            <TabPane tab="OPERATION PERSONNELS" key="1" >
-                                <div className="row shadow">
-                                    <div className="col-4">
-                                        <div className="card" style={{ height: '20vw', width: '40vw' }}>
-                                            <Graph />
-                                        </div>
-                                    </div>
-                                </div>
-                            </TabPane>
-                            <TabPane tab="AGENTS" key="2">
-                                Content of tab 2
-                        </TabPane>
-                        </Tabs>
-                    </div>
-                </div>
-            </div> */}
         </div >
     )
 }

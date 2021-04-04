@@ -1,10 +1,18 @@
-import { Alert, Button, DatePicker, Form, Input, Radio, Select, Space, Switch } from 'antd'
-import { useState, useEffect } from 'react';
+import { Alert, Button, DatePicker, Form, Input, notification, Space } from 'antd'
+import { useState } from 'react';
 import { productAPI } from './productAPI';
+import eventemitter from '../../../Services/EventEmitter'
 
-export default function AddNewProduct() {
+export default function AddNewProduct({ handleOk }) {
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
-    // const [associateQRCode, setAssociateQRCode] = useState(true)
+
+    const openNotification = ({ message, description = '' }) => {
+        notification.success({
+            message,
+            description,
+            placement: 'bottomLeft'
+        });
+    };
 
 
     const layout = {
@@ -23,26 +31,20 @@ export default function AddNewProduct() {
     };
     const onFinish = async (productDetails) => {
         console.log(productDetails)
-        // console.log(userDetails)
-        // setLoading(true)
         setError({ status: false, message: '', descriptions: '' })
+
         await productAPI.post('products/', { newProduct: productDetails })
             .then(res => {
                 console.log(res)
-                // userDetails = ''
-                // openNotification({ message: res.message })
-                // eventemitter.emit('updateUsers')
-                // handleOk()
+                openNotification({ message: res.message })
+                eventemitter.emit('updateProducts')
+                handleOk()
             })
             .catch(err => {
                 console.log(err)
-                // console.log(err.message)
-                // console.log(err.descriptions)
-                // setError({ status: true, errObj: err.response })
                 setError({ status: true, message: err.message, descriptions: err.descriptions })
-                // console.log('eerr')
             })
-            // .finally(() => setLoading(false))
+        // .finally(() => setLoading(false))
     };
 
 
@@ -64,15 +66,9 @@ export default function AddNewProduct() {
             onFinishFailed={onFinishFailed}>
             <Form.Item
                 label="Name"
-                name="productName"
+                name="name"
                 rules={[{ required: true, message: "Please input User's First Name!" }]}>
                 <Input placeholder='Product Name' />
-            </Form.Item>
-            <Form.Item
-                label="Batch"
-                name="batch"
-                rules={[{ required: true, message: 'Please input Batch number!' }]}>
-                <Input placeholder='Batch Id' />
             </Form.Item>
             <Form.Item
                 label="Product Count"
@@ -80,16 +76,9 @@ export default function AddNewProduct() {
                 rules={[{ required: true, message: 'Please input your Phone number!' }]}>
                 <Input type='number' placeholder='Enter product count' />
             </Form.Item>
-
-            <Form.Item
-                label="Associate QR Code"
-                name="associateQCode">
-                <Switch defaultChecked />
-            </Form.Item>
-
             <Form.Item
                 label="Expiry Date"
-                name="expiryDate"
+                name="expiry"
                 rules={[{ required: true, message: 'Please input your Phone number!' }]}>
                 <DatePicker placeholder='Select Expiry Date' onChange={onChange} />
             </Form.Item>
