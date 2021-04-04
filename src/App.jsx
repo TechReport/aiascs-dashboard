@@ -5,7 +5,7 @@ import axios from 'axios'
 import 'antd/dist/antd.css';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
 
-const baseURL = 'http://localhost:5400/'
+const baseURL = 'http://localhost:5400/api/v1/'
 
 
 axios.defaults.headers.common['Authorization'] =
