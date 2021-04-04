@@ -1,3 +1,4 @@
+import { notification } from 'antd';
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Login from '../Pages/Authentication';
@@ -14,6 +15,14 @@ function LoadingMessage() {
         </div>
     );
 }
+
+function openNotification({ message, description = '' }) {
+    notification.warn({
+        message,
+        description,
+        placement: 'bottomLeft'
+    });
+};
 
 
 function withSplashScreen(WrappedComponent) {
@@ -38,11 +47,16 @@ function withSplashScreen(WrappedComponent) {
                 });
 
             } catch (err) {
-                console.log(err);
                 this.setState({
                     loading: false,
                     authenticated: false
                 });
+                if (localStorage.getItem('token')) {
+                    openNotification({ message: err.message, description: err.descriptions })
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('user')
+                    return
+                }
             }
         }
 
