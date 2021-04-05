@@ -12,7 +12,7 @@ const routes = [
     {
         name: 'Dashboard',
         component: Dashboard,
-        url: '/dashboard',
+        url: '/',
         Icon: DesktopOutlined,
         comments: 'Dashboard endpoint',
         category: 1,
