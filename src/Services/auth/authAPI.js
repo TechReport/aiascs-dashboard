@@ -30,6 +30,17 @@ authAPI.login = async (userDetails) => {
         })
 }
 
+authAPI.signOut = async () => {
+    return await axios.post('/user/signout')
+        .then(res => {
+            localStorage.clear()
+            sessionStorage.clear()
+            return window.location.reload()
+        }).catch(err => {
+            return handleError(err)
+        })
+}
+
 authAPI.resetPassword = async (userData) => {
     console.log(userData)
 
