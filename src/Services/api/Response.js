@@ -41,6 +41,8 @@ export function handleError(error) {
                 }
             }
         } else if (error.response.data.category === 'unauthorized') {
+            localStorage.clear()
+            sessionStorage.clear()
             // eslint-disable-next-line
             throw {
                 message: error.response.data.message,

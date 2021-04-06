@@ -7,12 +7,13 @@ import {
 } from '@ant-design/icons';
 import Dashboard from '../Pages/Dashboard';
 import { Products, Users } from '../Pages/Manufacturer';
+import Product from '../Pages/Manufacturer/Products/Product';
 
 const routes = [
     {
         name: 'Dashboard',
         component: Dashboard,
-        url: '/dashboard',
+        url: '/',
         Icon: DesktopOutlined,
         comments: 'Dashboard endpoint',
         category: 1,
@@ -55,6 +56,13 @@ const routes = [
             //     key: 23
             // },
         ]
+    },
+    {
+        name: 'Product',
+        url: '/manufacturers/products/one',
+        component: Product,
+        sidebar: false,
+        category: 1,
     },
     {
         name: 'Quality Controllers',

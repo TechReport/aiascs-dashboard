@@ -22,7 +22,7 @@ export default function MainLayout() {
                     </Switch>
                 </Content>
                 <Footer style={{ textAlign: 'center', backgroundColor: 'white' }}>
-                    AIASCS ©2021 Created by dae54
+                    AIASCS ©2021 Created by AIASCS SecretRidge
                 </Footer>
             </Layout>
         </Layout>
