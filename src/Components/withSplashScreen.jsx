@@ -53,8 +53,8 @@ function withSplashScreen(WrappedComponent) {
                 });
                 if (localStorage.getItem('token')) {
                     openNotification({ message: err.message, description: err.descriptions })
-                    localStorage.removeItem('token')
-                    localStorage.removeItem('user')
+                    // localStorage.removeItem('token')
+                    // localStorage.removeItem('user')
                     return
                 }
             }
