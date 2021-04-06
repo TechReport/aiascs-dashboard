@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import Navbar from '../Components/Navbar';
 import routes from '../Components/routes';
 import Sidebar from '../Components/Sidebar';
+import NotFound from './NotFound';
 
 const { Content, Footer } = Layout;
 
@@ -19,6 +20,7 @@ export default function MainLayout() {
                             :
                             <Route exact path={route.url} component={route.component} />
                         )}
+                        <Route component={NotFound} />
                     </Switch>
                 </Content>
                 <Footer style={{ textAlign: 'center', backgroundColor: 'white' }}>
