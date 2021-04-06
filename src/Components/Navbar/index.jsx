@@ -12,7 +12,7 @@ import Notifications from "./Notifications";
 import ProfileOverview from "./ProfileOverview";
 
 export default function Navbar() {
-    const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useState(false)
     const [userData] = useState(JSON.parse(localStorage.getItem('user')))
 
     return (
