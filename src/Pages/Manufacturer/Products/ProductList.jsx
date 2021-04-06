@@ -69,7 +69,7 @@ export default function ProductList() {
 function formatQRCode(cell) {
     return (
         <Popover
-            content={<img src={`data:image/png;base64,${toBase64(cell.qrCodeImage.data)}`} />}
+            content={<img src={`data:image/png;base64,${toBase64(cell.qrCodeImage.data)}`} alt='' />}
             >
             <QrcodeOutlined style={{ cursor: 'pointer', fontSize: '20px' }} />
         </Popover>

@@ -1,4 +1,4 @@
-import { Affix, Button, Descriptions, PageHeader, Tag, Timeline } from "antd";
+import { Affix, Button, PageHeader, Tag, Timeline } from "antd";
 import {
     ClockCircleOutlined,
 } from '@ant-design/icons';
@@ -8,7 +8,7 @@ import { useHistory } from "react-router";
 import package1 from '../../../../Assets/package1.jpg'
 
 export default function Product(props) {
-    const [top, setTop] = useState(0)
+    const [top] = useState(0)
 
     console.log(props)
     const [product] = useState(props.location.state)
@@ -43,7 +43,7 @@ export default function Product(props) {
                                 <p><strong>Registered At: </strong>{product.createdAt}</p>
                                 <p><strong>Expiry Date: </strong>{product.expiry}</p>
                                 <p><strong>Last Track Location: </strong>Mbeya</p>
-                                <img src={`data:image/png;base64,${toBase64(product.qrcode.qrCodeImage.data)}`} />
+                                <img src={`data:image/png;base64,${toBase64(product.qrcode.qrCodeImage.data)}`} alt='' />
                             </div>
                             <div className="col-6">
                                 <h5>Batch Info Summary</h5>
