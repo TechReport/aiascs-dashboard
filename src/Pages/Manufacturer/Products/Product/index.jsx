@@ -1,4 +1,4 @@
-import { Affix, Button, PageHeader, Tag, Timeline } from "antd";
+import { Affix, Button, PageHeader, Tag, Timeline, Tabs } from "antd";
 import {
     ClockCircleOutlined,
 } from '@ant-design/icons';
@@ -6,6 +6,9 @@ import { useState } from "react";
 import toBase64 from "../../../../Services/Utilities";
 import { useHistory } from "react-router";
 import package1 from '../../../../Assets/package1.jpg'
+
+
+const { TabPane } = Tabs;
 
 export default function Product(props) {
     const [top] = useState(0)
@@ -58,31 +61,37 @@ export default function Product(props) {
             </div>
 
             <div className="card mt-5">
-                <div className="card-header bg-transparent">Product Tracker</div>
                 <div className="card-body">
-                    <Timeline mode="alternate">
-                        <Timeline.Item>
-                            <div className="card">
-                                <div className="card-body">
-                                    Create a services site 2015-09-01
-                                </div>
-                            </div>
-                        </Timeline.Item>
-                        <Timeline.Item color="green">Solve initial network problems 2015-09-01</Timeline.Item>
-                        <Timeline.Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />}>
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                            beatae vitae dicta sunt explicabo.
+                    <Tabs>
+                        <TabPane tab="PRODUCT TIMELINE" key="1" >
+                            <Timeline mode="alternate">
+                                <Timeline.Item>
+                                    <div className="card">
+                                        <div className="card-body">
+                                            Create a services site 2015-09-01
+                                        </div>
+                                    </div>
                                 </Timeline.Item>
-                        <Timeline.Item color="red">Network problems being solved 2015-09-01</Timeline.Item>
-                        <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                        <Timeline.Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />}>
-                            Technical testing 2015-09-01
+                                <Timeline.Item color="green">Solve initial network problems 2015-09-01</Timeline.Item>
+                                <Timeline.Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />}>
+                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                    laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
+                                    beatae vitae dicta sunt explicabo.
                                 </Timeline.Item>
-                    </Timeline>
+                                <Timeline.Item color="red">Network problems being solved 2015-09-01</Timeline.Item>
+                                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
+                                <Timeline.Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />}>
+                                    Technical testing 2015-09-01
+                                </Timeline.Item>
+                            </Timeline>
+                        </TabPane>
+                        <TabPane tab="PRODUCT REVIEW" key="2">
+                            <div className="jumbotron">Content of tab 2</div>
+                            <div className="jumbotron">Content of tab 2</div>
+                            <div className="jumbotron">Content of tab 2</div>
+                        </TabPane>
+                    </Tabs>
                 </div>
-                {/* </div>
-                </div> */}
             </div>
         </div>
     )
