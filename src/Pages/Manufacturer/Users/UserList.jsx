@@ -1,11 +1,19 @@
-import { Skeleton, Tag } from 'antd'
+import { Button, Popover, Skeleton, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { userAPI } from './userAPI'
 import eventEmitter from '../../../Services/EventEmitter'
+import { useHistory } from 'react-router-dom'
+import {
+    EditOutlined,
+    EyeOutlined
+} from '@ant-design/icons'
 
 export default function UserList() {
     const [users, setUsers] = useState({ loading: true, data: [] })
+    // const [usernameToDelete, setUsernameToDelete] = useState()
+
+    const hist = useHistory()
 
     function fetchUsers() {
         userAPI.getAll('user/', 'firstName lastName email phoneNumber')
@@ -39,7 +47,21 @@ export default function UserList() {
                     }>
                     Role
                 </TableHeaderColumn>
-                <TableHeaderColumn >Action</TableHeaderColumn>
+                <TableHeaderColumn dataFormat={ActionMenu}>Action</TableHeaderColumn>
             </BootstrapTable>
     )
+
+    function ActionMenu(cell, row) {
+        console.log(row)
+        return (
+            <>
+                <Popover content='Edit'>
+                    <Button size='small' shape='circle' type='text'><EditOutlined className='text-primary' /></Button>
+                </Popover>
+                <Popover content='View'>
+                    <Button size='small' shape='circle' type='text' onClick={() => hist.push(`/user/${row._id}`, row)}><EyeOutlined className='text-dark' /></Button>
+                </Popover>
+            </>
+        )
+    }
 }
