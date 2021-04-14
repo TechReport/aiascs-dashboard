@@ -9,6 +9,7 @@ const productAPI = new ApiCore({
 
     // getSingle: true,
     post: true,
+    deleteOne: true
 });
 
 // apiTasks.massUpdate = () => {
