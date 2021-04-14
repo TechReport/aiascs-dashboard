@@ -33,6 +33,15 @@ const post = (resource, model) => {
 };
 
 
+/** @param {string} resource @param {string} id */
+const deleteOne = (resource, id) => {
+    return axios
+        .delete(`${resource}/${id}`)
+        .then(handleResponse)
+        .catch(handleError);
+};
+
+
 // /** @param {string} resource  @param {object} model */
 // const put = (resource, model) => {
 //     return axios
@@ -61,6 +70,7 @@ export const apiProvider = {
     getAll,
     getSingle,
     post,
+    deleteOne,
     // put,
     // patch,
     // remove,

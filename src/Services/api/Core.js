@@ -22,6 +22,12 @@ export class ApiCore {
             };
         }
 
+        if (options.deleteOne) {
+            this.deleteOne = (resource, id) => {
+                return apiProvider.deleteOne(resource, id)
+            }
+        }
+
         // if (options.put) {
         //     this.put = (model) => {
         //         return apiProvider.put(options.url, model);
