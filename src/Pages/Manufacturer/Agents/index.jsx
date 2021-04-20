@@ -1,17 +1,18 @@
-import { Button } from 'antd'
+import { Button, Tabs, Modal } from 'antd'
 import { useState } from 'react'
 import { DashboardWidgetCard } from '../../../Components/Reusable'
 // import Graph from '../graph'
-import UserList from './UserList';
+// import UserList from './UserList';
 import {
     UserAddOutlined
 } from '@ant-design/icons';
-import AddNewUser from './AddNewUser';
-import Modal from 'antd/lib/modal/Modal';
+import AddNewAgents from './AddNewAgents';
+import AgentList from './AgentList';
+// import AddNewUser from './AddNewUser';
 
-// const { TabPane } = Tabs;
+const { TabPane } = Tabs;
 
-export default function Users() {
+export default function Agents() {
     const [isModalVisible, setIsModalVisible] = useState(false);
     // const [userUpdated, setUserUpdated] = useState(false)
 
@@ -21,7 +22,6 @@ export default function Users() {
 
     const handleOk = () => {
         setIsModalVisible(false);
-        // setUserUpdated(true)
     };
 
     const handleCancel = () => {
@@ -51,16 +51,16 @@ export default function Users() {
             <div className="container-fluid mt-4">
                 <div className="actions">
                     <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
-                        Add Users
+                        Add Agents
                         <UserAddOutlined className='' />
                     </Button>
-                    <Modal title="Add User"
+                    <Modal title="Add Agents"
                         visible={isModalVisible}
                         // onOk={handleOk}
                         onCancel={handleCancel}
                         footer={null}
                         destroyOnClose={true}>
-                        <AddNewUser handleCancel={handleCancel} handleOk={handleOk} />
+                        <AddNewAgents handleCancel={handleCancel} handleOk={handleOk} />
                     </Modal>
                 </div>
             </div>
@@ -70,11 +70,11 @@ export default function Users() {
                         <div className="title h5 text-muted">List</div>
                     </div>
                     <div className="card-body">
-                        <UserList />
+                        <AgentList />
                     </div>
                 </div>
             </div>
-{/* 
+
             <div className="container-fluid mt-4">
                 <div className="card shadow">
                     <div className="card-body">
@@ -83,7 +83,7 @@ export default function Users() {
                                 <div className="row shadow">
                                     <div className="col-4">
                                         <div className="card" style={{ height: '20vw', width: '40vw' }}>
-                                            <Graph />
+                                            {/* <Graph /> */}
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@ export default function Users() {
                         </Tabs>
                     </div>
                 </div>
-            </div> */}
+            </div>
         </div>
     )
 }

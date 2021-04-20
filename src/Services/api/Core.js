@@ -9,7 +9,6 @@ export class ApiCore {
                 return apiProvider.getAll(resource, selector);
             };
         }
-
         if (options.getSingle) {
             this.getSingle = (resource, id) => {
                 return apiProvider.getSingle(resource, id);
@@ -20,6 +19,18 @@ export class ApiCore {
             this.post = (resource, model) => {
                 return apiProvider.post(resource, model);
             };
+        }
+
+        if (options.deleteOne) {
+            this.deleteOne = (resource, id) => {
+                return apiProvider.deleteOne(resource, id)
+            }
+        }
+
+        if (options.getMany) {
+            this.getMany = (resource, filter, select, count) => {
+                return apiProvider.getMany(resource, filter, select, count)
+            }
         }
 
         // if (options.put) {

@@ -1,5 +1,5 @@
 // import { EventEmitter } from 'events'
-// import eventEmitter from '../EventEmitter'
+import eventEmitter from '../EventEmitter'
 
 export function handleResponse(response) {
     // console.log(response)
@@ -43,14 +43,15 @@ export function handleError(error) {
         } else if (error.response.data.category === 'unauthorized') {
             localStorage.clear()
             sessionStorage.clear()
+            eventEmitter.emit('unauthorized', error.response.data.message)
             // eslint-disable-next-line
             throw {
                 message: error.response.data.message,
                 descriptions: 'Please login again to access the resources',
-                debug: {
-                    dev_error: error.response.data.developerMessage,
-                    stack: error.response.data.stack
-                }
+                // debug: {
+                //     dev_error: error.response.data.developerMessage,
+                //     stack: error.response.data.stack
+                // }
             }
         }
         else {

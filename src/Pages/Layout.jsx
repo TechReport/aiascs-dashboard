@@ -1,8 +1,11 @@
 import { Layout } from 'antd';
 import { Route, Switch } from 'react-router-dom'
 import Navbar from '../Components/Navbar';
-import routes from '../Components/routes';
+// import routes, { openRoutes } from '../Components/routes';
+import routes, { openRoutes } from '../Components/Routes'
+import RouteWrapper from '../Components/RouteWrapper';
 import Sidebar from '../Components/Sidebar';
+import NotFound from './Errors/NotFound';
 
 const { Content, Footer } = Layout;
 
@@ -15,10 +18,25 @@ export default function MainLayout() {
                 <Content style={{ padding: '0 10px', backgroundColor: 'white' }}>
                     <Switch>
                         {routes.map(route => route.submenu ?
-                            route.submenu.map(subroute => <Route exact path={subroute.url} component={subroute.component} />)
+                            route.submenu.map(subroute =>
+                                <RouteWrapper
+                                    exact
+                                    path={subroute.url}
+                                    component={subroute.component}
+                                    roles={route.roles}
+                                />
+                            )
                             :
+                            <RouteWrapper
+                                exact
+                                path={route.url}
+                                component={route.component}
+                                roles={route.roles} />
+                        )}
+                        {openRoutes.map(route =>
                             <Route exact path={route.url} component={route.component} />
                         )}
+                        <Route component={NotFound} />
                     </Switch>
                 </Content>
                 <Footer style={{ textAlign: 'center', backgroundColor: 'white' }}>

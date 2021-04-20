@@ -10,8 +10,11 @@ import {
 import { authAPI } from "../../Services/auth/authAPI";
 
 import confirm from 'antd/lib/modal/confirm';
+import { Link } from 'react-router-dom';
 
 export default function ProfileOverview({ userData }) {
+    console.log(userData)
+
     function showSignOutConfirm() {
         confirm({
             title: 'You are about to sign out. Continue?',
@@ -33,7 +36,7 @@ export default function ProfileOverview({ userData }) {
         });
     }
     return (
-        <div className="row text-center pb-0 mb-0" style={{ width: '210px' }}>
+        <div className="row text-center pb-0 mb-0 px-1" style={{ width: '210px' }}>
             <div className="col">
                 <Avatar
                     size={50}
@@ -49,13 +52,15 @@ export default function ProfileOverview({ userData }) {
                 </span> <br />
                 {userData.email}
             </div>
-            <Tag color='blue' className='w-100'>{userData.role.name}</Tag>
+            <Tag color='blue' className='w-100 mx-1'>{userData.role.name}</Tag>
             <Divider className='mb-0' />
             <div className="col p-1 pb-0">
-                <Button className='w-100 text-left' type='ghost'>
-                    <ProfileOutlined />
-                    User Profile
-            </Button>
+                <Link to={{ pathname: '/user/profile', state: userData }}>
+                    <Button className='w-100 text-left' type='ghost'>
+                        <ProfileOutlined />
+                        User Profile
+                    </Button>
+                </Link>
                 <Button className='w-100 text-left' type='ghost'><SettingOutlined />Settings</Button>
                 <Button className='w-100 text-left' type='danger' styl={{ backgroundColor: 'white', color: 'black' }} onClick={showSignOutConfirm}><LogoutOutlined /> Sign Out</Button>
             </div>

@@ -12,6 +12,18 @@ const getAll = (resource, selector) => {
 };
 
 
+/** @param {string} resource  @param {object} filter */
+const getMany = (resource, filter, select, count) => {
+    return axios
+        // .get(`${resource}`, filter, { count })
+        .get(`/${resource}`, {
+            params: { filter, select, count }
+        })
+        .then(handleResponse)
+        .catch(handleError);
+};
+
+
 /** @param {string} resource @param {string} id */
 const getSingle = (resource, id) => {
     // console.log(resource)
@@ -28,6 +40,15 @@ const post = (resource, model) => {
     // console.log(model)
     return axios
         .post(`/${resource}`, model)
+        .then(handleResponse)
+        .catch(handleError);
+};
+
+
+/** @param {string} resource @param {string} id */
+const deleteOne = (resource, id) => {
+    return axios
+        .delete(`${resource}/${id}`)
         .then(handleResponse)
         .catch(handleError);
 };
@@ -61,6 +82,8 @@ export const apiProvider = {
     getAll,
     getSingle,
     post,
+    deleteOne,
+    getMany,
     // put,
     // patch,
     // remove,

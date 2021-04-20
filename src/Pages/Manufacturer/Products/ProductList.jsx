@@ -1,4 +1,4 @@
-import { Button, Popover, Skeleton, Tag } from 'antd'
+import { Button, Input, message, Popconfirm, Popover, Skeleton, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { productAPI } from './productAPI'
@@ -15,12 +15,15 @@ import toBase64 from '../../../Services/Utilities'
 
 export default function ProductList() {
     const [products, setProducts] = useState({ loading: true, data: [] })
+    const [productName, setProductName] = useState('')
+    // const [deleteProductProps, setDeleteProductProps] = useState({ productName: '', })
 
     const hist = useHistory()
 
     function fetchProducts() {
         productAPI.getAll('products/', '')
             .then(res => {
+                console.log(res.data)
                 setProducts({ loading: false, data: res.data })
             })
             .catch(error => {
@@ -30,15 +33,25 @@ export default function ProductList() {
     }
     eventEmitter.on('updateProducts', () => fetchProducts());
 
+    function handleDeleteProduct(productID) {
+        console.log(productID)
+
+        productAPI.deleteOne('products/', productID)
+            .then(response => {
+                console.log(response)
+                setProducts({ loading: false, data: products.data.filter(a => a._id !== productID) })
+                message.info("Product Deleted Successfully")
+            }).catch(err => {
+                console.log(err)
+            })
+    }
+
     useEffect(() => {
         fetchProducts()
         return () => {
             setProducts({ loading: false, data: [] })
         }
     }, [])
-    useEffect(() => {
-        console.log(products)
-    }, [products])
 
     return (
         products.loading ?
@@ -58,9 +71,31 @@ export default function ProductList() {
     function ActionMenu(cell, row) {
         return (
             <>
-                <Button size='small' shape='circle' type='text'><DeleteOutlined className='text-danger' /></Button>
-                <Button size='small' shape='circle' type='text'><EditOutlined className='text-primary' /></Button>
-                <Button size='small' shape='circle' type='text' onClick={() => hist.push('products/one', row)}><EyeOutlined className='text-dark' /></Button>
+                <Popover content='Delete Product'>
+                    <Popconfirm
+                        title={
+                            <>
+                                Enter <strong className='text-uppercase'>{row.name}</strong> below to confirm delete <br />
+                                <Input style={{ width: '100%' }} type='text' placeholder='Type name of the product ' value={productName} onChange={(e) => setProductName(e.target.value)} />
+                            </>
+                        }
+
+                        okButtonProps={{
+                            disabled: row.name.toUpperCase() === productName.toUpperCase() ? false : true,
+                            loading: false
+                        }}
+                        okText="Delete"
+                        onConfirm={() => handleDeleteProduct(row._id)}
+                        cancelText="Cancel">
+                        <Button size='small' shape='circle' type='text'><DeleteOutlined className='text-danger' /></Button>
+                    </Popconfirm>
+                </Popover>
+                <Popover content='Edit Product'>
+                    <Button size='small' shape='circle' type='text'><EditOutlined className='text-primary' /></Button>
+                </Popover>
+                <Popover content='View Product'>
+                    <Button size='small' shape='circle' type='text' onClick={() => hist.push('products/one', row)}><EyeOutlined className='text-dark' /></Button>
+                </Popover>
             </>
         )
     }
@@ -68,9 +103,7 @@ export default function ProductList() {
 
 function formatQRCode(cell) {
     return (
-        <Popover
-            content={<img src={`data:image/png;base64,${toBase64(cell.qrCodeImage.data)}`} alt='' />}
-            >
+        <Popover content={<img src={`data:image/png;base64,${toBase64(cell.qrCodeImage.data)}`} alt='' />}>
             <QrcodeOutlined style={{ cursor: 'pointer', fontSize: '20px' }} />
         </Popover>
     )

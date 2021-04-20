@@ -5,6 +5,7 @@ import {
 import { Button, Modal } from "antd"
 import AddNewProduct from './AddNewProduct';
 import ProductList from './ProductList';
+import { DashboardWidgetCard } from '../../../Components/Reusable';
 
 export default function Products() {
     const [isModalVisible, setIsModalVisible] = useState(false)
@@ -20,11 +21,16 @@ export default function Products() {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
+    const data = [
+        { title: 'Total Products Registered', body: '37 M', percent: '-5%', descriptions: 'Number of registered products' },
+        { title: 'Total Batches', body: '132 k', percent: '+20%', descriptions: 'coming soon' },
+        { title: 'Agents', body: '37', percent: '-20%', descriptions: 'coming soon' },
+    ]
     return (
         <div>
-            {/* <div className='row mt-4 mx-0' styl={{ width: '100%' }}>
+            <div className='row mt-4 mx-0' styl={{ width: '100%' }}>
                 {data.map(item => <DashboardWidgetCard item={item} />)}
-            </div> */}
+            </div>
             <div className="container-fluid mt-4">
                 <div className="actions">
                     <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
