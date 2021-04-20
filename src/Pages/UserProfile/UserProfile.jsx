@@ -1,14 +1,17 @@
 import { Affix, Button, PageHeader, Tag } from 'antd'
 import Avatar from 'antd/lib/avatar/avatar'
 import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import {
     UserOutlined,
     ManOutlined,
     WomanOutlined
 } from '@ant-design/icons'
 
-export default function UserProfile() {
-    const [user] = useState(JSON.parse(localStorage.getItem('user')))
+export default function UserProfile(props) {
+    console.log(props)
+    const hist = useHistory()
+    const [user] = useState(props.location.state)
     const [top] = useState(0)
 
 
@@ -24,6 +27,7 @@ export default function UserProfile() {
                 <PageHeader
                     className="bg-light"
                     title={`${user.firstName} ${user.lastName}`}
+                    onBack={() => hist.goBack()}
                     extra={<>
                         <Button type='ghost'>Edit</Button>
                         <Button type='danger'>Delete</Button>

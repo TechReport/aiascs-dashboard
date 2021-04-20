@@ -1,6 +1,6 @@
 import { Button, Divider, Tooltip } from 'antd'
 import {
-    QuestionCircleOutlined,
+    EyeOutlined,
 } from '@ant-design/icons';
 import MainWidgetGraph from './graph';
 
@@ -10,8 +10,11 @@ export default function DashboardWidgetCard({ item }) {
             <div className="card shadow" style={{ borderRadius: '10px' }}>
                 <div className="d-flex justify-content-between pt-3 pb-0 ml-3 pr-2">
                     <div className='text-muted'>{item.title}</div>
-                    <Tooltip title={item.descriptions} color='gray' style={{ color: 'gray' }} >
+                    {/* <Tooltip className='mr-n5' title={item.descriptions} color='gray' style={{ color: 'gray' }} >
                         <Button type="text" shape="circle" size='small' icon={<QuestionCircleOutlined className='text-muted' />} />
+                    </Tooltip> */}
+                    <Tooltip title={item.descriptions} color='gray' style={{ color: 'gray' }} >
+                        <Button type="text" shape="circle" size='small' icon={<EyeOutlined className='text-muted' />} />
                     </Tooltip>
                 </div>
                 <Divider className='p-0 mb-0 mt-2' />

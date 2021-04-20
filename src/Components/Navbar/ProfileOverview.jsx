@@ -13,6 +13,8 @@ import confirm from 'antd/lib/modal/confirm';
 import { Link } from 'react-router-dom';
 
 export default function ProfileOverview({ userData }) {
+    console.log(userData)
+
     function showSignOutConfirm() {
         confirm({
             title: 'You are about to sign out. Continue?',
@@ -53,7 +55,7 @@ export default function ProfileOverview({ userData }) {
             <Tag color='blue' className='w-100 mx-1'>{userData.role.name}</Tag>
             <Divider className='mb-0' />
             <div className="col p-1 pb-0">
-                <Link to='/user/profile'>
+                <Link to={{ pathname: '/user/profile', state: userData }}>
                     <Button className='w-100 text-left' type='ghost'>
                         <ProfileOutlined />
                         User Profile

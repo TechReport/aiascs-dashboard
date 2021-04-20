@@ -1,7 +1,8 @@
 import { Layout } from 'antd';
 import { Route, Switch } from 'react-router-dom'
 import Navbar from '../Components/Navbar';
-import routes, { openRoutes } from '../Components/routes';
+// import routes, { openRoutes } from '../Components/routes';
+import routes, { openRoutes } from '../Components/Routes'
 import RouteWrapper from '../Components/RouteWrapper';
 import Sidebar from '../Components/Sidebar';
 import NotFound from './Errors/NotFound';
@@ -18,7 +19,12 @@ export default function MainLayout() {
                     <Switch>
                         {routes.map(route => route.submenu ?
                             route.submenu.map(subroute =>
-                                <Route exact path={subroute.url} component={subroute.component} />
+                                <RouteWrapper
+                                    exact
+                                    path={subroute.url}
+                                    component={subroute.component}
+                                    roles={route.roles}
+                                />
                             )
                             :
                             <RouteWrapper

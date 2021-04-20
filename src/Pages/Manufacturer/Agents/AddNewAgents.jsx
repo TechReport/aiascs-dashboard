@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { Button, Input, Select, Radio, Space, Form, Alert, notification } from 'antd';
-import { userAPI } from './userAPI'
+import { useState } from 'react';
+import { Button, Input, Space, Form, Alert, notification } from 'antd';
+import { agentAPI } from './agentAPI'
 import eventemitter from '../../../Services/EventEmitter'
 
-export default function AddNewUser({ handleOk, role }) {
-    const [gender, setGender] = useState('male')
-    const [roles, setRoles] = useState({ loading: false, data: [] })
+export default function AddNewAgent({ handleOk }) {
+    // const [gender, setGender] = useState('male')
+    // const [roles, setRoles] = useState({ loading: false, data: [] })
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
     const [loading, setLoading] = useState(false)
 
@@ -24,16 +24,16 @@ export default function AddNewUser({ handleOk, role }) {
         },
     };
 
-    const onFinish = async (userDetails) => {
+    const onFinish = async (agentDetails) => {
         // console.log(userDetails)
         setLoading(true)
         setError({ status: false, message: '', descriptions: '' })
-        await userAPI.post('user/register', { newUser: userDetails })
+        await agentAPI.post('productAgent/register', agentDetails)
             .then(res => {
                 console.log(res)
-                userDetails = ''
+                agentDetails = ''
                 openNotification({ message: res.message })
-                eventemitter.emit('updateUsers')
+                eventemitter.emit('updateAgents')
                 handleOk()
             })
             .catch(err => {
@@ -47,38 +47,26 @@ export default function AddNewUser({ handleOk, role }) {
             .finally(() => setLoading(false))
     };
 
-    const fetchRoles = async () => {
-        setRoles({ loading: true, data: [] })
-        await userAPI.getAll('acc/roles', 'name _id genericName')
-            .then(res => {
-                console.log(res)
-                if (role) {
-                    const resp = res.data.filter(a => a.genericName === role)
-                    console.log(resp)
-                    return setRoles({ loading: false, data: resp })
-
-                    // const data = [{ name: 'daniel', age: 20 }, { name: 'nsobay', age: 30 }, { name: 'denis', age: 40 }]
-                    // data.filter((a, b) => a.name == 'daniel')
-                    // res.data
-                }
-                setRoles({ loading: false, data: res.data })
-            })
-            .catch(err => console.log(err))
-    }
+    // const fetchRoles = async () => {
+    //     // setRoles({ loading: true, data: [] })
+    //     await agentAPI.getAll('acc/roles', 'name _id')
+    //         // .then(res => setRoles({ loading: false, data: res.data }))
+    //         .catch(err => console.log(err))
+    // }
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
-    const { Option } = Select;
+    // const { Option } = Select;
 
 
-    useEffect(() => {
-        fetchRoles()
-        return () => {
-            setRoles([])
-        }
-    }, [])
+    // useEffect(() => {
+    //     fetchRoles()
+    //     return () => {
+    //         // setRoles([])
+    //     }
+    // }, [])
 
     const openNotification = ({ message, description = '' }) => {
         notification.success({
@@ -96,14 +84,14 @@ export default function AddNewUser({ handleOk, role }) {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}>
             <Form.Item
-                label="First Name"
-                name="firstName"
+                label="Agent Company Name"
+                name="name"
                 rules={[{ required: true, message: "Please input User's First Name!" }]}>
                 <Input placeholder='Erick' />
             </Form.Item>
             <Form.Item
-                label="Last Name"
-                name="lastName"
+                label="Registration Number"
+                name="regno"
                 rules={[{ required: true, message: 'Please input your username!' }]}>
                 <Input />
             </Form.Item>
@@ -115,33 +103,10 @@ export default function AddNewUser({ handleOk, role }) {
             </Form.Item>
             <Form.Item
                 label="Phone Number"
-                name="phoneNumber"
+                name="phonenumber"
                 rules={[{ required: true, message: 'Please input your Phone number!' }]}>
                 <Input type='number' />
             </Form.Item>
-            <Form.Item
-                label="Gender"
-                name="gender"
-                rules={[{ required: true, message: 'Please select users gender!' }]}>
-                <Radio.Group onChange={(e) => setGender(e.target.value)} value={gender}>
-                    <Radio value='male'>Male</Radio>
-                    <Radio value='female'>Female</Radio>
-                </Radio.Group>
-            </Form.Item>
-            <Form.Item
-                label="Role"
-                name="role"
-                rules={[{ required: true, message: 'Please input your role' }]}>
-                <Select
-                    showSearch
-                    loading={roles.loading}
-                    style={{ width: 200 }}
-                    placeholder="Search to Select"
-                    optionFilterProp="children" >
-                    {roles.data.map(role => <Option value={role._id}>{role.name}</Option>)}
-                </Select>
-            </Form.Item>
-
             <Form.Item
                 label="Location"
                 name="location"

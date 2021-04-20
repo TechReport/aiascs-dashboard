@@ -1,61 +1,52 @@
-import { Button, Popover, Skeleton, Tag } from 'antd'
+import { Button, Popover, Skeleton } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
-import { userAPI } from './userAPI'
+import { agentAPI } from './agentAPI'
 import eventEmitter from '../../../Services/EventEmitter'
 import { useHistory } from 'react-router-dom'
 import {
     EditOutlined,
     EyeOutlined
 } from '@ant-design/icons'
-import './style.css'
 
-
-export default function UserList() {
-    const [users, setUsers] = useState({ loading: true, data: [] })
-    // const [usernameToDelete, setUsernameToDelete] = useState()
+export default function AgentList() {
+    const [agents, setAgents] = useState({ loading: true, data: [] })
 
     const hist = useHistory()
 
-    function fetchUsers() {
-        userAPI.getAll('user/', '')
+    function fetchAgents() {
+        agentAPI.getAll('productAgent/all')
             .then(res => {
-                setUsers({ loading: false, data: res.data })
+                console.log(res)
+                setAgents({ loading: false, data: res })
             })
             .catch(error => {
                 console.log(error)
             })
     }
-    eventEmitter.on('updateUsers', () => fetchUsers());
+    eventEmitter.on('updateAgents', () => fetchAgents());
 
     useEffect(() => {
-        fetchUsers()
+        fetchAgents()
         return () => {
-            setUsers({ loading: false, data: [] })
+            setAgents({ loading: false, data: [] })
         }
     }, [])
 
-    function trClassFormat(row, rowIndex) {
-        return 'small'
-        // row is the current row data
-        // return rowIndex % 2 === 0 ? "small" : "tr-even";  // return class name.
-    }
-
-
     return (
-        users.loading ?
+        agents.loading ?
             <Skeleton active />
             :
-            <BootstrapTable trStyle={{ padding: '0px' }} data={users.data} pagination search scrollTop='Top' striped hover searchPlaceholder='Search by name, age, address or tags' trClassName={trClassFormat} >
-                <TableHeaderColumn dataField='firstName' filterFormatted dataFormat={(cell, row) => `${row.firstName} ${row.lastName}`} isKey>Name</TableHeaderColumn>
+            <BootstrapTable data={agents.data} pagination search scrollTop='Top' striped hover searchPlaceholder='Search by name, age, address or tags' trClassName='bg-inf border' >
+                <TableHeaderColumn dataField='name' filterFormatted isKey>Name</TableHeaderColumn>
                 <TableHeaderColumn dataField='email'>Email</TableHeaderColumn>
-                <TableHeaderColumn dataField='phoneNumber'>Phone Number</TableHeaderColumn>
-                <TableHeaderColumn dataField='role'
+                <TableHeaderColumn dataField='phonenumber'>Phone Number</TableHeaderColumn>
+                {/* <TableHeaderColumn dataField='role'
                     dataFormat={(cell) =>
-                        <Tag color={'geekblue'} key={cell}>{cell.name}</Tag>
+                        <Tag colo={'red'} key={cell}>{cell.name.toUpperCase()}</Tag>
                     }>
                     Role
-                </TableHeaderColumn>
+                </TableHeaderColumn> */}
                 <TableHeaderColumn dataFormat={ActionMenu}>Action</TableHeaderColumn>
             </BootstrapTable>
     )

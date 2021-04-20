@@ -12,6 +12,18 @@ const getAll = (resource, selector) => {
 };
 
 
+/** @param {string} resource  @param {object} filter */
+const getMany = (resource, filter, select, count) => {
+    return axios
+        // .get(`${resource}`, filter, { count })
+        .get(`/${resource}`, {
+            params: { filter, select, count }
+        })
+        .then(handleResponse)
+        .catch(handleError);
+};
+
+
 /** @param {string} resource @param {string} id */
 const getSingle = (resource, id) => {
     // console.log(resource)
@@ -71,6 +83,7 @@ export const apiProvider = {
     getSingle,
     post,
     deleteOne,
+    getMany,
     // put,
     // patch,
     // remove,
