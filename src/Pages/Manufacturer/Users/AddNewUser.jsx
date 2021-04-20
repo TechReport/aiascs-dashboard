@@ -72,12 +72,12 @@ export default function AddNewUser({ handleOk, role }) {
 
     const { Option } = Select;
 
-
     useEffect(() => {
         fetchRoles()
         return () => {
             setRoles([])
         }
+        // eslint-disable-next-line
     }, [])
 
     const openNotification = ({ message, description = '' }) => {
