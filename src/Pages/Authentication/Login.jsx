@@ -14,6 +14,7 @@ import eventEmitter from '../../Services/EventEmitter'
 
 export default function Login() {
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
+    const [loading, setLoading] = useState(false)
 
     const onFinishFailed = async (e) => {
         console.log(e)
@@ -21,17 +22,21 @@ export default function Login() {
 
     const onFinish = async (userDetails) => {
         setError({ status: false, message: '', descriptions: '' })
+        setLoading(true)
         await authAPI.login(userDetails)
             .then(data => {
-                if (data.data.target === 'firstTimeLoginStatus') {
-                    sessionStorage.setItem('ftl', data.data.tempToken)
+                console.log(data)
+                if (data.status === 'firstTimeLogin') {
+                    sessionStorage.setItem('ftl', data.user.token)
                     return eventEmitter.emit('goto', 1)
                 }
-                localStorage.setItem('token', data.data.token)
-                localStorage.setItem('user', JSON.stringify(data.data.user))
+                setLoading(false)
+                localStorage.setItem('token', data.user.token)
+                localStorage.setItem('user', JSON.stringify(data.user))
                 window.location.reload()
             }).catch(err => {
                 console.log(err)
+                setLoading(false)
                 setError({ status: true, message: err.message, descriptions: err.descriptions })
             })
     }
@@ -54,9 +59,9 @@ export default function Login() {
                     <Input.Password placeholder='Password' />
                 </Form.Item>
                 <Form.Item >
-                    <Button type="primary" htmlType="submit" >
+                    <Button type="primary" loading={loading} htmlType="submit" >
                         Login
-                </Button>
+                    </Button>
                 </Form.Item>
                 <p>Forgot Password ? <Link>Reset</Link> </p>
                 <p>Don't have account? <Link to='/'>Contact Admin</Link></p>

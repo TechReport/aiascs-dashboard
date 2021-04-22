@@ -19,8 +19,8 @@ export default function UserList() {
 
     function fetchUsers() {
         userAPI.getAll('user/', '')
-            .then(res => {
-                setUsers({ loading: false, data: res.data })
+            .then(data => {
+                setUsers({ loading: false, data })
             })
             .catch(error => {
                 console.log(error)
