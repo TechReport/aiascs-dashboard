@@ -5,7 +5,6 @@ import eventemitter from '../../../Services/EventEmitter'
 
 export default function AddNewProduct({ handleOk }) {
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
-    const [admin] = useState(JSON.parse(localStorage.getItem('user')))
 
     const openNotification = ({ message, description = '' }) => {
         notification.success({
@@ -33,7 +32,7 @@ export default function AddNewProduct({ handleOk }) {
     const onFinish = async (productDetails) => {
         console.log(productDetails)
         setError({ status: false, message: '', descriptions: '' })
-        productDetails.companyId = admin.companyId._id
+
         await productAPI.post('products/', { newProduct: productDetails })
             .then(res => {
                 console.log(res)

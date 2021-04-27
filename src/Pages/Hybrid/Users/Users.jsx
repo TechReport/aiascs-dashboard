@@ -1,5 +1,3 @@
-import { Button } from 'antd'
-import { useState } from 'react'
 import { DashboardWidgetCard } from '../../../Components/Reusable'
 // import Graph from '../graph'
 import UserList from './UserList';
@@ -10,10 +8,14 @@ import AddNewUser from './AddNewUser';
 import Modal from 'antd/lib/modal/Modal';
 
 import ShowForPermission from '../../../Components/Authentication/CheckPermission'
+import { Button } from 'antd';
+import { useState } from 'react';
+import TestHoc from './testHoc';
 
 // const { TabPane } = Tabs;
 
 export default function Users() {
+    // console.log(props)
     const [isModalVisible, setIsModalVisible] = useState(false);
     // const [userUpdated, setUserUpdated] = useState(false)
 
@@ -62,21 +64,37 @@ export default function Users() {
                             onCancel={handleCancel}
                             footer={null}
                             destroyOnClose={true}>
-                            <AddNewUser handleCancel={handleCancel} handleOk={handleOk} />
+                            <AddNewUser handleOk={handleOk} />
                         </Modal>
                     </ShowForPermission>
                 </div>
             </div>
-            <div className="container-fluid mt-4">
-                <div className="card shadow">
-                    <div className="card-header bg-white">
-                        <div className="title h5 text-muted">List</div>
-                    </div>
-                    <div className="card-body">
-                        <UserList />
+            <div className="container-fluid row w-100 mt-4">
+                <div className="col-8">
+                    <div className="card shadow">
+                        <div className="card-header bg-white border-0">
+                            <div className="title h5 text-muted">List</div>
+                        </div>
+                        <div className="card-body py-1">
+                            <UserList />
+                        </div>
                     </div>
                 </div>
+                {/* <div className="col">
+                    <div className="jumbotron">
+                    </div>
+                </div> */}
+
             </div>
+            {/* <div className="container-fluid row mt-4 w-100">
+                <div className="col">
+                    <div className="card">
+                        <div className="card-body">
+                            <TestHoc names = 'john doe' />
+                        </div>
+                    </div>
+                </div>
+            </div> */}
             {/* 
             <div className="container-fluid mt-4">
                 <div className="card shadow">

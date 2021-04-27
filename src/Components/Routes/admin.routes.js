@@ -4,16 +4,32 @@ import {
     // DesktopOutlined,
     SettingOutlined,
     UserOutlined,
-    // FundProjectionScreenOutlined
+    FundProjectionScreenOutlined
 } from '@ant-design/icons';
 // import { UserProfile } from "../../Pages/UserProfile";
-import { ManCompanyProfile, Manufacturers, QualityControllers } from "../../Pages/SuperAdmin";
-import QualityControllerProfile from "../../Pages/SuperAdmin/QualityControllers/QualityControllerProfile";
+// import { ManCompanyProfile, Manufacturers, QualityControllers } from "../../Pages/SuperAdmin";
+// import QualityControllerProfile from "../../Pages/SuperAdmin/QualityControllers/QualityControllerProfile";
+
+import { Users } from "../../Pages/Hybrid/Users";
+import { ManCompanyProfile, Manufacturers, UnregisteredProductProfile, UnregisteredProducts } from "../../Pages/Hybrid/Manufacturers";
+import { QualityControllerProfile, QualityControllers } from "../../Pages/Hybrid/QualityControllers";
 
 
 const adminRoutes = [
     {
-        name: 'Manufacturer',
+        name: 'Users',
+        component: Users,
+        url: '/manage/users',
+        Icon: UserOutlined,
+        comments: 'Manage Users Endpoint',
+        category: 1,
+        sidebar: true,
+        roles: ['ROLE_SUPER_ADMIN'],
+        key: 10,
+        protected: true,
+    },
+    {
+        name: 'Manufacturers',
         component: Manufacturers,
         url: '/manage/manufacturers',
         Icon: UserOutlined,
@@ -21,7 +37,7 @@ const adminRoutes = [
         category: 1,
         sidebar: true,
         roles: ['ROLE_SUPER_ADMIN'],
-        key: 10,
+        key: 13,
         protected: true,
     },
     {
@@ -37,14 +53,16 @@ const adminRoutes = [
         protected: true,
     },
     {
-        name: 'Quality Controllers Profile',
-        component: QualityControllerProfile,
-        url: '/manage/qcontroller/profile/:companyId',
-        comments: 'quality controllers endpoint',
+        name: 'Unregistered Products',
+        component: UnregisteredProducts,
+        url: '/manage/unregisteredProducts',
+        Icon: FundProjectionScreenOutlined,
+        comments: 'unregistered products endpoint',
         category: 1,
-        sidebar: false,
+        sidebar: true,
         roles: ['ROLE_SUPER_ADMIN'],
         key: 12,
+        protected: true,
     },
     {
         name: 'Settings',
@@ -62,12 +80,29 @@ const adminRoutes = [
 
     // Not in sidebar
     {
-        name: 'Product',
+        name: 'Manufacturer Profile',
         url: '/manage/manufacturer/profile/:id',
         component: ManCompanyProfile,
         sidebar: false,
+        roles: ['ROLE_SUPER_ADMIN'],
         category: 1,
-    }
+    },
+    {
+        name: 'Quality Controllers Profile',
+        url: '/manage/qcontroller/profile/:id',
+        component: QualityControllerProfile,
+        sidebar: false,
+        roles: ['ROLE_SUPER_ADMIN'],
+        category: 1,
+    },
+    {
+        name: 'Manufacturer Profile',
+        url: '/manage/unregisteredProduct/:id',
+        component: UnregisteredProductProfile,
+        sidebar: false,
+        roles: ['ROLE_SUPER_ADMIN'],
+        category: 1,
+    },
 ]
 
 export default adminRoutes

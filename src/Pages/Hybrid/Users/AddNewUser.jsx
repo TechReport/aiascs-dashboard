@@ -4,7 +4,7 @@ import { userAPI } from './userAPI'
 import eventemitter from '../../../Services/EventEmitter'
 // import LocationSelect from './LocationSelect';
 
-export default function AddNewUser({ handleOk, companyId, type, role }) {
+export default function AddNewUser({ handleOk, role }) {
     const [gender, setGender] = useState('male')
     const [roles, setRoles] = useState({ loading: false, data: [] })
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
@@ -26,12 +26,8 @@ export default function AddNewUser({ handleOk, companyId, type, role }) {
     };
 
     const onFinish = async (userDetails) => {
-        // Add companyId to user object
-        userDetails.companyId = companyId
-        userDetails.onModel = type
         // console.log(userDetails)
         setLoading(true)
-
         setError({ status: false, message: '', descriptions: '' })
         await userAPI.post('user/register', { newUser: userDetails })
             .then(res => {
@@ -54,19 +50,12 @@ export default function AddNewUser({ handleOk, companyId, type, role }) {
 
     const fetchRoles = async () => {
         setRoles({ loading: true, data: [] })
-        let filter = { genericName: role }
-        await userAPI.getAll('acc/roles', 'name _id genericName target', filter)
+        await userAPI.getAll('acc/rolesbyrole', 'name _id genericName target')
             .then(data => {
-                console.log(data)
-                // if (role) {
-                //     const resp = data.filter(a => a.genericName === role)
-                //     console.log(resp)
-                //     return setRoles({ loading: false, data: resp })
-
-                //     // const data = [{ name: 'daniel', age: 20 }, { name: 'nsobay', age: 30 }, { name: 'denis', age: 40 }]
-                //     // data.filter((a, b) => a.name == 'daniel')
-                //     // res.data
-                // }
+                if (role) {
+                    const resp = data.filter(a => a.genericName === role)
+                    return setRoles({ loading: false, data: resp })
+                }
                 setRoles({ loading: false, data })
             })
             .catch(err => console.log(err))
@@ -159,9 +148,6 @@ export default function AddNewUser({ handleOk, companyId, type, role }) {
                 <Input />
 
             </Form.Item>
-            {/* <Form.Item name="company">
-                <Input type='hidden' value={company.id} />
-            </Form.Item> */}
             <Form.Item {...tailLayout}>
                 <Space size='middle' direction='horizontal'>
                     <Button type="ghost" htmlType="reset" >

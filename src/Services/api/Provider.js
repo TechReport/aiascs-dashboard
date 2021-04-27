@@ -2,10 +2,10 @@ import axios from 'axios';
 import { handleResponse, handleError } from './Response';
 
 /** @param {string} resource */
-const getAll = (resource, selector) => {
+const getAll = (resource, select, filter) => {
     return axios
         .get(`/${resource}`, {
-            params: { select: selector }
+            params: { select, filter }
         })
         .then(handleResponse)
         .catch(handleError);

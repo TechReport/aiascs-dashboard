@@ -27,6 +27,11 @@ export default function Navbar() {
                         </Breadcrumb>
                     </div>
 
+                    {userData.companyId &&
+                        <div className="ml-auto">
+                            <Tag className='py-2 px-2' color='blue'>{userData.companyId.name}</Tag>
+                        </div>
+                    }
                     <div className="px-3 pr-2">
                         <div className='float-left mr-3' style={{ cursor: 'pointer' }}>
                             <Popover
@@ -43,7 +48,7 @@ export default function Navbar() {
                             placement='bottomRight'
                             onVisibleChange={() => setVisible(!visible)}
                         >
-                            <div className='float-left mr-n2 mt-2' style={{cursor:'pointer'}}>
+                            <div className='float-left mr-n2 mt-2' style={{ cursor: 'pointer' }}>
                                 <Tag className='mt-1' style={{ border: 'none' }}>
                                     <span className='font-weight-bold'>{`${userData.firstName} ${userData.lastName}`}</span><br />
                                     <Tag color='blue'>{userData.role.name}</Tag>

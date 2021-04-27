@@ -2,7 +2,7 @@ import { Button, Input, message, Popconfirm, Popover, Skeleton, Tag } from 'antd
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { productAPI } from './productAPI'
-import eventEmitter from '../../../Services/EventEmitter'
+import eventEmitter from '../../../../Services/EventEmitter'
 import {
     DeleteOutlined,
     EditOutlined,
@@ -11,9 +11,11 @@ import {
 } from '@ant-design/icons';
 import moment from 'moment'
 import { useHistory } from 'react-router'
-import toBase64 from '../../../Services/Utilities'
+import toBase64 from '../../../../Services/Utilities'
 
-export default function ProductList() {
+export default function ProductList({ companyId }) {
+    console.log('i wonder')
+    console.log(companyId)
     const [products, setProducts] = useState({ loading: true, data: [] })
     const [productName, setProductName] = useState('')
     // const [deleteProductProps, setDeleteProductProps] = useState({ productName: '', })
@@ -21,7 +23,9 @@ export default function ProductList() {
     const hist = useHistory()
 
     function fetchProducts() {
-        productAPI.getAll('products/', '', {})
+        const filter = { companyId }
+        console.log(filter)
+        productAPI.getAll('products/', '', filter)
             .then(res => {
                 console.log(res.data)
                 setProducts({ loading: false, data: res.data })
@@ -57,9 +61,9 @@ export default function ProductList() {
         products.loading ?
             <Skeleton active />
             :
-            <BootstrapTable data={products.data} pagination search scrollTop='Top' striped hover searchPlaceholder='Search products' trClassName='bg-inf border' >
+            <BootstrapTable bordered={false} data={products.data} pagination search scrollTop='Top' striped hover searchPlaceholder='Search products' trClassName='bg-inf border' >
                 <TableHeaderColumn dataField='name' isKey width='150'>Name</TableHeaderColumn>
-                <TableHeaderColumn dataField='qrcode' dataFormat={cell => cell.productToken}>Token</TableHeaderColumn>
+                {/* <TableHeaderColumn dataField='qrcode' dataFormat={cell => cell.productToken}>Token</TableHeaderColumn> */}
                 <TableHeaderColumn dataField='qrcode' width='90' dataFormat={formatQRCode}>QR Code</TableHeaderColumn>
                 <TableHeaderColumn dataField='isRevoked' width='90' dataFormat={(cell) => cell ? <Tag color='magenta'>True</Tag> : <Tag color='cyan'>False</Tag>}>Revoked ?</TableHeaderColumn>
                 <TableHeaderColumn dataField='createdAt' dataFormat={(cell) => moment(cell).format('DD-MM-YYYY')} width='100' >Registered At</TableHeaderColumn>

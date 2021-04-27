@@ -1,12 +1,14 @@
-import { Affix, Button, PageHeader, Tag } from 'antd'
+import { Affix, Button, message, PageHeader, Tag } from 'antd'
 import Avatar from 'antd/lib/avatar/avatar'
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import {
     UserOutlined,
     ManOutlined,
-    WomanOutlined
+    WomanOutlined,
+    EditOutlined
 } from '@ant-design/icons'
+import { userAPI } from '../Hybrid/Users/userAPI'
 
 export default function UserProfile(props) {
     console.log(props)
@@ -14,6 +16,24 @@ export default function UserProfile(props) {
     const [user] = useState(props.location.state)
     const [top] = useState(0)
 
+    function assignCompany() {
+        alert('on development')
+    }
+
+    async function deleteUser() {
+        const deleteUser = window.confirm('Confirm to delete user')
+        if (deleteUser) {
+            await userAPI.deleteOne('user', user._id)
+                .then(res => {
+                    console.log(res)
+                    message.success(res.message)
+                    hist.goBack()
+
+                }).catch(error => {
+                    console.log(error)
+                })
+        }
+    }
 
     useEffect(() => {
         console.log(user)
@@ -30,7 +50,7 @@ export default function UserProfile(props) {
                     onBack={() => hist.goBack()}
                     extra={<>
                         <Button type='ghost'>Edit</Button>
-                        <Button type='danger'>Delete</Button>
+                        <Button type='danger' onClick={deleteUser}>Delete</Button>
                     </>}
                     subTitle={<Tag color='green'>{user.role.name}</Tag>}
                 />
@@ -45,6 +65,17 @@ export default function UserProfile(props) {
                             <div className="col">
                                 <p><strong>Name: </strong>{`${user.firstName} ${user.lastName}`}</p>
                                 <p><strong>Emal: </strong>{user.email}</p>
+                                <p>
+                                    <strong>Company: </strong>
+                                    {user.companyId ?
+                                        <span>{user.companyId.name}</span>
+                                        :
+                                        <>
+                                            <Tag>Not Assigned</Tag>
+                                            <Button type='text' size='small' onClick={assignCompany}><EditOutlined /></Button>
+                                        </>
+                                    }
+                                </p>
                                 <p><strong>Gender: </strong>{user.gender} {user.gender === 'male' ? <ManOutlined /> : <WomanOutlined />}</p>
                                 <p><strong>Email Verified: </strong>{<Tag>{user.emailVerified ? 'Verified' : 'Not Verified'}</Tag>}</p>
                                 <p><strong>Phone Number: </strong>{user.phoneNumber}</p>

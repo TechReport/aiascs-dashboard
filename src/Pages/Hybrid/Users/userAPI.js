@@ -8,19 +8,20 @@ import { handleError, handleResponse } from '../../../Services/api/Response';
 
 const userAPI = new ApiCore({
     getAll: true,
+    deleteOne: true,
     // getMany: true,
     // getByRole: true,
 
-    // getSingle: true,
+    getSingle: true,
     post: true,
 });
 
 // apiTasks.massUpdate = () => {
 //     // Add custom api call logic here
 // }
-userAPI.getByRole = async (resource, role, select, companyId) => {
+userAPI.getByRole = async (resource, role, select, count) => {
     return await axios.get(`/${resource}`, {
-        params: { role, select, companyId }
+        params: { role, select, count }
     })
         .then(res => {
             return handleResponse(res)
@@ -28,5 +29,16 @@ userAPI.getByRole = async (resource, role, select, companyId) => {
             return handleError(err)
         })
 }
+
+// userAPI.getByCompany = async (companyId, select, count) => {
+//     return await axios.get(`/user/company/${companyId}`, {
+//         params: { select, count }
+//     })
+//         .then(res => {
+//             return handleResponse(res)
+//         }).catch(err => {
+//             return handleError(err)
+//         })
+// }
 
 export { userAPI };

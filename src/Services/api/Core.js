@@ -5,8 +5,8 @@ export class ApiCore {
     constructor(options) {
 
         if (options.getAll) {
-            this.getAll = (resource, selector) => {
-                return apiProvider.getAll(resource, selector);
+            this.getAll = (resource, selector, filter) => {
+                return apiProvider.getAll(resource, selector, filter);
             };
         }
         if (options.getSingle) {

@@ -42,18 +42,12 @@ function withSplashScreen(WrappedComponent) {
             try {
                 const { dispatch } = this.context;
                 let setCurrentUser = currentUser => dispatch({ type: 'currentUser', payload: currentUser })
-                // let setPermissions = permissions => dispatch({ type: 'permissions', payload: permissions })
-                // console.log('checking...')
                 const result = await authAPI.checkSession()
-                // eventEmititer.emit('currentUserInfo', result)
                 setCurrentUser(result.user)
-                // console.log(resp)
-                // console.log('done...')
                 return this.setState({
                     loading: false,
                     authenticated: true
                 });
-
             } catch (err) {
                 this.setState({
                     loading: false,
@@ -67,19 +61,12 @@ function withSplashScreen(WrappedComponent) {
                 }
             }
         }
-        // componentDidUpdate() {
-        //     eventEmititer.addListener('unauthorized', (message) => {
-        //         console.log('component did catch')
-        //         console.log(message)
-        //     })
-        // }
 
         render() {
             // while checking user session, show "loading" message
             if (this.state.loading) return LoadingMessage();
 
             // otherwise, show the desired route
-            // return this.state.authenticated ? <WrappedComponent {...this.props} /> : <Login />;
             return (
                 <BrowserRouter>
                     {this.state.authenticated ? <WrappedComponent {...this.props} /> : <Login />}

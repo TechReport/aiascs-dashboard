@@ -14,7 +14,6 @@ const { Sider } = Layout;
 
 export default function Sidebar() {
     const { state } = useContext(AuthContext)
-    console.log(state.currentUser.role)
 
     const [collapsed, setCollapsed] = useState(false)
     return (

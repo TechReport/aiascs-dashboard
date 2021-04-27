@@ -13,7 +13,7 @@ import {
 } from '@ant-design/icons';
 
 import { UserProfile } from '../../Pages/UserProfile'
-import QCRoutes from './qualitycontroller.routes'
+// import QCRoutes from './qualitycontroller.routes'
 
 const sharedRoutes = [
     {
@@ -52,6 +52,7 @@ const openRoutes = [
 ]
 
 
-export default sharedRoutes.concat(manRoutes.concat(adminRoutes).concat(QCRoutes))
-// export default sharedRoutes.concat(manRoutes.concat(adminRoutes))
+export default sharedRoutes.concat(manRoutes.concat(adminRoutes))
+// export default sharedRoutes.concat(manRoutes.concat(adminRoutes).concat(QCRoutes))
+// export default sharedRoutes.concat(adminRoutes)
 export { openRoutes }

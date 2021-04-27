@@ -2,10 +2,11 @@ import {
     UserOutlined,
     FundProjectionScreenOutlined
 } from '@ant-design/icons';
-import { Products, Users } from '../../Pages/Manufacturer';
-import Agents from '../../Pages/Manufacturer/Agents';
-import Product from '../../Pages/Manufacturer/Products/Product';
+import { Products } from '../../Pages/Manufacturer';
+// import Agents from '../../Pages/Manufacturer/Agents';
+// import Product from '../../Pages/Manufacturer/Products/Product';
 
+import { Users } from '../../Pages/Hybrid/Users'
 
 
 const manRoutes = [
@@ -17,37 +18,37 @@ const manRoutes = [
         comments: 'Users endpoint',
         category: 1,
         sidebar: true,
-        roles: ['ROLE_MANUFACTURING_COMPANY_ADMIN','ROLE_SUPER_ADMIN'],
+        roles: ['ROLE_MANUFACTURING_COMPANY_ADMIN'],
         key: 20,
         protected: true,
     },
-    {
-        name: 'Agents',
-        Icon: UserOutlined,
-        comments: 'Agents company users route',
-        category: 1,
-        sidebar: true,
-        key: 21,
-        roles: ['ROLE_MANUFACTURI,NG_COMPANY_ADMIN'],
-        submenu: [
-            {
-                name: 'Enroll',
-                url: '/manufacturers/agent/enroll',
-                component: 'Users',
-                key: 210,
-                protected: true,
-                roles: ['ROLE_MANUFACTURING_COMPANY_ADMIN'],
-            },
-            {
-                name: 'Enrolled',
-                url: '/manufacturers/agents',
-                component: Agents,
-                key: 211,
-                protected: true,
-                roles: ['ROLE_MANUFACTURING_COMPANY_ADMIN'],
-            },
-        ]
-    },
+    // {
+    //     name: 'Agents',
+    //     Icon: UserOutlined,
+    //     comments: 'Agents company users route',
+    //     category: 1,
+    //     sidebar: true,
+    //     key: 21,
+    //     roles: ['ROLE_MANUFACTURI,NG_COMPANY_ADMIN'],
+    //     submenu: [
+    //         {
+    //             name: 'Enroll',
+    //             url: '/manufacturers/agent/enroll',
+    //             component: 'Users',
+    //             key: 210,
+    //             protected: true,
+    //             roles: ['ROLE_MANUFACTURING_COMPANY_ADMIN'],
+    //         },
+    //         {
+    //             name: 'Enrolled',
+    //             url: '/manufacturers/agents',
+    //             component: Agents,
+    //             key: 211,
+    //             protected: true,
+    //             roles: ['ROLE_MANUFACTURING_COMPANY_ADMIN'],
+    //         },
+    //     ]
+    // },
     {
         name: 'Products',
         Icon: FundProjectionScreenOutlined,
@@ -73,14 +74,14 @@ const manRoutes = [
             }
         ]
     },
-    {
-        name: 'Product',
-        url: '/manufacturers/products/one',
-        component: Product,
-        sidebar: false,
-        roles: ['ROLE_MANUFACTURING_COMPANY_ADMIN'],
-        category: 1,
-    }
+    // {
+    //     name: 'Product',
+    //     url: '/manufacturers/products/one',
+    //     component: Product,
+    //     sidebar: false,
+    //     roles: ['ROLE_MANUFACTURING_COMPANY_ADMIN'],
+    //     category: 1,
+    // }
 ]
 
 export default manRoutes
