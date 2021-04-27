@@ -55,6 +55,7 @@ export default function ProductList({ companyId }) {
         return () => {
             setProducts({ loading: false, data: [] })
         }
+        // eslint-disable-next-line
     }, [])
 
     return (

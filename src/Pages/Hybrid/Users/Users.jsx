@@ -10,7 +10,6 @@ import Modal from 'antd/lib/modal/Modal';
 import ShowForPermission from '../../../Components/Authentication/CheckPermission'
 import { Button } from 'antd';
 import { useState } from 'react';
-import TestHoc from './testHoc';
 
 // const { TabPane } = Tabs;
 

@@ -1,4 +1,4 @@
-import { Button, Result, Skeleton, Tag } from 'antd'
+import { Skeleton, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import eventEmitter from '../../../../Services/EventEmitter'
@@ -40,7 +40,7 @@ export default function Users({ companyId }) {
     return (
         <>
             {error.status ?
-                <InternalError status={error.status} title={error.message}/>
+                <InternalError status={error.status} title={error.message} />
                 :
                 users.loading ?
                     <Skeleton active />
