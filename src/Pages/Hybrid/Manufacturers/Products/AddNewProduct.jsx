@@ -6,6 +6,7 @@ import eventemitter from '../../../../Services/EventEmitter'
 export default function AddNewProduct({ handleOk }) {
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
     const [loading, setLoading] = useState(false)
+    const [user] = useState(JSON.parse(localStorage.getItem('user')))
 
     const openNotification = ({ message, description = '' }) => {
         notification.success({
@@ -32,6 +33,8 @@ export default function AddNewProduct({ handleOk }) {
     };
     const onFinish = async (productDetails) => {
         console.log(productDetails)
+        productDetails.companyId = user.companyId._id
+
         setError({ status: false, message: '', descriptions: '' })
         setLoading(true)
         await productAPI.post('products/', { newProduct: productDetails })
@@ -45,7 +48,7 @@ export default function AddNewProduct({ handleOk }) {
                 console.log(err)
                 setError({ status: true, message: err.message, descriptions: err.descriptions })
             })
-        .finally(() => setLoading(false))
+            .finally(() => setLoading(false))
     };
 
 
