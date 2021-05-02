@@ -1,4 +1,4 @@
-import { Skeleton } from 'antd'
+import { Skeleton, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { qualityControllerAPI } from './qualityControllerAPI'
@@ -45,6 +45,7 @@ export default function RegisteredQualityControllers() {
     function formatAdmin(cell) {
         if (cell)
             return `${cell.firstName} ${cell.lastName}`
+        return <Tag color='geekblue'>Not Assigned</Tag>
     }
 
     // function ActionMenu(cell, row) {
