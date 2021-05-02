@@ -12,9 +12,13 @@ export default function AssignAdmin({ handleOk, companyId, setCompany }) {
     const [selectedAdmin, setSelectedAdmin] = useState("")
 
     const { Option } = Select;
-
-    async function fetchUsers() {
-        userAPI.getByRole('user/role', { genericName: 'ROLE_MANUFACTURING_COMPANY_ADMIN' }, 'firstName lastName email', companyId)
+    // const filter = {
+    //     role:
+    // }
+    // TODO
+    // getByRole('usr/role', { role: { genericName: 'ROLE_MANUFACTURING_COMPANY_ADMIN' } })
+    async function fetchAdministrators() {
+        userAPI.getCompanyUserByRole({ role: { genericName: 'ROLE_MANUFACTURING_COMPANY_ADMIN' }, companyId }, 'firstName lastName email',)
             .then(res => {
                 setUsers({ loading: false, data: res })
             }).catch(err => {
@@ -41,7 +45,7 @@ export default function AssignAdmin({ handleOk, companyId, setCompany }) {
     }
 
     useEffect(() => {
-        fetchUsers()
+        fetchAdministrators()
         return () => {
             setUsers({ loading: false, data: [] })
         }
