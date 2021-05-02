@@ -3,9 +3,10 @@ import {
     ClockCircleOutlined,
 } from '@ant-design/icons';
 import { useState } from "react";
-import toBase64 from "../../../../Services/Utilities";
+import toBase64 from "../../../../../Services/Utilities";
 import { useHistory } from "react-router";
-import package1 from '../../../../Assets/package1.jpg'
+// import package1 from '../../../../../Assets/package1.jpg'
+import package1 from '../../../../../Assets/package1.jpg'
 
 
 const { TabPane } = Tabs;

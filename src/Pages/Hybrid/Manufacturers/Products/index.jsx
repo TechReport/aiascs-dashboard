@@ -5,7 +5,7 @@ import {
 import { Button, Modal } from "antd"
 import AddNewProduct from './AddNewProduct';
 import ProductList from './ProductList';
-import { DashboardWidgetCard } from '../../../Components/Reusable';
+import { DashboardWidgetCard } from '../../../../Components/Reusable';
 
 export default function Products() {
     const [isModalVisible, setIsModalVisible] = useState(false)
