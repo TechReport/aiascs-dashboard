@@ -9,6 +9,8 @@ import { DashboardWidgetCard } from '../../../../Components/Reusable';
 
 export default function Products() {
     const [isModalVisible, setIsModalVisible] = useState(false)
+    const [user] = useState(JSON.parse(localStorage.getItem('user')))
+
     const showModal = () => {
         setIsModalVisible(true);
     };
@@ -42,7 +44,7 @@ export default function Products() {
                         onCancel={handleCancel}
                         footer={null}
                         destroyOnClose={true}>
-                        <AddNewProduct handleCancel={handleCancel} handleOk={handleOk} />
+                        <AddNewProduct handleCancel={handleCancel} handleOk={handleOk} companyId={user.companyId}/>
                     </Modal>
                 </div>
             </div>
@@ -55,7 +57,7 @@ export default function Products() {
                                 <div className="title h5 text-muted">List</div>
                             </div>
                             <div className="card-body">
-                                <ProductList />
+                                <ProductList companyId={user.companyId}/>
                             </div>
                         </div>
                     </div>
