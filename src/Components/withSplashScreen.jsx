@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import Login from '../Pages/Authentication';
 import { authAPI } from '../Services/auth/authAPI';
-// import eventEmititer from '../Services/EventEmitter'
+import eventEmititer from '../Services/EventEmitter'
 import '../Styles/splashscreen.css';
 
 
@@ -62,7 +62,17 @@ function withSplashScreen(WrappedComponent) {
             }
         }
 
+        async logout() {
+            localStorage.clear()
+            sessionStorage.clear()
+            this.setState({
+                loading: false,
+                authenticated: false
+            });
+        }
+
         render() {
+            eventEmititer.on('unauthorized', () => this.logout())
             // while checking user session, show "loading" message
             if (this.state.loading) return LoadingMessage();
 
