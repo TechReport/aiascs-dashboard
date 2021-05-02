@@ -1,10 +1,11 @@
 import { Alert, Button, DatePicker, Form, Input, notification, Space } from 'antd'
 import { useState } from 'react';
 import { productAPI } from './productAPI';
-import eventemitter from '../../../Services/EventEmitter'
+import eventemitter from '../../../../Services/EventEmitter'
 
 export default function AddNewProduct({ handleOk }) {
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
+    const [loading, setLoading] = useState(false)
 
     const openNotification = ({ message, description = '' }) => {
         notification.success({
@@ -32,7 +33,7 @@ export default function AddNewProduct({ handleOk }) {
     const onFinish = async (productDetails) => {
         console.log(productDetails)
         setError({ status: false, message: '', descriptions: '' })
-
+        setLoading(true)
         await productAPI.post('products/', { newProduct: productDetails })
             .then(res => {
                 console.log(res)
@@ -44,7 +45,7 @@ export default function AddNewProduct({ handleOk }) {
                 console.log(err)
                 setError({ status: true, message: err.message, descriptions: err.descriptions })
             })
-        // .finally(() => setLoading(false))
+        .finally(() => setLoading(false))
     };
 
 
@@ -88,7 +89,7 @@ export default function AddNewProduct({ handleOk }) {
                     <Button type="ghost" htmlType="reset" >
                         Clear Inputs
                     </Button>
-                    <Button type="primary" htmlType="submit" >
+                    <Button type="primary" htmlType="submit" loading={loading} >
                         Submit
                     </Button>
                 </Space>

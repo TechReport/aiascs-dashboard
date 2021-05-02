@@ -35,7 +35,10 @@ export default function ProductList({ companyId }) {
                 setProducts({ loading: false, data: [] })
             })
     }
-    eventEmitter.on('updateProducts', () => fetchProducts());
+    eventEmitter.on('updateProducts', () => {
+        setProducts({ loading: true, data: [] })
+        return fetchProducts()
+    });
 
     function handleDeleteProduct(productID) {
         console.log(productID)
@@ -67,7 +70,7 @@ export default function ProductList({ companyId }) {
                 {/* <TableHeaderColumn dataField='qrcode' dataFormat={cell => cell.productToken}>Token</TableHeaderColumn> */}
                 <TableHeaderColumn dataField='qrcode' width='90' dataFormat={formatQRCode}>QR Code</TableHeaderColumn>
                 <TableHeaderColumn dataField='isRevoked' width='90' dataFormat={(cell) => cell ? <Tag color='magenta'>True</Tag> : <Tag color='cyan'>False</Tag>}>Revoked ?</TableHeaderColumn>
-                <TableHeaderColumn dataField='createdAt' dataFormat={(cell) => moment(cell).format('DD-MM-YYYY')} width='100' >Registered At</TableHeaderColumn>
+                <TableHeaderColumn dataField='createdAt' dataSort={true} dataFormat={(cell) => moment(cell).format('DD-MM-YYYY')} width='100' >Registered At</TableHeaderColumn>
                 <TableHeaderColumn dataField='expiry' dataFormat={(cell) => moment(cell).format('DD-MM-YYYY')} width='100' >Expiry</TableHeaderColumn>
                 <TableHeaderColumn dataField='' width='100' dataFormat={ActionMenu}>Actions</TableHeaderColumn>
             </BootstrapTable>
@@ -99,7 +102,7 @@ export default function ProductList({ companyId }) {
                     <Button size='small' shape='circle' type='text'><EditOutlined className='text-primary' /></Button>
                 </Popover>
                 <Popover content='View Product'>
-                    <Button size='small' shape='circle' type='text' onClick={() => hist.push('products/one', row)}><EyeOutlined className='text-dark' /></Button>
+                    <Button size='small' shape='circle' type='text' onClick={() => hist.push(`products/${row._id}`, row)}><EyeOutlined className='text-dark' /></Button>
                 </Popover>
             </>
         )
