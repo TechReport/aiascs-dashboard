@@ -1,4 +1,4 @@
-import { Skeleton } from 'antd'
+import { Skeleton, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { manufacturerAPI } from './manufacturerAPI'
@@ -44,5 +44,7 @@ export default function RegisteredManufacturers() {
     function formatAdmin(cell) {
         if (cell)
             return `${cell.firstName} ${cell.lastName}`
+        else
+        return <Tag color='geekblue'>Not Assigned</Tag>
     }
 }
