@@ -12,7 +12,7 @@ const baseURL = process.env.NODE_ENV === 'production' ? 'https://secret-ridge-42
 axios.defaults.headers.common['Authorization'] =
     localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : 'undefined'
 
-axios.defaults.timeout = 20000
+axios.defaults.timeout = 120000
 axios.defaults.baseURL = baseURL
 
 
