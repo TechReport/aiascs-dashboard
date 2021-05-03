@@ -18,7 +18,7 @@ export function handleResponse(response) {
 
 export function handleError(error) {
   // console.log(error.response)
-  // console.log(error)
+  console.log(error)
   if (error.message === "Network Error") {
     // eslint-disable-next-line
     throw {
