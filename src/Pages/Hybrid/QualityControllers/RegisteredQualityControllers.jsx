@@ -38,7 +38,6 @@ export default function RegisteredQualityControllers() {
                 <TableHeaderColumn dataField='email'>Email</TableHeaderColumn>
                 <TableHeaderColumn dataField='phonenumber'>Phone Number</TableHeaderColumn>
                 <TableHeaderColumn dataField='admin' dataFormat={formatAdmin}>Admin</TableHeaderColumn>
-                {/* <TableHeaderColumn dataFormat={ActionMenu}>Action</TableHeaderColumn> */}
             </BootstrapTable>
     )
 
@@ -47,17 +46,4 @@ export default function RegisteredQualityControllers() {
             return `${cell.firstName} ${cell.lastName}`
         return <Tag color='geekblue'>Not Assigned</Tag>
     }
-
-    // function ActionMenu(cell, row) {
-    //     return (
-    //         <>
-    //             <Popover content='Edit'>
-    //                 <Button size='small' shape='circle' type='text'><EditOutlined className='text-primary' /></Button>
-    //             </Popover>
-    //             <Popover content='View'>
-    //                 <Button size='small' shape='circle' type='text' onClick={() => hist.push(`/manage/qcontroller/profile/${row._id}`, row)}><EyeOutlined className='text-dark' /></Button>
-    //             </Popover>
-    //         </>
-    //     )
-    // }
 }
