@@ -1,4 +1,4 @@
-import { qualityControllerAPI } from './qualityControllerAPI'
+import { agentsCompanyAPI } from './agentsCompanyAPI'
 import WithRegisterCompany from '../../../HOC/withCompany/withRegisterCompany'
 
 function RegisterQualityControllers({ handleOk, error, loading, onFinish, onFinishFailed }) {
@@ -8,7 +8,7 @@ function RegisterQualityControllers({ handleOk, error, loading, onFinish, onFini
 export default WithRegisterCompany(
     RegisterQualityControllers,
     {
-        handlerAPI: qualityControllerAPI,
-        resource: 'qualitycontrollers'
+        handlerAPI: agentsCompanyAPI,
+        resource: 'agents/register'
     }
 )

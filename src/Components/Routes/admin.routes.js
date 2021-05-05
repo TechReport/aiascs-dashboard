@@ -13,6 +13,7 @@ import {
 import { Users } from "../../Pages/Hybrid/Users";
 import { ManCompanyProfile, Manufacturers, UnregisteredProductProfile, UnregisteredProducts } from "../../Pages/Hybrid/Manufacturers";
 import { QualityControllerProfile, QualityControllers } from "../../Pages/Hybrid/QualityControllers";
+import { Agents } from "../../Pages/Hybrid/Agents";
 
 
 const adminRoutes = [
@@ -53,6 +54,17 @@ const adminRoutes = [
         protected: true,
     },
     {
+        name: 'Agents',
+        component: Agents,
+        url: '/manage/agents',
+        Icon: UserOutlined,
+        comments: 'agents endpoint',
+        category: 1,
+        sidebar: true,
+        roles: ['ROLE_SUPER_ADMIN'],
+        key: 12,
+    },
+    {
         name: 'Unregistered Products',
         component: UnregisteredProducts,
         url: '/manage/unregisteredProducts',
@@ -61,7 +73,7 @@ const adminRoutes = [
         category: 1,
         sidebar: true,
         roles: ['ROLE_SUPER_ADMIN'],
-        key: 12,
+        key: 14,
         protected: true,
     },
     {

@@ -4,14 +4,15 @@ import DashboardWidgetCard from '../../../Components/Reusable/DashboardWidgetCar
 import {
     UserAddOutlined
 } from '@ant-design/icons';
-import RegisteredQualityControllers from './RegisteredQualityControllers';
-import RegisterQualityControllers from './RegisterQualityControllers';
+
+import RegisteredAgents from './RegisteredAgents';
+import RegisterAgentsCompany from './RegisterAgentsCompany';
 import withCompanyProfile from '../../../HOC/withCompany/withCompanyHome';
-// import eventEmitter from '../../../Services/EventEmitter';
+import eventEmitter from '../../../Services/EventEmitter';
 
 
-function QualityControllers({ isModalVisible, showModal, handleOk, handleCancel, data }) {
-    // eventEmitter.on('closeModal', handleOk)
+function Agents({ isModalVisible, showModal, handleOk, handleCancel, data }) {
+    eventEmitter.on('closeModal', handleOk)
 
     return (
         <div>
@@ -21,15 +22,15 @@ function QualityControllers({ isModalVisible, showModal, handleOk, handleCancel,
             <div className="mt-4">
                 <div className="actions">
                     <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
-                        Register Quality Controller Company
+                        Register Agent Company
                         <UserAddOutlined />
                     </Button>
-                    <Modal title="Register Quality Controlling Company"
+                    <Modal title="Register Agents Company"
                         visible={isModalVisible}
                         onCancel={handleCancel}
                         footer={null}
                         destroyOnClose={true}>
-                        <RegisterQualityControllers handleCancel={handleCancel} handleOk={handleOk} />
+                        <RegisterAgentsCompany handleCancel={handleCancel} handleOk={handleOk} />
                     </Modal>
                 </div>
             </div>
@@ -37,7 +38,7 @@ function QualityControllers({ isModalVisible, showModal, handleOk, handleCancel,
     )
 }
 
-export default withCompanyProfile(QualityControllers,
-    { RegisteredCompanies: RegisteredQualityControllers },
-    { from: 'qc' }
+export default withCompanyProfile(Agents,
+    { RegisteredCompanies: RegisteredAgents },
+    { from: 'agents' }
 )
