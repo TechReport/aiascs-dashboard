@@ -10,24 +10,16 @@ import { handleError, handleResponse } from '../../../Services/api/Response';
 
 // plural and single may be used for message logic if needed in the ApiCore class.
 
-const qualityControllerAPI = new ApiCore({
+const agentsCompanyAPI = new ApiCore({
     getAll: true,
     getSingle: true,
     post: true,
     deleteOne: true
 });
 
-// adminAPI.assignAdminToManufacturer = async (resource, companyId, userId) => {
-//     return await axios.put(`${resource}/${companyId}/${userId}`,)
-//         .then(res => {
-//             return handleResponse(res)
-//         }).catch(err => {
-//             return handleError(err)
-//         })
-// }
 
-qualityControllerAPI.assignAdmin = async (resource, companyId, userId) => {
-    return await axios.put(`qualitycontrollers/assignAdmin/${companyId}/${userId}`,)
+agentsCompanyAPI.assignAdmin = async (resource, companyId, userId) => {
+    return await axios.put(`${resource}/${companyId}/${userId}`,)
         .then(res => {
             return handleResponse(res)
         }).catch(err => {
@@ -35,7 +27,7 @@ qualityControllerAPI.assignAdmin = async (resource, companyId, userId) => {
         })
 }
 
-qualityControllerAPI.getUsers = async (select, filter) => {
+agentsCompanyAPI.getUsers = async (select, filter) => {
     return await axios.get(`user/`, {
         params: { select, filter }
     })
@@ -47,4 +39,4 @@ qualityControllerAPI.getUsers = async (select, filter) => {
 }
 
 
-export { qualityControllerAPI };
+export { agentsCompanyAPI };

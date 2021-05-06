@@ -1,19 +1,15 @@
 import { Skeleton, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
-import eventEmitter from '../../../../Services/EventEmitter'
-import InternalError from '../../../Errors/InternalError'
+import eventEmitter from '../../Services/EventEmitter'
+import InternalError from '../../Pages/Errors/InternalError'
 
-import { manufacturerAPI } from '../manufacturerAPI'
-
-
-export default function Users({ companyId }) {
+export default function Users({ companyId, companyAPI }) {
     const [users, setUsers] = useState({ loading: true, data: [] })
     const [error, setError] = useState({ status: '', message: '' })
     let filter = { companyId }
-    console.log(filter)
     function fetchUsers() {
-        manufacturerAPI.getAll('user/', 'firstName lastName email phoneNumber role', filter)
+        companyAPI.getAll('user/', 'firstName lastName email phoneNumber role', filter)
             .then(data => {
                 console.log(data)
                 setUsers({ loading: false, data })

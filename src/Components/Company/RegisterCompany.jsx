@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Button, Input, Space, Form, Alert, notification } from 'antd';
-import { manufacturerAPI } from './manufacturerAPI'
-import eventemitter from '../../../Services/EventEmitter'
+// import { manufacturerAPI } from './manufacturerAPI'
+import eventemitter from '../../Services/EventEmitter'
 
-export default function RegisterManCompany({ handleOk }) {
+export default function RegisterCompany({ handlerAPI, resource, updateEvent }) {
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
     const [loading, setLoading] = useState(false)
 
@@ -22,23 +22,18 @@ export default function RegisterManCompany({ handleOk }) {
         },
     };
 
-    const onFinish = async (manDetails) => {
-        // console.log(userDetails)
+    const onFinish = async (companyDetails) => {
         setLoading(true)
         setError({ status: false, message: '', descriptions: '' })
-        await manufacturerAPI.post('manufacture/register', manDetails)
+        await handlerAPI.post(`${resource}/register`, companyDetails)
             .then(res => {
-                console.log(res)
-                manDetails = ''
-                openNotification({ message: res.message })
-                eventemitter.emit('updateManCompanies')
-                handleOk()
+                companyDetails = ''
+                eventemitter.emit(updateEvent)
+                openNotification()
             })
             .catch(err => {
                 console.log(err)
-                // setError({ status: true, errObj: err.response })
                 setError({ status: true, message: err.message, descriptions: err.descriptions })
-                // console.log('eerr')
             })
             .finally(() => setLoading(false))
     };
@@ -47,10 +42,9 @@ export default function RegisterManCompany({ handleOk }) {
         console.log('Failed:', errorInfo);
     };
 
-    const openNotification = ({ message, description = '' }) => {
+    const openNotification = () => {
         notification.success({
-            message,
-            description,
+            message: 'Company Registered',
             placement: 'bottomLeft'
         });
     };

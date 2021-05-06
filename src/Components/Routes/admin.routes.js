@@ -13,6 +13,8 @@ import {
 import { Users } from "../../Pages/Hybrid/Users";
 import { ManCompanyProfile, Manufacturers, UnregisteredProductProfile, UnregisteredProducts } from "../../Pages/Hybrid/Manufacturers";
 import { QualityControllerProfile, QualityControllers } from "../../Pages/Hybrid/QualityControllers";
+import { Agents } from "../../Pages/Hybrid/Agents";
+import AgentsCompanyProfile from "../../Pages/Hybrid/Agents/CompanyProfile";
 
 
 const adminRoutes = [
@@ -53,6 +55,17 @@ const adminRoutes = [
         protected: true,
     },
     {
+        name: 'Agents',
+        component: Agents,
+        url: '/manage/agents',
+        Icon: UserOutlined,
+        comments: 'agents endpoint',
+        category: 1,
+        sidebar: true,
+        roles: ['ROLE_SUPER_ADMIN'],
+        key: 12,
+    },
+    {
         name: 'Unregistered Products',
         component: UnregisteredProducts,
         url: '/manage/unregisteredProducts',
@@ -61,7 +74,7 @@ const adminRoutes = [
         category: 1,
         sidebar: true,
         roles: ['ROLE_SUPER_ADMIN'],
-        key: 12,
+        key: 14,
         protected: true,
     },
     {
@@ -81,15 +94,23 @@ const adminRoutes = [
     // Not in sidebar
     {
         name: 'Manufacturer Profile',
-        url: '/manage/manufacturer/profile/:id',
+        url: '/manage/manufacture/profile/:id',
         component: ManCompanyProfile,
         sidebar: false,
         roles: ['ROLE_SUPER_ADMIN'],
         category: 1,
     },
     {
+        name: 'Agents Profile',
+        url: '/manage/agents/profile/:id',
+        component: AgentsCompanyProfile,
+        sidebar: false,
+        roles: ['ROLE_SUPER_ADMIN'],
+        category: 1,
+    },
+    {
         name: 'Quality Controllers Profile',
-        url: '/manage/qcontroller/profile/:id',
+        url: '/manage/qualitycontrollers/profile/:id',
         component: QualityControllerProfile,
         sidebar: false,
         roles: ['ROLE_SUPER_ADMIN'],
