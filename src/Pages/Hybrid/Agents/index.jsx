@@ -1,5 +1,5 @@
 import Agents from './Agents'
-// import QualityControllerProfile from './CompanyProfile'
+import AgentCompProfile from './CompanyProfile'
 
 
-export { Agents }
+export { Agents, AgentCompProfile }
