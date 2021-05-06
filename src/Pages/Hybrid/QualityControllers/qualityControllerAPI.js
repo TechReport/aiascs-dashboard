@@ -27,7 +27,7 @@ const qualityControllerAPI = new ApiCore({
 // }
 
 qualityControllerAPI.assignAdmin = async (resource, companyId, userId) => {
-    return await axios.put(`${resource}/${companyId}/${userId}`,)
+    return await axios.put(`qualitycontrollers/assignAdmin/${companyId}/${userId}`,)
         .then(res => {
             return handleResponse(res)
         }).catch(err => {

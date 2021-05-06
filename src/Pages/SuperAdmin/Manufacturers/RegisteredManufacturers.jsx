@@ -58,7 +58,7 @@ export default function RegisteredManufacturers() {
                     <Button size='small' shape='circle' type='text'><EditOutlined className='text-primary' /></Button>
                 </Popover>
                 <Popover content='View'>
-                    <Button size='small' shape='circle' type='text' onClick={() => hist.push(`/manage/manufacturer/profile/${row._id}`, row)}><EyeOutlined className='text-dark' /></Button>
+                    <Button size='small' shape='circle' type='text' onClick={() => hist.push(`/manage/manufacture/profile/${row._id}`, row)}><EyeOutlined className='text-dark' /></Button>
                 </Popover>
             </>
         )

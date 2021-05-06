@@ -1,22 +1,18 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { DashboardWidgetCard } from '../Reusable'
 import {
     UserAddOutlined
 } from '@ant-design/icons';
-import { Button, Modal } from 'antd'
+import { Button, Modal, Skeleton, Tag } from 'antd'
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
+import { useHistory } from 'react-router'
 
-
-export default function CompanyHome({ data, RegisterCompany, RegisteredCompanies }) {
+export default function CompanyHome({ data, companies, resource, RegisterCompany }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
-    // const [userUpdated, setUserUpdated] = useState(false)
+    const hist = useHistory()
 
     const showModal = () => {
         setIsModalVisible(true);
-    };
-
-    const handleOk = () => {
-        setIsModalVisible(false);
-        // setUserUpdated(true)
     };
 
     const handleCancel = () => {
@@ -40,7 +36,7 @@ export default function CompanyHome({ data, RegisterCompany, RegisteredCompanies
                         onCancel={handleCancel}
                         footer={null}
                         destroyOnClose={true}>
-                        <RegisterCompany handleCancel={handleCancel} handleOk={handleOk} />
+                        <RegisterCompany />
                     </Modal>
                 </div>
             </div>
@@ -52,7 +48,16 @@ export default function CompanyHome({ data, RegisterCompany, RegisteredCompanies
                                 <div className="title" style={{ fontSize: 'medium' }}>Registered Companies</div>
                             </div>
                             <div className="card-body mt-n5">
-                                <RegisteredCompanies />
+                                {companies.loading ?
+                                    <Skeleton active />
+                                    :
+                                    <BootstrapTable options={{ onRowClick: (cell) => hist.push(`/manage/${resource}/profile/${cell._id}`, cell) }} tableContainerClas='mt-n2' className='bg-inf mt-n3' data={companies.data} pagination search scrollTop='Top' striped hover searchPlaceholder='Search by name, age, address or tags' trClassName='bg-inf border' trStyle={{ cursor: 'pointer' }} >
+                                        <TableHeaderColumn dataField='name' filterFormatted isKey>Name</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='email'>Email</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='phonenumber'>Phone Number</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='admin' dataFormat={formatAdmin}>Admin</TableHeaderColumn>
+                                    </BootstrapTable>
+                                }
                             </div>
                         </div>
                     </div>
@@ -60,4 +65,11 @@ export default function CompanyHome({ data, RegisterCompany, RegisteredCompanies
             </div>
         </div>
     )
+
+    function formatAdmin(cell) {
+        if (cell)
+            return `${cell.firstName} ${cell.lastName}`
+        else
+            return <Tag color='geekblue'>Not Assigned</Tag>
+    }
 }
