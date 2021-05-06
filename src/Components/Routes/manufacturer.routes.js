@@ -5,6 +5,7 @@ import { UserOutlined, FundProjectionScreenOutlined } from "@ant-design/icons";
 
 import { Users } from "../../Pages/Hybrid/Users";
 import { Products, Product } from "../../Pages/Hybrid/Manufacturers";
+import Batches from "../../Pages/Hybrid/Manufacturers/Products/Batches";
 
 const manRoutes = [
   {
@@ -63,10 +64,17 @@ const manRoutes = [
         roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
       },
       {
+        name: "Batches",
+        url: "/manufacturers/products/batches",
+        component: Batches,
+        key: 221,
+        roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+      },
+      {
         name: "Reports",
         url: "/manufacturers/report/product",
         component: "Product",
-        key: 221,
+        key: 222,
         roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
       },
     ],

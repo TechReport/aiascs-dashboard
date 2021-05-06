@@ -1,70 +1,51 @@
-import { Button } from 'antd'
-import Modal from 'antd/lib/modal/Modal'
-import { useState } from 'react'
-import { DashboardWidgetCard } from '../../../Components/Reusable'
-import RegisteredManufacturers from './RegisteredManufacturers'
-import {
-    UserAddOutlined
-} from '@ant-design/icons';
-import RegisterManCompany from './RegisterManCompany'
+import CompanyHome from '../../../Components/Company/Home'
+
+import { useEffect, useState } from 'react'
+import { manufacturerAPI } from './manufacturerAPI'
+import eventEmitter from '../../../Services/EventEmitter'
+import RegisterCompany from '../../../Components/Company/RegisterCompany'
 
 export default function Manufacturers() {
+    const updateEvent = 'updateManCompanies'
     const data = [
         { title: 'Manufacturing Companies', body: '37', percent: '+8%', descriptions: 'The number of Manufacturing Companies registered since 2021' },
         { title: 'Products', body: '37 M', percent: '-5%', descriptions: 'coming soon' },
     ]
+    const [manufacturers, setManufacturers] = useState({ loading: true, data: [] })
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    // const [userUpdated, setUserUpdated] = useState(false)
 
-    const showModal = () => {
-        setIsModalVisible(true);
-    };
+    function fetchManCompanies() {
+        manufacturerAPI.getAll('manufacture/all')
+            .then(res => {
+                console.log(res)
+                setManufacturers({ loading: false, data: res })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+    eventEmitter.on(updateEvent, () => fetchManCompanies());
 
-    const handleOk = () => {
-        setIsModalVisible(false);
-        // setUserUpdated(true)
-    };
-
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
-
+    useEffect(() => {
+        fetchManCompanies()
+        return () => {
+            setManufacturers({ loading: false, data: [] })
+        }
+    }, [])
 
     return (
         <div>
-            <div className='row mt-3 w-100' gutter={12} >
-                {data.map(item => <DashboardWidgetCard item={item} />)}
-            </div>
-            <div className="mt-4">
-                <div className="actions">
-                    <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
-                        Register Company
-                        <UserAddOutlined className='' />
-                    </Button>
-                    <Modal title="Register Manufacturing Company"
-                        visible={isModalVisible}
-                        onCancel={handleCancel}
-                        footer={null}
-                        destroyOnClose={true}>
-                        <RegisterManCompany handleCancel={handleCancel} handleOk={handleOk} />
-                    </Modal>
-                </div>
-            </div>
-            <div className="mt-4">
-                <div className="row w-100">
-                    <div className="col-8">
-                        <div className="card shadow">
-                            <div className="card-header bg-white border-0">
-                                <div className="title" style={{ fontSize: 'medium' }}>Registered Companies</div>
-                            </div>
-                            <div className="card-body mt-n5">
-                                <RegisteredManufacturers />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <CompanyHome
+                RegisterCompany={() =>
+                    RegisterCompany({
+                        handlerAPI: manufacturerAPI,
+                        resource: 'manufacture',
+                        updateEvent: updateEvent
+                    })}
+                data={data}
+                companies={manufacturers}
+                resource='manufacture' />
+
         </div>
     )
 }

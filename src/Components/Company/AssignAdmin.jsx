@@ -1,11 +1,25 @@
 import { Alert, Button, message, Select } from 'antd';
 import React, { useEffect, useState } from 'react'
-import AddNewUser from '../../../Manufacturer/Users/AddNewUser';
-import { userAPI } from '../../../Manufacturer/Users/userAPI';
-import { manufacturerAPI } from '../manufacturerAPI';
-import eventEmitter from '../../../../Services/EventEmitter'
+import { userAPI } from '../../Pages/Hybrid/Users/userAPI';
+import eventEmitter from '../../Services/EventEmitter';
+import AddNewUser from './AddNewUser';
 
-export default function AssignAdmin({ handleOk, companyId, setCompany }) {
+export default function AssignAdmin({ handleOk, companyId, setCompany, companyAPI, companyType }) {
+    let role = ''
+    switch (companyType) {
+        case 'manufacture':
+            role = ['ROLE_MANUFACTURING_COMPANY_ADMIN']
+            break;
+        case 'qualityController':
+            role = ['ROLE_QUALITY_CONTROLLER_ADMIN']
+            break;
+        case 'productAgent':
+            role = ['ROLE_AGENT_COMPANY_ADMIN']
+            break;
+        default:
+            role = []
+            break;
+    }
     const [current, setCurrent] = useState(0)
     const [users, setUsers] = useState({ loading: false, data: [] })
 
@@ -18,7 +32,7 @@ export default function AssignAdmin({ handleOk, companyId, setCompany }) {
     // TODO
     // getByRole('usr/role', { role: { genericName: 'ROLE_MANUFACTURING_COMPANY_ADMIN' } })
     async function fetchAdministrators() {
-        userAPI.getCompanyUserByRole({ role: { genericName: 'ROLE_MANUFACTURING_COMPANY_ADMIN' }, companyId }, 'firstName lastName email',)
+        userAPI.getCompanyUserByRole({ role: { genericName: role }, companyId }, 'firstName lastName email',)
             .then(res => {
                 setUsers({ loading: false, data: res })
             }).catch(err => {
@@ -28,7 +42,7 @@ export default function AssignAdmin({ handleOk, companyId, setCompany }) {
     }
 
     async function assignAdmin() {
-        manufacturerAPI.assignAdmin('manufacture/assignAdmin', companyId, selectedAdmin)
+        companyAPI.assignAdmin(`${companyType}/assignAdmin`, companyId, selectedAdmin)
             .then(res => {
                 console.log(res)
                 setCompany(prevState => {
@@ -61,9 +75,8 @@ export default function AssignAdmin({ handleOk, companyId, setCompany }) {
             title: 'Create new user',
             content: <AddNewUser
                 handleOk={handleOk}
-                role='ROLE_MANUFACTURING_COMPANY_ADMIN'
                 companyId={companyId}
-                type='manufacture' />,
+                type={companyType} />,
         }
     ];
 

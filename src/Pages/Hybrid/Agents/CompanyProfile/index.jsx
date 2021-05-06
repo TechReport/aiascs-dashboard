@@ -1,18 +1,18 @@
-import { manufacturerAPI } from "../manufacturerAPI";
+import { agentsCompanyAPI } from "../agentsCompanyAPI";
 
 import CompanyProfile from "../../../../Components/Company/Profile";
-import ProductList from "../Products/ProductList";
+// import ProductList from "../Products/ProductList";
 
-export default function ManCompanyProfile(props) {
+export default function AgentsCompanyProfile(props) {
     return (
         <div className="container-fluid mt-4">
             <CompanyProfile
                 companyData={props.location.state}
-                companyAPI={manufacturerAPI}
-                resource='manufacture'
-                companyType='manufacture'
-                updateEvent='updateManufacturer' />
-            <div className="row mt-4">
+                companyAPI={agentsCompanyAPI}
+                companyType='productAgent'
+                resource='agents'
+                updateEvent='updateAgents' />
+            {/* <div className="row mt-4">
                 <div className="col-6 ">
                     <div className="card">
                         <div className="h5 card-header bg-white border-0">
@@ -23,7 +23,7 @@ export default function ManCompanyProfile(props) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div >
     )
 }
