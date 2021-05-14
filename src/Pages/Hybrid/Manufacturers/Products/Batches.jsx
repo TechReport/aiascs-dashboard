@@ -1,7 +1,6 @@
-import { Tag, Timeline, Tree } from 'antd'
+import { Tag } from 'antd'
 import React, { useState, useEffect } from 'react'
 import { manufacturerAPI } from '../manufacturerAPI'
-import { InboxOutlined } from '@ant-design/icons'
 
 import { Collapse } from 'antd';
 
@@ -12,55 +11,55 @@ export default function Batches() {
     const [batches, setBatches] = useState([])
 
 
-    const onSelect = (selectedKeys, info) => {
-        console.log('selected', selectedKeys, info);
-    };
+    // const onSelect = (selectedKeys, info) => {
+    //     console.log('selected', selectedKeys, info);
+    // };
 
-    const onCheck = (checkedKeys, info) => {
-        console.log('onCheck', checkedKeys, info);
-    };
-
-
+    // const onCheck = (checkedKeys, info) => {
+    //     console.log('onCheck', checkedKeys, info);
+    // };
 
 
-    const treeData = [
-        {
-            title: 'Product Batches',
-            key: 'batch',
 
-            children: batches
-            // [
-            //     batches,
-            //     { title: "1620340286256" },
-            //     { title: "Fri May 07 2021" },
-            //     {
-            //         title: 'parent 1-0',
-            //         // key: 'batch-props',
-            //         // children: [
-            //         //     {
-            //         //         title: 'leaf',
-            //         //     },
-            //         //     {
-            //         //         title: 'leaf',
-            //         //     },
-            //         // ],
-            //     },
-            //     {
-            //         title: 'parent 1-1',
-            //         key: 'batch-props-2',
-            //         children: [
-            //             {
-            //                 title: (
-            //                     <span className='card card-body'>
-            //                         sss
-            //                     </span>
-            //                 ),
-            //             },
-            //         ],
-            //     },
-            // ],
-        },
-    ];
+
+    // const treeData = [
+    //     {
+    //         title: 'Product Batches',
+    //         key: 'batch',
+
+    //         children: batches
+    //         // [
+    //         //     batches,
+    //         //     { title: "1620340286256" },
+    //         //     { title: "Fri May 07 2021" },
+    //         //     {
+    //         //         title: 'parent 1-0',
+    //         //         // key: 'batch-props',
+    //         //         // children: [
+    //         //         //     {
+    //         //         //         title: 'leaf',
+    //         //         //     },
+    //         //         //     {
+    //         //         //         title: 'leaf',
+    //         //         //     },
+    //         //         // ],
+    //         //     },
+    //         //     {
+    //         //         title: 'parent 1-1',
+    //         //         key: 'batch-props-2',
+    //         //         children: [
+    //         //             {
+    //         //                 title: (
+    //         //                     <span className='card card-body'>
+    //         //                         sss
+    //         //                     </span>
+    //         //                 ),
+    //         //             },
+    //         //         ],
+    //         //     },
+    //         // ],
+    //     },
+    // ];
 
     function fetchBatches() {
         manufacturerAPI.getAll(`products/batch/${user.companyId._id}`)
@@ -88,11 +87,11 @@ export default function Batches() {
         console.log(batches)
     }, [batches])
 
-    const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
+//     const text = `
+//   A dog is a type of domesticated animal.
+//   Known for its loyalty and faithfulness,
+//   it can be found as a welcome guest in many households across the world.
+// `;
     return (
         <div className='row w-100'>
             <div className="col-6">

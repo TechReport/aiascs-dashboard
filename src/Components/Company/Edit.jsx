@@ -6,9 +6,6 @@ export default function Edit({ data, isModalVisible, handleCancel, companyAPI, c
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
     const [loading, setLoading] = useState(false)
 
-    const [name, setName] = useState('daniel')
-
-
     console.log(data)
     const layout = {
         labelCol: {
