@@ -15,6 +15,7 @@ import ShowForPermission from "../../Components/Authentication/CheckPermission";
 import AssignAdmin from "./AssignAdmin";
 import Users from "./Users";
 import eventEmitter from "../../Services/EventEmitter";
+import Edit from "./Edit";
 
 /**
  * @param resource enum [qualitycontrollers, manufacture, productAgent]
@@ -55,6 +56,19 @@ export default function CompanyProfile({ companyData, companyAPI, companyType, r
     eventEmitter.on('updatedAdmin', (event) => setAdmin({ loading: false, data: event }))
 
 
+    // EDIT COMPANY INFO 
+    const [editModalVisible, setEditModalVisible] = useState(false)
+
+    const showEditModal = () => {
+        setEditModalVisible(true)
+    }
+
+    const closeEditModal = () => {
+        setEditModalVisible(false)
+    }
+
+
+    // END OFO EDIT COMPANY
     const hist = useHistory()
 
     function fetchAdmin() {
@@ -101,10 +115,19 @@ export default function CompanyProfile({ companyData, companyAPI, companyType, r
                     onBack={() => hist.goBack()}
                     title={company.name}
                     extra={<>
-                        <Button type='ghost' >Deactivate</Button>
+                        <Button type='ghost' onClick={showEditModal} >Edit</Button>
+                        {/* <Button type='ghost' >Deactivate</Button> */}
                         <Button type='danger' loading={loading} onClick={showDeleteCompanyModal}>Delete</Button>
                     </>}
                     subTitle={<Tag color='gold'>{company._id}</Tag>}
+                />
+                <Edit
+                    isModalVisible={editModalVisible}
+                    handleCancel={closeEditModal}
+                    data={companyData}
+                    companyAPI={companyAPI}
+                    companyType={companyType}
+                    resource={resource}
                 />
 
                 <Modal
