@@ -15,11 +15,12 @@ export default function LocationSelect({ setLocation, locationError }) {
     const [selectedDistrict, setSelectedDistrict] = useState('')
     // eslint-disable-next-line
     const [selectedWard, setSelectedWard] = useState('')
+    const locationURL = process.env.NODE_ENV === 'production' ? 'https://tanzania-locations.herokuapp.com/' : 'http://tanzania-locations.herokuapp.com/'
 
 
     async function getDistricts(forRegion) {
         setDistricts({ loading: true, data: [] })
-        await axios.get(`http://tanzania-locations.herokuapp.com/districts/${forRegion}`)
+        await axios.get(`${locationURL}districts/${forRegion}`)
             .then((data) => {
                 setDistricts({ loading: false, data: Object.values(data.data) })
             })
@@ -31,7 +32,7 @@ export default function LocationSelect({ setLocation, locationError }) {
 
     async function getWards(forDistrict) {
         setWards({ loading: true, data: [] })
-        await axios.get(`http://tanzania-locations.herokuapp.com/wards/${selectedRegion}/${forDistrict}/`)
+        await axios.get(`${locationURL}wards/${selectedRegion}/${forDistrict}/`)
             .then((data) => {
                 console.log(data)
                 setWards({ loading: false, data: Object.values(data.data) })
