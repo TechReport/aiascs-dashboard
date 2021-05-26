@@ -4,6 +4,7 @@ import { AuthContext } from '../../Context/AuthContext';
 
 export default function ShowForPermission({ allowedPermissions, children }) {
     const { state } = useContext(AuthContext)
+    console.log(state)
     let isPermitted = state.currentUser.role.permissions.some(e => e.genericName === allowedPermissions)
 
     if (isPermitted) {
@@ -12,7 +13,20 @@ export default function ShowForPermission({ allowedPermissions, children }) {
     return <></>
 };
 
+function ShowForRole({ allowedRoles, children }) {
+    const { state } = useContext(AuthContext)
+    // console.log(state)
+    // let isPermitted = state.currentUser.role.genericName === allowedRoles
+    let isPermitted = allowedRoles.some(e => e === state.currentUser.role.genericName)
+    console.log(isPermitted)
 
+    if (isPermitted) {
+        return children;
+    }
+    return <></>
+};
+
+export { ShowForRole }
 
 
 // import { useContext } from 'react';
