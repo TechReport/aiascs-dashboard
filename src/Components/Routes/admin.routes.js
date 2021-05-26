@@ -4,7 +4,10 @@ import {
     // DesktopOutlined,
     SettingOutlined,
     UserOutlined,
-    FundProjectionScreenOutlined
+    FundProjectionScreenOutlined,
+    SafetyCertificateOutlined,
+    AlertOutlined,
+    TeamOutlined
 } from '@ant-design/icons';
 // import { UserProfile } from "../../Pages/UserProfile";
 // import { ManCompanyProfile, Manufacturers, QualityControllers } from "../../Pages/SuperAdmin";
@@ -34,7 +37,7 @@ const adminRoutes = [
         name: 'Manufacturers',
         component: Manufacturers,
         url: '/manage/manufacturers',
-        Icon: UserOutlined,
+        Icon: SafetyCertificateOutlined,
         comments: 'Settings endpoint',
         category: 1,
         sidebar: true,
@@ -46,7 +49,7 @@ const adminRoutes = [
         name: 'Quality Controllers',
         component: QualityControllers,
         url: '/manage/quality_controllers',
-        Icon: UserOutlined,
+        Icon: AlertOutlined,
         comments: 'quality controllers endpoint',
         category: 1,
         sidebar: true,
@@ -58,7 +61,7 @@ const adminRoutes = [
         name: 'Agents',
         component: Agents,
         url: '/manage/agents',
-        Icon: UserOutlined,
+        Icon: TeamOutlined,
         comments: 'agents endpoint',
         category: 1,
         sidebar: true,
