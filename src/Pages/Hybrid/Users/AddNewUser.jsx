@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { Button, Input, Select, Radio, Space, Form, Alert, notification } from 'antd';
 import { userAPI } from './userAPI'
 import eventemitter from '../../../Services/EventEmitter'
-// import LocationSelect from './LocationSelect';
+import LocationSelect from './LocationSelect';
 
 export default function AddNewUser({ handleOk, role }) {
     const [gender, setGender] = useState('male')
     const [roles, setRoles] = useState({ loading: false, data: [] })
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
     const [loading, setLoading] = useState(false)
+    const [location, setLocation] = useState({ region: '', district: '', ward: '' })
+    const [locationError, setLocationError] = useState({ status: false, message: '' })
 
     const layout = {
         labelCol: {
@@ -26,7 +28,11 @@ export default function AddNewUser({ handleOk, role }) {
     };
 
     const onFinish = async (userDetails) => {
-        // console.log(userDetails)
+        if (!location.ward) {
+            return setLocationError({ status: true, message: 'Please select location' })
+        }
+        userDetails.location = location
+
         setLoading(true)
         setError({ status: false, message: '', descriptions: '' })
         await userAPI.post('user/register', { newUser: userDetails })
@@ -98,25 +104,39 @@ export default function AddNewUser({ handleOk, role }) {
                 label="First Name"
                 name="firstName"
                 rules={[{ required: true, message: "Please input User's First Name!" }]}>
-                <Input placeholder='Erick' />
+                <Input placeholder='Enter Users First Name' />
             </Form.Item>
             <Form.Item
                 label="Last Name"
                 name="lastName"
                 rules={[{ required: true, message: 'Please input your username!' }]}>
-                <Input />
+                <Input placeholder='Enter Users Last Name' />
             </Form.Item>
             <Form.Item
                 label="Email"
                 name="email"
-                rules={[{ required: true, message: 'Please input your username!' }]}>
-                <Input />
+                rules={[
+                    { required: true, message: 'Please input your Email!' },
+                    {
+                        pattern: /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        message: "Invalid Email Format",
+                    },
+                ]}>
+                <Input placeholder='Enter users Email' />
             </Form.Item>
             <Form.Item
                 label="Phone Number"
                 name="phoneNumber"
-                rules={[{ required: true, message: 'Please input your Phone number!' }]}>
-                <Input type='number' />
+                rules={[
+                    { required: true, message: 'Please input your Phone number!' },
+                    {
+                        pattern: /^[\d]{10,12}$/,
+                        message: "Allowed format: 255626327561 or 0626327561",
+                    },
+                    // { len: 10, message: 'Only 10 digits allowed!' },
+                    // { message: 'Only 10 digits allowed!', validator: `@"^\d{10}$"` }
+                ]}>
+                <Input type='number' placeholder='Enter users Phone Number' />
             </Form.Item>
             <Form.Item
                 label="Gender"
@@ -143,9 +163,10 @@ export default function AddNewUser({ handleOk, role }) {
             <Form.Item
                 label="Location"
                 name="location"
-                rules={[{ required: true, message: 'Please input your location!' }]}>
-                {/* <LocationSelect /> */}
-                <Input />
+            // rules={[{ required: true, message: 'Please input your location!' }]}
+            >
+                <LocationSelect setLocation={setLocation} locationError={locationError} />
+                {/* <Input placeholder='Enter users Location' /> */}
 
             </Form.Item>
             <Form.Item {...tailLayout}>

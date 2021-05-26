@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Button, Input, Select, Radio, Space, Form, Alert, notification } from 'antd';
+import { Button, Input, Select, Radio, Space, Form, Alert, notification, InputNumber } from 'antd';
 // import eventemitter from '../../../Services/EventEmitter'
 import { userAPI } from '../../Pages/Hybrid/Users/userAPI';
 import eventEmitter from '../../Services/EventEmitter';
+import LocationSelect from '../../Pages/Hybrid/Users/LocationSelect';
 // import LocationSelect from './LocationSelect';
 
 export default function AddNewUser({ handleOk, companyId, type }) {
@@ -26,6 +27,9 @@ export default function AddNewUser({ handleOk, companyId, type }) {
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
     const [loading, setLoading] = useState(false)
 
+    const [location, setLocation] = useState({ region: '', district: '', ward: '' })
+    const [locationError, setLocationError] = useState({ status: false, message: '' })
+
     const layout = {
         labelCol: {
             span: 6,
@@ -42,8 +46,12 @@ export default function AddNewUser({ handleOk, companyId, type }) {
     };
 
     const onFinish = async (userDetails) => {
+        if (!location.ward) {
+            return setLocationError({ status: true, message: 'Please select location' })
+        }
         // Add companyId to user object
         userDetails.companyId = companyId
+        userDetails.location = location
         userDetails.onModel = type
         // console.log(userDetails)
         setLoading(true)
@@ -125,7 +133,7 @@ export default function AddNewUser({ handleOk, companyId, type }) {
                 label="First Name"
                 name="firstName"
                 rules={[{ required: true, message: "Please input User's First Name!" }]}>
-                <Input placeholder='Erick' />
+                <Input placeholder='Enter your usernames' />
             </Form.Item>
             <Form.Item
                 label="Last Name"
@@ -136,13 +144,25 @@ export default function AddNewUser({ handleOk, companyId, type }) {
             <Form.Item
                 label="Email"
                 name="email"
-                rules={[{ required: true, message: 'Please input your username!' }]}>
+                rules={[
+                    { required: true, message: 'Please input your email!' },
+                    {
+                        pattern: /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        message: "Invalid Email Format",
+                    },
+                ]}>
                 <Input />
             </Form.Item>
             <Form.Item
                 label="Phone Number"
                 name="phoneNumber"
-                rules={[{ required: true, message: 'Please input your Phone number!' }]}>
+                rules={[
+                    { required: true, message: 'Please input your Phone number!' },
+                    {
+                        pattern: /^[\d]{10,12}$/,
+                        message: "Allowed format: 255626327561 or 0626327561",
+                    },
+                ]}>
                 <Input type='number' />
             </Form.Item>
             <Form.Item
@@ -169,15 +189,10 @@ export default function AddNewUser({ handleOk, companyId, type }) {
 
             <Form.Item
                 label="Location"
-                name="location"
-                rules={[{ required: true, message: 'Please input your location!' }]}>
-                {/* <LocationSelect /> */}
-                <Input />
-
+                name="location">
+                <LocationSelect setLocation={setLocation} locationError={locationError} />
             </Form.Item>
-            {/* <Form.Item name="company">
-                <Input type='hidden' value={company.id} />
-            </Form.Item> */}
+
             <Form.Item {...tailLayout}>
                 <Space size='middle' direction='horizontal'>
                     <Button type="ghost" htmlType="reset" >

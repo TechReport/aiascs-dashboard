@@ -36,13 +36,13 @@ export default function CompanyProfile({ companyData, companyAPI, companyType, r
 
     const showDeleteCompanyModal = () => {
         setIsDeleteCompanyModalVisible(true);
-        setLoading(true)
+        // setLoading(true)
     };
 
     const handleCancel = () => {
         setIsDeleteCompanyModalVisible(false);
         setIsAddUserModalVisible(false)
-        setLoading(false)
+        // setLoading(false)
     };
 
     const showAssignAdminModal = () => {
@@ -85,6 +85,7 @@ export default function CompanyProfile({ companyData, companyAPI, companyType, r
     }
 
     function deleteCompany(e) {
+        setLoading(true)
         companyAPI.deleteOne(`${resource}/`, company._id)
             .then(res => {
                 console.log(res)
@@ -144,7 +145,7 @@ export default function CompanyProfile({ companyData, companyAPI, companyType, r
                     <Input className='text-uppercase text-center' value={deleteCompanyCheck} onChange={(e) => setDeleteCompanyCheck(e.target.value)} />
                     <div className='mt-3 text-right'>
                         <Button type='ghost' className='mr-1' onClick={handleCancel}>Dismiss</Button>
-                        <Button type='danger' disabled={!(company.name.toUpperCase() === deleteCompanyCheck.toUpperCase())} onClick={deleteCompany}>DELETE</Button>
+                        <Button type='danger' disabled={!(company.name.toUpperCase() === deleteCompanyCheck.toUpperCase())} onClick={deleteCompany} loading={loading} >DELETE</Button>
                     </div>
                 </Modal>
             </Affix>
@@ -158,7 +159,7 @@ export default function CompanyProfile({ companyData, companyAPI, companyType, r
                             <p><strong>Regisitration No: </strong>{company.regno}</p>
                             <p><strong>Email: </strong>{company.email}</p>
                             <p><strong>Phone Number: </strong>{company.phonenumber}</p>
-                            <p><strong>Location: </strong>{company.location && `${company.location.country}, ${company.location.district}`}</p>
+                            <p><strong>Location: </strong><span className='text-uppercase'>{company.location && `${company.location.region}, ${company.location.district}, ${company.location.ward}`}</span></p>
                             <p>
                                 <strong>Admin: </strong>
                                 {company.admin ?
