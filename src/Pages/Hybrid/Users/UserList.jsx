@@ -14,7 +14,6 @@ export default function UserList() {
     // console.log(state)
 
     const [userData] = useState(JSON.parse(localStorage.getItem('user')))
-    console.log(userData)
 
     const [users, setUsers] = useState({ loading: true, data: [] })
     // const [usernameToDelete, setUsernameToDelete] = useState()
@@ -59,6 +58,14 @@ export default function UserList() {
                 <TableHeaderColumn dataField='firstName' filterFormatted dataFormat={(cell, row) => `${row.firstName} ${row.lastName}`} isKey>Name</TableHeaderColumn>
                 <TableHeaderColumn dataField='email'>Email</TableHeaderColumn>
                 <TableHeaderColumn dataField='phoneNumber'>Phone Number</TableHeaderColumn>
+                <TableHeaderColumn dataField='companyId' dataFormat={(cell, row) => {
+                    if (cell) {
+                        return `${cell.name} (${row.onModel.toUpperCase()})`
+                    } else {
+                        return <Tag >Not Assigned</Tag>
+                    }
+                }}>Company</TableHeaderColumn>
+
                 <TableHeaderColumn dataField='role'
                     dataFormat={(cell) =>
                         <Tag color={'geekblue'} key={cell}>{cell.name}</Tag>

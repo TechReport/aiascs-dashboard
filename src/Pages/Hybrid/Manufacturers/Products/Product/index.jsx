@@ -1,4 +1,4 @@
-import { Affix, Button, PageHeader, Tag, Timeline, Tabs } from "antd";
+import { Affix, Button, PageHeader, Tag, Timeline, Tabs, message, Modal, Alert } from "antd";
 import {
     ClockCircleOutlined,
 } from '@ant-design/icons';
@@ -7,16 +7,43 @@ import toBase64 from "../../../../../Services/Utilities";
 import { useHistory } from "react-router";
 // import package1 from '../../../../../Assets/package1.jpg'
 import package1 from '../../../../../Assets/package1.jpg'
+import { productAPI } from "../productAPI";
+import ShowForPermission from "../../../../../Components/Authentication/CheckPermission";
 
 
 const { TabPane } = Tabs;
 
 export default function Product(props) {
     const [top] = useState(0)
-
-    console.log(props)
-    const [product] = useState(props.location.state)
     const hist = useHistory()
+    const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
+    const [error, setError] = useState({ status: false, message: '', description: '' })
+
+    function handleCancel() {
+        setIsDeleteModalVisible(false)
+    }
+
+    // function handleShowDeleteModal(){
+    //     setIsDeleteModalVisible(true)
+    // }
+
+    function handleDeleteProduct() {
+        console.log(product)
+
+        productAPI.deleteOne('products', product._id)
+            .then(response => {
+                console.log(response)
+                message.info("Product Deleted Successfully")
+                hist.goBack()
+            }).catch(err => {
+                console.log(err)
+                setError(err)
+                setError({ status: true, message: err.message, descriptions: err.descriptions })
+            })
+    }
+
+    const [product] = useState(props.location.state)
+
     return (
         <div className="container-fluid mt-4">
             <Affix offsetTop={top}>
@@ -25,9 +52,35 @@ export default function Product(props) {
                     onBack={() => hist.goBack()}
                     title={product.name}
                     extra={<>
-                        <Button type='primary'>Track</Button>
-                        <Button type='danger'>Revoke</Button>
-                        <Button type='danger'>Delete</Button>
+                        <ShowForPermission allowedPermissions='update_product' >
+                            <Button type='default'>Edit</Button>
+                        </ShowForPermission>
+                        <ShowForPermission allowedPermissions='revoke_product' >
+                            <Button type='default'>Revoke</Button>
+                        </ShowForPermission>
+                        <ShowForPermission allowedPermissions='update_product' >
+                            <Button type='danger' onClick={() => setIsDeleteModalVisible(true)}>Delete</Button>
+                        </ShowForPermission>
+                        <Modal title="Confirm Delete Product"
+                            visible={isDeleteModalVisible}
+                            onCancel={handleCancel}
+                            footer={null}
+                            destroyOnClose={true}>
+                            <p> Product name: <Tag color='lime'>{product.name}</Tag></p>
+                            <p> Product Token: <Tag color='green'>{product.token}</Tag></p>
+                            <p> The identified product will be deleted permanently. Confirm</p>
+                            <div className='text-right mb-2'>
+                                <Button type='default' className='mr-2' onClick={() => setIsDeleteModalVisible(false)}>Dismiss   </Button>
+                                <Button type='danger' onClick={handleDeleteProduct}>Delete</Button>
+                            </div>
+                            {error.status &&
+                                <Alert
+                                    message={error.message}
+                                    description={error.descriptions}
+                                    type="error"
+                                />
+                            }
+                        </Modal>
                     </>}
                     subTitle={<Tag color={product.isRevoked ? 'red' : 'green'}>{product.isRevoked ? 'Revoked' : 'Not Revoked'}</Tag>}
                 />

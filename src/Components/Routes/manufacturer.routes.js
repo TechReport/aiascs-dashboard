@@ -57,7 +57,7 @@ const manRoutes = [
     roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
     submenu: [
       {
-        name: "List",
+        name: "All Products",
         url: "/manufacturers/products",
         component: Products,
         key: 220,

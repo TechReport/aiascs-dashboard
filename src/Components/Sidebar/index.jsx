@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 // import routes from "../routes";
 import routes from '../Routes'
 
-import {
-    DeploymentUnitOutlined
-} from '@ant-design/icons';
+// import {
+//     DeploymentUnitOutlined
+// } from '@ant-design/icons';
 import SubMenu from "antd/lib/menu/SubMenu";
 import { AuthContext } from "../../Context/AuthContext";
+import brand from '../../Assets/logos/AIASCS (3)_CROPED.png'
 
 const { Sider } = Layout;
 
@@ -30,8 +31,9 @@ export default function Sidebar() {
                 left: 0
             }}>
             <div className="logo bg-inf py-1 pr-3 text-center" style={{ fontSize: '18px', fontFamily: 'verdana' }}>
-                <DeploymentUnitOutlined style={{ fontSize: '30px' }} className='p-2' />
+                {/* <DeploymentUnitOutlined style={{ fontSize: '30px' }} className='p-2' /> */}
                 {/* AIASCS */}
+                <img src={brand} alt='brand' className='img-fluid' />
             </div>
             <Divider className='mt-0 mb-0' />
             <Menu defaultSelectedKeys={['1']} style={{ backgroundColor: '#f4f4f4', fontSize: '14px' }} mode="inline" >

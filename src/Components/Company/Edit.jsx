@@ -2,11 +2,9 @@ import React, { useState } from 'react'
 import { Button, Input, Space, Form, Alert, notification, Modal } from 'antd';
 
 export default function Edit({ data, isModalVisible, handleCancel, companyAPI, companyType, resource }) {
-    console.log(resource)
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
     const [loading, setLoading] = useState(false)
 
-    console.log(data)
     const layout = {
         labelCol: {
             span: 6,

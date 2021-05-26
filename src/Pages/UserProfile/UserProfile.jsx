@@ -80,7 +80,9 @@ export default function UserProfile(props) {
                                 <p><strong>Email Verified: </strong>{<Tag>{user.emailVerified ? 'Verified' : 'Not Verified'}</Tag>}</p>
                                 <p><strong>Phone Number: </strong>{user.phoneNumber}</p>
                                 <p><strong>Registered At: </strong>{user.createdAt}</p>
-                                <p><strong>Location: </strong>{user.location}</p>
+                                {user.location &&
+                                    <p><strong>Location: </strong><span className='text-uppercase'>{`${user.location.region} | ${user.location.district} | ${user.location.ward}`}</span></p>
+                                }
                             </div>
                         </div>
                     </div>

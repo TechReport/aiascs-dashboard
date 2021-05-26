@@ -43,6 +43,7 @@ export default function QualityControllers() {
                         updateEvent
                     })}
                 data={data}
+                title='Register Quality Controllers'
                 companies={qualityControllers}
                 resource='qualitycontrollers' />
         </div>

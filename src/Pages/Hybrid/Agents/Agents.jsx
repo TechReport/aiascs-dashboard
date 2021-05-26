@@ -40,9 +40,10 @@ export default function Agents() {
                     RegisterCompany({
                         handlerAPI: agentsCompanyAPI,
                         resource: 'productAgent',
-                        updateEvent
+                        updateEvent,
                     })}
                 data={data}
+                title='Register Agents Company'
                 companies={agents}
                 resource='agents' />
         </div>

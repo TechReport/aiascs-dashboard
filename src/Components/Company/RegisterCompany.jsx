@@ -2,10 +2,15 @@ import { useState } from 'react';
 import { Button, Input, Space, Form, Alert, notification } from 'antd';
 // import { manufacturerAPI } from './manufacturerAPI'
 import eventemitter from '../../Services/EventEmitter'
+import LocationSelect from '../../Pages/Hybrid/Users/LocationSelect';
 
 export default function RegisterCompany({ handlerAPI, resource, updateEvent }) {
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
     const [loading, setLoading] = useState(false)
+
+    const [location, setLocation] = useState({ region: '', district: '', ward: '' })
+    const [locationError, setLocationError] = useState({ status: false, message: '' })
+
 
     const layout = {
         labelCol: {
@@ -23,6 +28,11 @@ export default function RegisterCompany({ handlerAPI, resource, updateEvent }) {
     };
 
     const onFinish = async (companyDetails) => {
+        if (!location.ward) {
+            return setLocationError({ status: true, message: 'Please select location' })
+        }
+        companyDetails.location = location
+
         setLoading(true)
         setError({ status: false, message: '', descriptions: '' })
         await handlerAPI.post(`${resource}/register`, companyDetails)
@@ -66,25 +76,36 @@ export default function RegisterCompany({ handlerAPI, resource, updateEvent }) {
                 label="Registration No"
                 name="regno"
                 rules={[{ required: true, message: 'Please input your username!' }]}>
-                <Input />
+                <Input placeholder='Enter Companies Registration Number' />
             </Form.Item>
             <Form.Item
                 label="Email"
                 name="email"
-                rules={[{ required: true, message: 'Please input your username!' }]}>
-                <Input />
+                rules={[
+                    { required: true, message: 'Please input your Email!' },
+                    {
+                        pattern: /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        message: "Invalid Email Format",
+                    },
+                ]}>
+                <Input type='email' placeholder="Enter Companie's Email" />
             </Form.Item>
             <Form.Item
                 label="Phone Number"
                 name="phonenumber"
-                rules={[{ required: true, message: 'Please input your Phone number!' }]}>
-                <Input type='number' />
+                rules={[
+                    { required: true, message: 'Please input your Phone number!' },
+                    {
+                        pattern: /^[\d]{10,12}$/,
+                        message: "Allowed format: 255626327561 or 0626327561",
+                    },
+                ]}>
+                <Input type='number' placeholder='Enter Phone Number' />
             </Form.Item>
             <Form.Item
                 label="Location"
-                name="location"
-                rules={[{ required: true, message: 'Please input your location!' }]}>
-                <Input />
+                name="location">
+                <LocationSelect setLocation={setLocation} locationError={locationError} />
             </Form.Item>
 
             <Form.Item {...tailLayout}>

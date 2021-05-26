@@ -69,7 +69,7 @@ export default function Users() {
                 </div>
             </div>
             <div className="container-fluid row w-100 mt-4">
-                <div className="col-8">
+                <div className="col">
                     <div className="card shadow">
                         <div className="card-header bg-white border-0">
                             <div className="title h5 text-muted">List</div>
