@@ -1,4 +1,4 @@
-import { Button, Input, message, Popconfirm, Popover, Skeleton, Tag } from 'antd'
+import { Button, Popover, Skeleton, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { productAPI } from './productAPI'
@@ -15,7 +15,6 @@ export default function ProductList({ companyId }) {
     console.log('i wonder')
     console.log(companyId)
     const [products, setProducts] = useState({ loading: true, data: [] })
-    const [productName, setProductName] = useState('')
     // const [deleteProductProps, setDeleteProductProps] = useState({ productName: '', })
 
     const hist = useHistory()
@@ -38,18 +37,18 @@ export default function ProductList({ companyId }) {
         return fetchProducts()
     });
 
-    function handleDeleteProduct(productID) {
-        console.log(productID)
+    // function handleDeleteProduct(productID) {
+    //     console.log(productID)
 
-        productAPI.deleteOne('products/', productID)
-            .then(response => {
-                console.log(response)
-                setProducts({ loading: false, data: products.data.filter(a => a._id !== productID) })
-                message.info("Product Deleted Successfully")
-            }).catch(err => {
-                console.log(err)
-            })
-    }
+    //     productAPI.deleteOne('products/', productID)
+    //         .then(response => {
+    //             console.log(response)
+    //             setProducts({ loading: false, data: products.data.filter(a => a._id !== productID) })
+    //             message.info("Product Deleted Successfully")
+    //         }).catch(err => {
+    //             console.log(err)
+    //         })
+    // }
 
     useEffect(() => {
         fetchProducts()

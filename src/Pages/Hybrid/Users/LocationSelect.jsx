@@ -1,18 +1,19 @@
-import { Cascader, Select } from 'antd';
+import { Select } from 'antd';
 import { Option } from 'antd/lib/mentions';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // import tgd from 'tanzaniageodata'
 
 
 export default function LocationSelect({ setLocation, locationError }) {
-    const [regions, setRegions] = useState(['arusha', 'daressalaam', 'dodoma', 'geita', 'iringa', 'kagera', 'katavi', 'kigoma', 'kilimanjaro', 'lindi', 'manyara', 'mara', 'mbeya', 'morogoro', 'mtwara', 'mwanza', 'njombe', 'pwani', 'rukwa', 'ruvuma', 'shinyanga', 'simiyu', 'singida', 'singida', 'songwe', 'tabora'])
+    const [regions] = useState(['arusha', 'daressalaam', 'dodoma', 'geita', 'iringa', 'kagera', 'katavi', 'kigoma', 'kilimanjaro', 'lindi', 'manyara', 'mara', 'mbeya', 'morogoro', 'mtwara', 'mwanza', 'njombe', 'pwani', 'rukwa', 'ruvuma', 'shinyanga', 'simiyu', 'singida', 'singida', 'songwe', 'tabora'])
     const [districts, setDistricts] = useState({ loading: false, data: [] })
     const [wards, setWards] = useState({ loading: false, data: [] })
 
     const [selectedRegion, setSelectedRegion] = useState('')
     const [selectedDistrict, setSelectedDistrict] = useState('')
+    // eslint-disable-next-line
     const [selectedWard, setSelectedWard] = useState('')
 
 

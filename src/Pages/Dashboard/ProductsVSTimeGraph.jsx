@@ -1,7 +1,5 @@
-import { Button } from 'antd'
 import React, { useEffect, useState } from 'react'
 import ReactApexChart from 'react-apexcharts'
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { manufacturerAPI } from '../Hybrid/Manufacturers/manufacturerAPI'
 
 export default function Graph1() {
@@ -76,13 +74,13 @@ export default function Graph1() {
                 <ReactApexChart options={options} series={series} type="area" height={350} />
             </div>
             {/* <div className="col-4"> */}
-                {/* {series[0] &&
+            {/* {series[0] &&
                     <ReactApexChart options={pirChartOptions} series={series[0].data} type="pie" width={350} />
                 } */}
-                {/* <ReactApexChart options={options} series={series} type="donut" height={350} /> */}
+            {/* <ReactApexChart options={options} series={series} type="donut" height={350} /> */}
 
 
-                {/* <BootstrapTable tableContainerClas='mt-n2' className='' data={data} scrollTop='Top' striped hover >
+            {/* <BootstrapTable tableContainerClas='mt-n2' className='' data={data} scrollTop='Top' striped hover >
                     <TableHeaderColumn isKey dataField='_id'>Date</TableHeaderColumn>
                     <TableHeaderColumn dataField='count'>Count</TableHeaderColumn>
                 </BootstrapTable> */}

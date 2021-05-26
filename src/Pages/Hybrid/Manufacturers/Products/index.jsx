@@ -22,11 +22,11 @@ export default function Products() {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
-    const data = [
-        { title: 'Total Products Registered', body: '37 M', percent: '-5%', descriptions: 'Number of registered products' },
-        { title: 'Total Batches', body: '132 k', percent: '+20%', descriptions: 'coming soon' },
-        { title: 'Agents', body: '37', percent: '-20%', descriptions: 'coming soon' },
-    ]
+    // const data = [
+    //     { title: 'Total Products Registered', body: '37 M', percent: '-5%', descriptions: 'Number of registered products' },
+    //     { title: 'Total Batches', body: '132 k', percent: '+20%', descriptions: 'coming soon' },
+    //     { title: 'Agents', body: '37', percent: '-20%', descriptions: 'coming soon' },
+    // ]
     return (
         <div>
             {/* <div className='row mt-4 mx-0' styl={{ width: '100%' }}>

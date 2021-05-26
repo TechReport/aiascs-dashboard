@@ -1,4 +1,3 @@
-import { Button } from 'antd';
 import React, { useEffect, useState } from 'react'
 import ReactApexChart from 'react-apexcharts';
 import { manufacturerAPI } from '../Hybrid/Manufacturers/manufacturerAPI';
