@@ -7,7 +7,7 @@ import { Button, Modal, Skeleton, Tag } from 'antd'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { useHistory } from 'react-router'
 
-export default function CompanyHome({ data, companies, resource, RegisterCompany }) {
+export default function CompanyHome({ data, companies, resource, RegisterCompany, title }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const hist = useHistory()
 
@@ -28,10 +28,11 @@ export default function CompanyHome({ data, companies, resource, RegisterCompany
             <div className="mt-4">
                 <div className="actions">
                     <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
-                        Register Company
+                        {title}
                         <UserAddOutlined className='' />
                     </Button>
-                    <Modal title="Register Manufacturing Company"
+                    <Modal title={title}
+                        // ""
                         visible={isModalVisible}
                         onCancel={handleCancel}
                         footer={null}
@@ -55,7 +56,7 @@ export default function CompanyHome({ data, companies, resource, RegisterCompany
                                         <TableHeaderColumn dataField='name' filterFormatted isKey>Name</TableHeaderColumn>
                                         <TableHeaderColumn dataField='email'>Email</TableHeaderColumn>
                                         <TableHeaderColumn dataField='phonenumber'>Phone Number</TableHeaderColumn>
-                                        <TableHeaderColumn dataField='admin' dataFormat={formatAdmin}>Admin</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='admin' dataFormat={formatAdmin}>Role</TableHeaderColumn>
                                     </BootstrapTable>
                                 }
                             </div>

@@ -43,6 +43,7 @@ export default function Manufacturers() {
                         updateEvent: updateEvent
                     })}
                 data={data}
+                title='Register Manufacturing Company'
                 companies={manufacturers}
                 resource='manufacture' />
 
