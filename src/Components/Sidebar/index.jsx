@@ -41,7 +41,7 @@ export default function Sidebar() {
                     return (
                         route.sidebar &&
                         <>
-                            {index > 0 && route.category !== array[index - 1].category && <Divider />}
+                            {/* {index > 0 && route.category !== array[index - 1].category && <Divider />} */}
                             {route.submenu && route.roles.includes(state.currentUser.role.genericName) ?
                                 <SubMenu key={route.key} icon={<route.Icon />} title={route.name}>
                                     {route.submenu.map(submenu =>
