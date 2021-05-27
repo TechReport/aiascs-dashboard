@@ -80,6 +80,18 @@ const manRoutes = [
     ],
   },
   {
+    name: "Agents",
+    component: "Agents",
+    url: "/agents",
+    Icon: UserOutlined,
+    comments: "Users endpoint",
+    category: 1,
+    sidebar: true,
+    roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+    key: 23,
+    protected: true,
+  },
+  {
     name: "Product",
     url: "/manufacturers/products/:id",
     component: Product,
