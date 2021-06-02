@@ -1,22 +1,33 @@
-import { Affix, Button, PageHeader, Tag, Timeline, Tabs, message, Modal, Alert } from "antd";
+import { Affix, Button, PageHeader, Tag, Timeline, Tabs, message, Modal, Alert, Skeleton, Select, Empty } from "antd";
 import {
     ClockCircleOutlined,
 } from '@ant-design/icons';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toBase64 from "../../../../../Services/Utilities";
 import { useHistory } from "react-router";
 // import package1 from '../../../../../Assets/package1.jpg'
 import package1 from '../../../../../Assets/package1.jpg'
 import { productAPI } from "../productAPI";
-import ShowForPermission from "../../../../../Components/Authentication/CheckPermission";
+import { ShowForRole } from "../../../../../Components/Authentication/CheckPermission";
+// import ShowForPermission, { ShowForRole } from "../../../../../Components/Authentication/CheckPermission";
+import RevokeProduct from "./RevokeProduct";
+import Paragraph from "antd/lib/skeleton/Paragraph";
+import moment from "moment";
 
 
 const { TabPane } = Tabs;
+const { Option } = Select;
 
 export default function Product(props) {
     const [top] = useState(0)
     const hist = useHistory()
+    const [product] = useState(props.location.state)
+    const [productActivity, setProductActivity] = useState({ loading: true, data: [] })
+    const [mode, setMode] = useState('alternate')
+
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
+    const [revokeModalVisible, setRevokeModalVisible] = useState(false)
+
     const [error, setError] = useState({ status: false, message: '', description: '' })
 
     function handleCancel() {
@@ -26,6 +37,18 @@ export default function Product(props) {
     // function handleShowDeleteModal(){
     //     setIsDeleteModalVisible(true)
     // }
+
+    async function getProductActivity() {
+        setProductActivity({ loading: true, data: [] })
+        await productAPI.activity(product._id)
+            .then(data => {
+                console.log(data)
+                setProductActivity({ loading: false, data })
+            }).catch(error => {
+                setProductActivity({ loading: true, data: [] })
+                console.log(error)
+            })
+    }
 
     function handleDeleteProduct() {
         console.log(product)
@@ -42,7 +65,10 @@ export default function Product(props) {
             })
     }
 
-    const [product] = useState(props.location.state)
+    useEffect(() => {
+        getProductActivity()
+        // eslint-disable-next-line
+    }, [])
 
     return (
         <div className="container-fluid mt-4">
@@ -52,15 +78,18 @@ export default function Product(props) {
                     onBack={() => hist.goBack()}
                     title={product.name}
                     extra={<>
-                        <ShowForPermission allowedPermissions='update_product' >
+                        {/* <ShowForPermission allowedPermissions='update_product' >
                             <Button type='default'>Edit</Button>
-                        </ShowForPermission>
-                        <ShowForPermission allowedPermissions='revoke_product' >
-                            <Button type='default'>Revoke</Button>
-                        </ShowForPermission>
-                        <ShowForPermission allowedPermissions='update_product' >
+                        </ShowForPermission> */}
+                        <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN']} >
+                            <Button type='default'>Edit</Button>
+                        </ShowForRole>
+                        <ShowForRole allowedRoles={['ROLE_QUALITY_CONTROLLER_ADMIN']} >
+                            <Button type='danger' onClick={() => setRevokeModalVisible(true)}>Revoke</Button>
+                        </ShowForRole>
+                        <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN']} >
                             <Button type='danger' onClick={() => setIsDeleteModalVisible(true)}>Delete</Button>
-                        </ShowForPermission>
+                        </ShowForRole>
                         <Modal title="Confirm Delete Product"
                             visible={isDeleteModalVisible}
                             onCancel={handleCancel}
@@ -81,6 +110,7 @@ export default function Product(props) {
                                 />
                             }
                         </Modal>
+                        <RevokeProduct refreshProductActivity={getProductActivity} revokeModalVisible={revokeModalVisible} setRevokeModalVisible={setRevokeModalVisible} product={product} />
                     </>}
                     subTitle={<Tag color={product.isRevoked ? 'red' : 'green'}>{product.isRevoked ? 'Revoked' : 'Not Revoked'}</Tag>}
                 />
@@ -116,34 +146,48 @@ export default function Product(props) {
 
             <div className="card mt-5">
                 <div className="card-body">
-                    <Tabs>
-                        <TabPane tab="PRODUCT TIMELINE" key="1" >
-                            <Timeline mode="alternate">
-                                <Timeline.Item>
-                                    <div className="card">
-                                        <div className="card-body">
-                                            Create a services site 2015-09-01
-                                        </div>
-                                    </div>
-                                </Timeline.Item>
-                                <Timeline.Item color="green">Solve initial network problems 2015-09-01</Timeline.Item>
-                                <Timeline.Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />}>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                    laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                                    beatae vitae dicta sunt explicabo.
-                                </Timeline.Item>
-                                <Timeline.Item color="red">Network problems being solved 2015-09-01</Timeline.Item>
-                                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                                <Timeline.Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />}>
-                                    Technical testing 2015-09-01
-                                </Timeline.Item>
-                            </Timeline>
+                    <Tabs tabBarExtraContent={
+                        <Select style={{ width: 120 }} defaultOpen={true} defaultValue={mode} onChange={(val) => setMode(val)} >
+                            <Option value='alternate'>Alternate</Option>
+                            <Option value='left'>Left</Option>
+                            <Option value='right'>Right</Option>
+                        </Select>
+                    }>
+                        <TabPane destroyInactiveTabPane={true} tab="PRODUCT TIMELINE" key="1" className='pt-4' style={{ maxHeight: '60vh', overflowY: 'auto', overflowX: 'hidden' }} >
+                            {productActivity.loading ?
+                                <Skeleton active>
+                                    <Paragraph />
+                                </Skeleton>
+                                :
+                                <>
+                                    {productActivity.data.length === 0 ?
+                                        <Empty description='No Reviews to show' />
+                                        :
+                                        <Timeline mode={mode}>
+                                            {productActivity.data.map(activity => {
+                                                return (
+                                                    <Timeline.Item>
+                                                        <div className="card">
+                                                            <div className="card-body">
+                                                                <h5>{activity.title} Issued by <span className='text-info'>{`${activity.actor.firstName} ${activity.actor.lastName}`}</span></h5>
+                                                                <p> {activity.descriptions}</p>
+                                                                <span className='text-muted'>{moment(activity.issuedAt).format('DD MMM, YYYY HH:mm:ss')} ({moment(activity.issuedAt).fromNow()})</span>
+                                                            </div>
+                                                        </div>
+                                                    </Timeline.Item>
+                                                )
+                                            })}
+                                            <Timeline.Item color="green" dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />}></Timeline.Item>
+                                        </Timeline>
+                                    }
+                                </>
+                            }
                         </TabPane>
-                        <TabPane tab="PRODUCT REVIEW" key="2">
+                        {/* <TabPane tab="PRODUCT REVIEW" key="2">
                             <div className="jumbotron">Content of tab 2</div>
                             <div className="jumbotron">Content of tab 2</div>
                             <div className="jumbotron">Content of tab 2</div>
-                        </TabPane>
+                        </TabPane> */}
                     </Tabs>
                 </div>
             </div>

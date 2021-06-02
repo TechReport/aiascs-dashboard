@@ -11,16 +11,15 @@ import { useHistory } from 'react-router'
 import toBase64 from '../../../../Services/Utilities'
 import { ShowForRole } from '../../../../Components/Authentication/CheckPermission'
 
-export default function ProductList({ companyId }) {
+export default function ProductList({ companyId, extra }) {
     console.log('i wonder')
     console.log(companyId)
     const [products, setProducts] = useState({ loading: true, data: [] })
-    // const [deleteProductProps, setDeleteProductProps] = useState({ productName: '', })
 
     const hist = useHistory()
 
     function fetchProducts() {
-        const filter = { companyId }
+        const filter = { companyId, ...extra }
         console.log(filter)
         productAPI.getAll('products/', '', filter)
             .then(res => {
@@ -37,19 +36,6 @@ export default function ProductList({ companyId }) {
         return fetchProducts()
     });
 
-    // function handleDeleteProduct(productID) {
-    //     console.log(productID)
-
-    //     productAPI.deleteOne('products/', productID)
-    //         .then(response => {
-    //             console.log(response)
-    //             setProducts({ loading: false, data: products.data.filter(a => a._id !== productID) })
-    //             message.info("Product Deleted Successfully")
-    //         }).catch(err => {
-    //             console.log(err)
-    //         })
-    // }
-
     useEffect(() => {
         fetchProducts()
         return () => {
@@ -60,15 +46,13 @@ export default function ProductList({ companyId }) {
 
     return (
         <div className='row'>
-            <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN']}>
-
+            <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN', 'ROLE_QUALITY_CONTROLLER_ADMIN']}>
                 <div className="col-xl-8">
                     {products.loading ?
                         <Skeleton active />
                         :
                         <BootstrapTable options={{ onRowClick: (row) => hist.push(`products/${row._id}`, row) }} trStyle={{ padding: '0px', cursor: 'pointer' }} data={products.data} pagination search scrollTop='Top' striped hover searchPlaceholder='Search products' trClassName='bg-inf ' tableHeaderClass='' >
                             <TableHeaderColumn dataField='name' isKey width='150'>Name</TableHeaderColumn>
-                            {/* <TableHeaderColumn dataField='qrcode' dataFormat={cell => cell.productToken}>Token</TableHeaderColumn> */}
                             <TableHeaderColumn dataField='qrcode' width='90' dataFormat={formatQRCode}>QR Code</TableHeaderColumn>
                             <TableHeaderColumn dataField='isRevoked' width='90' dataFormat={(cell) => cell ? <Tag color='magenta'>True</Tag> : <Tag color='cyan'>False</Tag>}>Revoked ?</TableHeaderColumn>
                             <TableHeaderColumn dataField='createdAt' dataSort={true} dataFormat={(cell) => moment(cell).format('DD-MM-YYYY')} width='100' >Registered At</TableHeaderColumn>
@@ -77,25 +61,27 @@ export default function ProductList({ companyId }) {
                     }
                 </div>
             </ShowForRole>
-            <div className="col-xl-4">
-                <div className="card">
-                    <div className="card-body border-bottom">
-                        <p>Total Scanned Products: <Tag color='gold'>{products.data.length}</Tag></p>
-                        <p>Total Revoked Products: <Tag color='gold'>{products.data.length}</Tag></p>
-                        <p>Total Expired Products: <Tag color='gold'>{products.data.length}</Tag></p>
-                        {/* <p>Total Products: <Tag color='gold'>{products.data.length}</Tag></p> */}
+            <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN']}>
+                <div className="col-xl-4">
+                    <div className="card">
+                        <div className="card-body border-bottom">
+                            <p>Total Scanned Products: <Tag color='gold'>{products.data.length}</Tag></p>
+                            <p>Total Revoked Products: <Tag color='gold'>{products.data.length}</Tag></p>
+                            <p>Total Expired Products: <Tag color='gold'>{products.data.length}</Tag></p>
+                            {/* <p>Total Products: <Tag color='gold'>{products.data.length}</Tag></p> */}
+                        </div>
+                        <div className="card-body">
+                            Total Products: <Tag color='gold'>{products.data.length}</Tag>
+                        </div>
                     </div>
-                    <div className="card-body">
-                        Total Products: <Tag color='gold'>{products.data.length}</Tag>
+                    <div className="card mt-3">
+                        <div className="card-body">
+                            Total Batches: <Tag color='gold'>{products.data.length}</Tag>
+                            <Button size='small' shape='round' type='dashed' >View</Button>
+                        </div>
                     </div>
                 </div>
-                <div className="card mt-3">
-                    <div className="card-body">
-                        Total Batches: <Tag color='gold'>{products.data.length}</Tag>
-                        <Button size='small' shape='round' type='dashed' >View</Button>
-                    </div>
-                </div>
-            </div>
+            </ShowForRole>
         </div>
     )
 }

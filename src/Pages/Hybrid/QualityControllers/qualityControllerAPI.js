@@ -50,4 +50,26 @@ qualityControllerAPI.getUsers = async (select, filter) => {
     });
 };
 
+qualityControllerAPI.revokeProduct = async (productID, descriptions) => {
+  return await axios
+    .patch(`products/revoke/${productID}`, { descriptions })
+    .then((res) => {
+      return handleResponse(res);
+    })
+    .catch((err) => {
+      return handleError(err);
+    });
+};
+
+qualityControllerAPI.revokeBatch = async (batch, descriptions) => {
+  return await axios
+    .patch(`products/revokebatch`, { descriptions, batch })
+    .then((res) => {
+      return handleResponse(res);
+    })
+    .catch((err) => {
+      return handleError(err);
+    });
+};
+
 export { qualityControllerAPI };
