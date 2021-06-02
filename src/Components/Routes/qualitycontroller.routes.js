@@ -6,9 +6,13 @@ import {
 // import { Users } from '../../Pages/Manufacturer';
 import { Users } from "../../Pages/Hybrid/Users";
 // import { Products, Product } from "../../Pages/Hybrid/Manufacturers";
-import Batches from "../../Pages/Hybrid/Manufacturers/Products/Batches";
+// import Batches from "../../Pages/Hybrid/Manufacturers/Products/Batches";
 import Products from "../../Pages/Hybrid/QualityControllers/Products";
-import { Product } from "../../Pages/Hybrid/Manufacturers";
+import {
+  Product,
+  UnregisteredProducts,
+} from "../../Pages/Hybrid/Manufacturers";
+import Revoked from "../../Pages/Hybrid/QualityControllers/Products/Revoked";
 
 // import { Products, Users } from '../../Pages/Manufacturer';
 // import Agents from '../../Pages/Manufacturer/Agents';
@@ -46,14 +50,14 @@ const QCRoutes = [
       {
         name: "Revoked",
         url: "/products/revoked",
-        component: Batches,
+        component: Revoked,
         key: 221,
         roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
       },
       {
         name: "Unregistered",
         url: "/report/product",
-        component: "Product",
+        component: UnregisteredProducts,
         key: 222,
         roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
       },

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {
     AppstoreAddOutlined
 } from '@ant-design/icons';
-import { Button, Modal, Tag } from "antd"
+import { Button, Modal } from "antd"
 import AddNewProduct from './AddNewProduct';
 import ProductList from './ProductList';
 
@@ -55,7 +55,7 @@ export default function Products() {
                             <div className="card-header bg-white">
                                 <div className="title d-flex justify-content-between">
                                     <h5 className='text-muted'>All Products</h5>
-                                    <Tag color='gold' className='px-2 pt-2 pb-1' style={{ fontSize: '20px' }}>Total: 990</Tag>
+                                    {/* <Tag color='gold' className='px-2 pt-2 pb-1' style={{ fontSize: '20px' }}>Total: 990</Tag> */}
                                 </div>
                             </div>
                             <div className="card-body">

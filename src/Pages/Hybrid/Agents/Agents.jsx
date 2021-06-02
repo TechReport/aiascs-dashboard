@@ -15,7 +15,7 @@ export default function Agents() {
     const [agents, setAgents] = useState({ loading: true, data: [] })
 
     function fetchAgentCompanies() {
-        agentsCompanyAPI.getAll('productAgent/all')
+        agentsCompanyAPI.getAll('agents/all')
             .then(res => {
                 console.log(res)
                 setAgents({ loading: false, data: res })

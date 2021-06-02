@@ -6,7 +6,8 @@ export default function RevokeProduct({ revokeModalVisible, setRevokeModalVisibl
     const [error, setError] = useState({ status: false, message: '', description: '' })
     const [revokeReason, setRevokeReason] = useState('')
     const [loading, setLoading] = useState(false)
-    const [revokeBatchLoading, setRevokeBatchLoading] = useState(false)
+    const [revokeBatchLoading] = useState(false)
+    // const [revokeBatchLoading, setRevokeBatchLoading] = useState(false)
 
     async function handleRevokeProduct() {
         setError({ status: '', data: '' })

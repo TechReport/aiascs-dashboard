@@ -1,27 +1,28 @@
 import { useState } from 'react'
-import {
-    AppstoreAddOutlined
-} from '@ant-design/icons';
-import { Button, Modal, Tag } from "antd"
+// import {
+//     AppstoreAddOutlined
+// } from '@ant-design/icons';
 // import AddNewProduct from './AddNewProduct';
 import ProductList from './ProductList';
 
 export default function Products() {
-    const [isModalVisible, setIsModalVisible] = useState(false)
+    // const [isModalVisible, setIsModalVisible] = useState(false)
     const [user] = useState(JSON.parse(localStorage.getItem('user')))
 
-    const showModal = () => {
-        setIsModalVisible(true);
-    };
+    // console.log(isModalVisible)
 
-    const handleOk = () => {
-        setIsModalVisible(false);
-        // setUserUpdated(true)
-    };
+    // const showModal = () => {
+    //     setIsModalVisible(true);
+    // };
 
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
+    // const handleOk = () => {
+    //     setIsModalVisible(false);
+    //     // setUserUpdated(true)
+    // };
+
+    // const handleCancel = () => {
+    //     setIsModalVisible(false);
+    // };
     // const data = [
     //     { title: 'Total Products Registered', body: '37 M', percent: '-5%', descriptions: 'Number of registered products' },
     //     { title: 'Total Batches', body: '132 k', percent: '+20%', descriptions: 'coming soon' },

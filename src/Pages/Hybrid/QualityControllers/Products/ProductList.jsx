@@ -1,4 +1,4 @@
-import { Button, Popover, Skeleton, Tag } from 'antd'
+import { Popover, Skeleton, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import eventEmitter from '../../../../Services/EventEmitter'
@@ -8,7 +8,7 @@ import {
 import moment from 'moment'
 import { useHistory } from 'react-router'
 import toBase64 from '../../../../Services/Utilities'
-import { ShowForRole } from '../../../../Components/Authentication/CheckPermission'
+// import { ShowForRole } from '../../../../Components/Authentication/CheckPermission'
 import { productAPI } from '../../Manufacturers/Products/productAPI';
 
 export default function ProductList({ companyId }) {

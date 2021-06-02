@@ -8,7 +8,8 @@ import { useHistory } from "react-router";
 // import package1 from '../../../../../Assets/package1.jpg'
 import package1 from '../../../../../Assets/package1.jpg'
 import { productAPI } from "../productAPI";
-import ShowForPermission, { ShowForRole } from "../../../../../Components/Authentication/CheckPermission";
+import { ShowForRole } from "../../../../../Components/Authentication/CheckPermission";
+// import ShowForPermission, { ShowForRole } from "../../../../../Components/Authentication/CheckPermission";
 import RevokeProduct from "./RevokeProduct";
 import Paragraph from "antd/lib/skeleton/Paragraph";
 import moment from "moment";
@@ -66,6 +67,7 @@ export default function Product(props) {
 
     useEffect(() => {
         getProductActivity()
+        // eslint-disable-next-line
     }, [])
 
     return (
