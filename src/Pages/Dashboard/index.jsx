@@ -1,20 +1,83 @@
+import { Skeleton } from "antd"
+import { useContext, useEffect, useState } from "react"
 import { DashboardWidgetCard } from "../../Components/Reusable"
+import { AuthContext } from "../../Context/AuthContext"
+import { productAPI } from "../Hybrid/Manufacturers/Products/productAPI"
 import ProductsVSCompanyGraph from "./ProductsVSCompanyGraph"
 import ProductsVSTimeGraph from "./ProductsVSTimeGraph"
 import RegisteredVSUnregisteredProductGraph from "./registeredVSUnregisteredProductGraph"
 import VerifiedVSUnverifiedGraph from "./VerifiedVSUnverifiedGraph"
 
 export default function Dashboard() {
-    const data = [
-        { title: 'Manufacturing Companies', body: '37', percent: '+8%', descriptions: 'The number of Manufacturing Companies registered since 2021' },
-        { title: 'Products', body: '37 M', percent: '-5%', descriptions: 'coming soon' },
-        { title: 'Batches', body: '132 k', percent: '+20%', descriptions: 'coming soon' },
-        { title: 'Agents', body: '38', percent: '-20%', descriptions: 'coming soon' },
-    ]
+    const [stats, setStats] = useState({ loading: true, data: {} })
+    const { state } = useContext(AuthContext)
+
+    async function fetchStats() {
+        setStats({ loading: true, data: {} })
+        await productAPI.getAdminStats()
+            .then(data => {
+                setStats({ loading: false, data })
+            }).catch((error => {
+                console.log(error)
+                setStats({ loading: false, data: {} })
+            }))
+    }
+
+    useEffect(() => {
+        fetchStats()
+        return () => {
+            setStats([])
+        }
+    }, [])
+
+    let data = []
+
+    switch (state.currentUser.role.genericName) {
+        case 'ROLE_SUPER_ADMIN':
+            data = [
+                { title: 'Total Users', body: !stats.loading && stats.data.totalUsers, descriptions: 'Total Users' },
+                { title: 'Manufacturing Companies', body: !stats.loading && stats.data.totalManufacturers, descriptions: 'The number of Manufacturing Companies registered' },
+                { title: 'Products', body: !stats.loading && stats.data.totalProducts, descriptions: 'Total Products' },
+                { title: 'Quality Controllers', body: !stats.loading && stats.data.totalQCCompanies, descriptions: 'Total Quality Controllers Companies' },
+            ]
+            break;
+        case 'ROLE_QUALITY_CONTROLLER_ADMIN':
+            data = [
+                { title: 'Products', body: !stats.loading && stats.data.totalProducts, descriptions: 'Total Products' },
+                { title: 'Manufacturing Companies', body: !stats.loading && stats.data.totalManufacturers, descriptions: 'The number of Manufacturing Companies registered' },
+                { title: 'Quality Controllers', body: !stats.loading && stats.data.totalQCCompanies, descriptions: 'Total Quality Controllers Companies' },
+                { title: 'Total Unregistered Products Reported', body: !stats.loading && stats.data.unregisteredProducts, descriptions: 'Total Reported Unregistered Products' },
+            ]
+            break;
+        case 'ROLE_MANUFACTURING_COMPANY_ADMIN':
+            data = [
+                { title: 'Total Agent Companies', body: !stats.loading && stats.data.totalAgentCompanies, descriptions: 'The number of Manufacturing Companies registered' },
+                { title: 'Quality Controllers', body: !stats.loading && stats.data.totalQCCompanies, descriptions: 'Total Quality Controllers Companies' },
+            ]
+            break;
+
+        default:
+            break;
+    }
+
     return (
         <>
             <div className='row mt-3 w-100' gutter={12} >
-                {data.map(item => <DashboardWidgetCard item={item} />)}
+                {stats.loading ?
+                    Array.from({ length: 2 }, () => {
+                        return (
+                            <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                                <div className="card shadow">
+                                    <div className="card-body py-0">
+                                        <Skeleton active ></Skeleton>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })
+                    :
+                    data.map(item => <DashboardWidgetCard item={item} />)
+                }
             </div >
             <div className="container-fluid mt-4 mx-0 px-0">
                 <div className="row w-100">
