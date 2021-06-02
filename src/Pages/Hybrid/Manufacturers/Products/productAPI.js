@@ -13,6 +13,17 @@ const productAPI = new ApiCore({
   deleteOne: true,
 });
 
+productAPI.getAdminStats = () => {
+  return axios
+    .get("products/adminstats")
+    .then((res) => {
+      return handleResponse(res);
+    })
+    .catch((err) => {
+      return handleError(err);
+    });
+};
+
 productAPI.activity = async (productID) => {
   return await axios
     .get(`products/activity/${productID}`)
