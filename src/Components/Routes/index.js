@@ -12,7 +12,7 @@ import {
   // FundProjectionScreenOutlined
 } from "@ant-design/icons";
 
-import { UserProfile } from "../../Pages/UserProfile";
+import { UserProfile } from "../../Pages/Hybrid/Users/UserProfile";
 import QCRoutes from "./qualitycontroller.routes";
 
 const sharedRoutes = [
