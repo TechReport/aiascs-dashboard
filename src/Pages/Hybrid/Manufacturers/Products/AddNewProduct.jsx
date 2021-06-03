@@ -6,7 +6,7 @@ import eventemitter from '../../../../Services/EventEmitter'
 export default function AddNewProduct({ handleOk }) {
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
     const [loading, setLoading] = useState(false)
-    const [user] = useState(JSON.parse(localStorage.getItem('user')))
+    const [user] = useState(JSON.parse(sessionStorage.getItem('user')))
 
     const openNotification = ({ message, description = '' }) => {
         notification.success({

@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 let initialState = {
-    token: localStorage.getItem('token'),
+    token: sessionStorage.getItem('token'),
     isLocked: false,
     authIssuedAt: '',
     currentUser: '',
@@ -49,7 +49,7 @@ export { AuthContext, AuthContextConsumer, AuthContextProvider }
 //     // Context state
 //     state = {
 //         currentUser: {},
-//         token: localStorage.getItem('token'),
+//         token: sessionStorage.getItem('token'),
 //         authIssuedAt: '',
 //         permissions: [],
 //     }

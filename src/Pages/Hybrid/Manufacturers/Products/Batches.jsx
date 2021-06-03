@@ -6,7 +6,7 @@ import { Collapse } from 'antd';
 
 const { Panel } = Collapse;
 export default function Batches() {
-    const [user] = React.useState(JSON.parse(localStorage.getItem('user')))
+    const [user] = React.useState(JSON.parse(sessionStorage.getItem('user')))
     console.log(user.companyId)
     const [batches, setBatches] = useState([])
 
@@ -87,11 +87,11 @@ export default function Batches() {
         console.log(batches)
     }, [batches])
 
-//     const text = `
-//   A dog is a type of domesticated animal.
-//   Known for its loyalty and faithfulness,
-//   it can be found as a welcome guest in many households across the world.
-// `;
+    //     const text = `
+    //   A dog is a type of domesticated animal.
+    //   Known for its loyalty and faithfulness,
+    //   it can be found as a welcome guest in many households across the world.
+    // `;
     return (
         <div className='row w-100'>
             <div className="col-6">

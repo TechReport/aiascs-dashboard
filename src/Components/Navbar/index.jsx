@@ -13,7 +13,7 @@ import ProfileOverview from "./ProfileOverview";
 
 export default function Navbar() {
     const [visible, setVisible] = useState(false)
-    const [userData] = useState(JSON.parse(localStorage.getItem('user')))
+    const [userData] = useState(JSON.parse(sessionStorage.getItem('user')))
 
     return (
         <Fragment>

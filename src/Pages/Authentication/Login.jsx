@@ -31,8 +31,8 @@ export default function Login() {
                     return eventEmitter.emit('goto', 1)
                 }
                 setLoading(false)
-                localStorage.setItem('token', data.user.token)
-                localStorage.setItem('user', JSON.stringify(data.user))
+                sessionStorage.setItem('token', data.user.token)
+                sessionStorage.setItem('user', JSON.stringify(data.user))
                 window.location.reload()
             }).catch(err => {
                 console.log(err)
