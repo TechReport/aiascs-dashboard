@@ -132,13 +132,24 @@ export default function Product(props) {
                                 <p><strong>Last Track Location: </strong>Mbeya</p>
                                 <img src={`data:image/png;base64,${toBase64(product.qrcode.qrCodeImage.data)}`} alt='' />
                             </div>
-                            <div className="col-6">
+                            <ShowForRole allowedRoles={['ROLE_QUALITY_CONTROLLER_ADMIN']} >
+                                <div className="col-6">
+                                    <h5>Company Information</h5>
+                                    <p><strong>Company Name: </strong>{product.companyId.name}</p>
+                                    <p><strong>Registration: </strong>{product.companyId.regno}</p>
+                                    <p><strong>Email: </strong>{product.companyId.email}</p>
+                                    <p><strong>Phone Number: </strong>{product.companyId.phonenumber}</p>
+                                    {/* <p><strong>Location: </strong>{product.companyId.location}</p> */}
+                                    <p><strong>Registered At: </strong>{moment(product.companyId.createdAt).format('DD MMM YYYY')}</p>
+                                </div>
+                            </ShowForRole>
+                            {/* <div className="col-6">
                                 <h5>Batch Info Summary</h5>
                                 <p><strong>Product Count: </strong></p>
                                 <p><strong>Revoked Products: </strong>0</p>
                                 <p><strong>Tracked Products: </strong>0</p>
                                 <p><strong>Reported Products: </strong>0</p>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

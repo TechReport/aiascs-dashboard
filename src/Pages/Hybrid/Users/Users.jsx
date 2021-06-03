@@ -7,7 +7,7 @@ import {
 import AddNewUser from './AddNewUser';
 import Modal from 'antd/lib/modal/Modal';
 
-import ShowForPermission from '../../../Components/Authentication/CheckPermission'
+import ShowForPermission, { ShowForRole } from '../../../Components/Authentication/CheckPermission'
 import { Button } from 'antd';
 import { useState } from 'react';
 
@@ -53,19 +53,21 @@ export default function Users() {
             </div>
             <div className="container-fluid mt-4">
                 <div className="actions">
-                    <ShowForPermission allowedPermissions='createUser'>
-                        <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
-                            Add User <UserAddOutlined className='' />
-                        </Button>
+                    <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN', 'ROLE_QUALITY_CONTROLLER_ADMIN']}>
+                        <ShowForPermission allowedPermissions='createUser'>
+                            <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
+                                Add User <UserAddOutlined className='' />
+                            </Button>
 
-                        <Modal title="Add User"
-                            visible={isModalVisible}
-                            onCancel={handleCancel}
-                            footer={null}
-                            destroyOnClose={true}>
-                            <AddNewUser handleOk={handleOk} />
-                        </Modal>
-                    </ShowForPermission>
+                            <Modal title="Add User"
+                                visible={isModalVisible}
+                                onCancel={handleCancel}
+                                footer={null}
+                                destroyOnClose={true}>
+                                <AddNewUser handleOk={handleOk} />
+                            </Modal>
+                        </ShowForPermission>
+                    </ShowForRole>
                 </div>
             </div>
             <div className="container-fluid row w-100 mt-4">
