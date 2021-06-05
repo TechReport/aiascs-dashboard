@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router'
-import { Affix, Button, PageHeader, Tag, message, Input, Popover, Skeleton } from "antd";
+import { Affix, Button, PageHeader, Tag, Popover } from "antd";
 // import Paragraph from "antd/lib/skeleton/Paragraph";
 
 import moment from 'moment';
@@ -8,14 +8,14 @@ import {
     EditOutlined,
     PlusOutlined,
 } from '@ant-design/icons';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import { manufacturerAPI } from '../../Manufacturers/manufacturerAPI';
 import { agentsCompanyAPI } from '../agentsCompanyAPI';
 import { AuthContext } from '../../../../Context/AuthContext';
 
 export default function CompanySubProfile(props) {
     const { state } = useContext(AuthContext)
+    // eslint-disable-next-line 
     const [agentCompany, setAgentCompany] = useState(props.location.state)
+    // eslint-disable-next-line 
     const [associatedCompanies, setAssociatedCompanies] = useState({ loading: false, data: [] })
     console.log(state)
 

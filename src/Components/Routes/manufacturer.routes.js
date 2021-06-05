@@ -8,7 +8,6 @@ import { Products, Product } from "../../Pages/Hybrid/Manufacturers";
 import Batches from "../../Pages/Hybrid/Manufacturers/Products/Batches";
 import AssignedAgents from "../../Pages/Hybrid/Agents/CompanyProfile/AssignedAgents";
 import AllAgents from "../../Pages/Hybrid/Agents/CompanyProfile/AllAgents";
-import AgentsCompanyProfile from "../../Pages/Hybrid/Agents/CompanyProfile";
 import CompanySubProfile from "../../Pages/Hybrid/Agents/CompanyProfile/CompanySubProfile";
 
 const manRoutes = [

@@ -1,5 +1,4 @@
 import { Button, Skeleton } from 'antd'
-import Modal from 'antd/lib/modal/Modal'
 import moment from 'moment'
 import React, { useContext, useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
@@ -8,7 +7,6 @@ import { Link } from 'react-router-dom'
 import { AuthContext } from '../../../../Context/AuthContext'
 import { manufacturerAPI } from '../../Manufacturers/manufacturerAPI'
 // import RegisterCompany from '../../../../Components/Company/RegisterCompany'
-import { agentsCompanyAPI } from '../agentsCompanyAPI'
 
 export default function AssignedAgents() {
     const hist = useHistory()
@@ -35,6 +33,7 @@ export default function AssignedAgents() {
         return () => {
             setAssignedCompanies()
         }
+        // eslint-disable-next-line 
     }, [])
 
     return (
