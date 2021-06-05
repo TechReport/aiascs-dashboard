@@ -4,7 +4,6 @@ import { Button, Input, Select, Radio, Space, Form, Alert, notification, Modal }
 import { userAPI } from '../userAPI';
 
 export default function EditUser({ data, isModalVisible, handleCancel, role }) {
-    console.log(data)
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
     const [loading, setLoading] = useState(false)
 
@@ -55,11 +54,8 @@ export default function EditUser({ data, isModalVisible, handleCancel, role }) {
         setLoading(true)
         setError({ status: false, message: '', descriptions: '' })
         await userAPI.updateOne('user', { userDetails }, data._id)
-            // ${resource}/update/${resourceId}`
             .then(res => {
-                console.log(res)
                 userDetails = ''
-                // eventemitter.emit(updateEvent)
                 openNotification()
             })
             .catch(err => {
@@ -70,7 +66,7 @@ export default function EditUser({ data, isModalVisible, handleCancel, role }) {
     };
 
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+        // console.log('Failed:', errorInfo);
     };
 
     const openNotification = () => {
