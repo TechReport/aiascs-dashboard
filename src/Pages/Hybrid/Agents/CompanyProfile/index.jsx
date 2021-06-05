@@ -1,9 +1,20 @@
 import { agentsCompanyAPI } from "../agentsCompanyAPI";
 
 import CompanyProfile from "../../../../Components/Company/Profile";
-// import ProductList from "../Products/ProductList";
+import ProductList from "../../Manufacturers/Products/ProductList";
+import { Skeleton, Tag } from "antd";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import moment from "moment";
+import { useHistory } from "react-router";
+import { useState } from "react";
 
 export default function AgentsCompanyProfile(props) {
+    const hist = useHistory()
+    console.log(props)
+    const [agentCompany] = useState({ loading: false, data: props.location.state })
+    console.log(agentCompany)
+
+
     return (
         <div className="container-fluid mt-4">
             <CompanyProfile
@@ -12,18 +23,6 @@ export default function AgentsCompanyProfile(props) {
                 companyType='productAgent'
                 resource='agents'
                 updateEvent='updateAgents' />
-            {/* <div className="row mt-4">
-                <div className="col-6 ">
-                    <div className="card">
-                        <div className="h5 card-header bg-white border-0">
-                            Products
-                        </div>
-                        <div className="card-body mt-n5 py-2 px-0">
-                            <ProductList companyId={props.location.state._id} />
-                        </div>
-                    </div>
-                </div>
-            </div> */}
         </div >
     )
 }
