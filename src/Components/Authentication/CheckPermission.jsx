@@ -4,7 +4,6 @@ import { AuthContext } from '../../Context/AuthContext';
 
 export default function ShowForPermission({ allowedPermissions, children }) {
     const { state } = useContext(AuthContext)
-    console.log(state)
     let isPermitted = state.currentUser.role.permissions.some(e => e.genericName === allowedPermissions)
 
     if (isPermitted) {

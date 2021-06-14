@@ -9,20 +9,8 @@ export default function VerifiedVSUnverifiedGraph() {
     async function getRequests() {
         await manufacturerAPI.verifiedVSUnverified()
             .then(response => {
-                console.log(response)
-
                 setCategories(Object.keys(response))
-                // setSeries(Object.values(response))
                 setSeries([{ data: Object.values(response) }])
-
-                // let ser = []
-                // let cat = []
-                // response.forEach(item => {
-                //     ser.push(item.count)
-                //     cat.push(item.company)
-                // })
-                // setSeries(ser)
-                // setCategories(cat)
             }).catch(error => {
                 console.log(error)
             })
@@ -35,31 +23,6 @@ export default function VerifiedVSUnverifiedGraph() {
     useEffect(() => {
         console.log(series)
     }, [series])
-
-    // const options = {
-    //     series: [55, 10],
-    //     options: {
-    //         chart: {
-    //             width: 380,
-    //             type: 'pie',
-    //         },
-    //         // labels: categories,
-    //         xaxis: {
-    //             categories: categories,
-    //         },
-    //         responsive: [{
-    //             breakpoint: 480,
-    //             options: {
-    //                 chart: {
-    //                     width: 200
-    //                 },
-    //                 legend: {
-    //                     position: 'bottom'
-    //                 }
-    //             }
-    //         }]
-    //     },
-    // };
 
     const options = {
         chart: {
@@ -102,7 +65,7 @@ export default function VerifiedVSUnverifiedGraph() {
     }
     return (
         <div className="card shadow">
-            <div className="card-header bg-whit" style={{ fontSize: '16px' }}>Registered VS Unregistered Products</div>
+            <div className="card-header bg-whit" style={{ fontSize: '16px' }}>Verified VS Unverified Products</div>
             <div className="card-body">
                 <ReactApexChart options={options} series={series} type="bar" height={305} />
             </div>

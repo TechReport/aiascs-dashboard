@@ -53,17 +53,17 @@ function withSplashScreen(WrappedComponent) {
                     loading: false,
                     authenticated: false
                 });
-                if (localStorage.getItem('token')) {
+                if (sessionStorage.getItem('token')) {
                     openNotification({ message: err.message, description: err.descriptions })
-                    // localStorage.removeItem('token')
-                    // localStorage.removeItem('user')
+                    // sessionStorage.removeItem('token')
+                    // sessionStorage.removeItem('user')
                     return
                 }
             }
         }
 
         async logout() {
-            localStorage.clear()
+            sessionStorage.clear()
             sessionStorage.clear()
             this.setState({
                 loading: false,
@@ -143,10 +143,10 @@ export default withSplashScreen;
 //             console.log(err)
 //             setAuthenticated(false)
 //             setLoading(false)
-//             if (localStorage.getItem('token')) {
+//             if (sessionStorage.getItem('token')) {
 //                 // openNotification({ message: err.message, description: err.descriptions })
-//                 // localStorage.removeItem('token')
-//                 // localStorage.removeItem('user')
+//                 // sessionStorage.removeItem('token')
+//                 // sessionStorage.removeItem('user')
 //                 return
 //             }
 //         })

@@ -6,6 +6,9 @@ import { UserOutlined, FundProjectionScreenOutlined } from "@ant-design/icons";
 import { Users } from "../../Pages/Hybrid/Users";
 import { Products, Product } from "../../Pages/Hybrid/Manufacturers";
 import Batches from "../../Pages/Hybrid/Manufacturers/Products/Batches";
+import AssignedAgents from "../../Pages/Hybrid/Agents/CompanyProfile/AssignedAgents";
+import AllAgents from "../../Pages/Hybrid/Agents/CompanyProfile/AllAgents";
+import CompanySubProfile from "../../Pages/Hybrid/Agents/CompanyProfile/CompanySubProfile";
 
 const manRoutes = [
   {
@@ -81,20 +84,53 @@ const manRoutes = [
   },
   {
     name: "Agents",
-    component: "Agents",
-    url: "/agents",
     Icon: UserOutlined,
-    comments: "Users endpoint",
+    comments: "Products route",
     category: 1,
     sidebar: true,
-    roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
     key: 23,
-    protected: true,
+    roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+    submenu: [
+      {
+        name: "All Agents",
+        url: "/manufacturers/agents/all",
+        component: AllAgents,
+        key: 230,
+        roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+      },
+      {
+        name: "Assigned Agents",
+        url: "/manufacturers/agents/assigned",
+        component: AssignedAgents,
+        key: 231,
+        roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+      },
+    ],
   },
+  //   {
+  //     name: "Agents",
+  //     component: "Agents",
+  //     url: "/agents",
+  //     Icon: UserOutlined,
+  //     comments: "Users endpoint",
+  //     category: 1,
+  //     sidebar: true,
+  //     roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+  //     key: 23,
+  //     protected: true,
+  //   },
   {
     name: "Product",
     url: "/manufacturers/products/:id",
     component: Product,
+    sidebar: false,
+    roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+    category: 1,
+  },
+  {
+    name: "Agents Profile",
+    url: "/agents/:id",
+    component: CompanySubProfile,
     sidebar: false,
     roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
     category: 1,

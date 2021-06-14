@@ -8,7 +8,7 @@ import ProductList from './ProductList';
 
 export default function Products() {
     const [isModalVisible, setIsModalVisible] = useState(false)
-    const [user] = useState(JSON.parse(localStorage.getItem('user')))
+    const [user] = useState(JSON.parse(sessionStorage.getItem('user')))
 
     const showModal = () => {
         setIsModalVisible(true);

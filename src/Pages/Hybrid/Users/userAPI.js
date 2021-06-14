@@ -8,6 +8,7 @@ import { handleError, handleResponse } from "../../../Services/api/Response";
 const userAPI = new ApiCore({
   getAll: true,
   deleteOne: true,
+  updateOne: true,
   // getMany: true,
   // getByRole: true,
 

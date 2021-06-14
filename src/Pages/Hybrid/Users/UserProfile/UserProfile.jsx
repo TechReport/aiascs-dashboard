@@ -8,13 +8,17 @@ import {
     WomanOutlined,
     EditOutlined
 } from '@ant-design/icons'
-import { userAPI } from '../Hybrid/Users/userAPI'
+import EditUser from './Edit'
+
+import { userAPI } from '../userAPI'
 
 export default function UserProfile(props) {
     console.log(props)
     const hist = useHistory()
-    const [user] = useState(props.location.state)
+    const [user, setUser] = useState(props.location.state)
     const [top] = useState(0)
+
+    const [editUserModal, setEditUserModal] = useState(false)
 
     function assignCompany() {
         alert('on development')
@@ -36,11 +40,11 @@ export default function UserProfile(props) {
     }
 
     useEffect(() => {
-        console.log(user)
         return () => {
-            console.log('exiting')
+            setUser({})
         }
-    }, [user])
+    }, [])
+
     return (
         <div className="container-fluid mt-4">
             <Affix offsetTop={top}>
@@ -49,10 +53,15 @@ export default function UserProfile(props) {
                     title={`${user.firstName} ${user.lastName}`}
                     onBack={() => hist.goBack()}
                     extra={<>
-                        <Button type='ghost'>Edit</Button>
+                        <Button type='ghost' onClick={() => setEditUserModal(true)}>Edit</Button>
                         <Button type='danger' onClick={deleteUser}>Delete</Button>
                     </>}
                     subTitle={<Tag color='green'>{user.role.name}</Tag>}
+                />
+                <EditUser
+                    isModalVisible={editUserModal}
+                    handleCancel={() => setEditUserModal(false)}
+                    data={user}
                 />
             </Affix>
             <div className="card border-0 shadow-sm">

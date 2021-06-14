@@ -13,7 +13,7 @@ export default function UserList() {
 
     // console.log(state)
 
-    const [userData] = useState(JSON.parse(localStorage.getItem('user')))
+    const [userData] = useState(JSON.parse(sessionStorage.getItem('user')))
 
     const [users, setUsers] = useState({ loading: true, data: [] })
     // const [usernameToDelete, setUsernameToDelete] = useState()

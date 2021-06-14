@@ -28,6 +28,20 @@ agentsCompanyAPI.assignAdmin = async (resource, companyId, userId) => {
     });
 };
 
+agentsCompanyAPI.associateToManufactureringCompany = async (
+  agentCompanyId,
+  manCompanyId
+) => {
+  return await axios
+    .patch(`/agents/associateManufacturer/${agentCompanyId}/${manCompanyId}`)
+    .then((res) => {
+      return handleResponse(res);
+    })
+    .catch((err) => {
+      return handleError(err);
+    });
+};
+
 agentsCompanyAPI.getUsers = async (select, filter) => {
   return await axios
     .get(`user/`, {
@@ -39,6 +53,13 @@ agentsCompanyAPI.getUsers = async (select, filter) => {
     .catch((err) => {
       return handleError(err);
     });
+};
+
+agentsCompanyAPI.getAssocatedToCompany = async (companyId) => {
+  return await axios
+    .get(`/agents/associated/${companyId}`)
+    .then((res) => handleResponse(res))
+    .catch((error) => handleError(error));
 };
 
 export { agentsCompanyAPI };
