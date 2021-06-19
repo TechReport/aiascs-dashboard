@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DashboardWidgetCard } from '../Reusable'
+// import { DashboardWidgetCard } from '../Reusable'
 import {
     UserAddOutlined
 } from '@ant-design/icons';
@@ -7,7 +7,7 @@ import { Button, Modal, Skeleton, Tag } from 'antd'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { useHistory } from 'react-router'
 
-export default function CompanyHome({ data, companies, resource, RegisterCompany, title }) {
+export default function CompanyHome({ companies, resource, RegisterCompany, title }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const hist = useHistory()
 
@@ -21,9 +21,9 @@ export default function CompanyHome({ data, companies, resource, RegisterCompany
 
     return (
         <div>
-            <div className='row mt-3 w-100' >
+            {/* <div className='row mt-3 w-100' >
                 {data.map(item => <DashboardWidgetCard item={item} />)}
-            </div>
+            </div> */}
 
             <div className="mt-4">
                 <div className="actions">
