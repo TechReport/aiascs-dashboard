@@ -106,7 +106,7 @@ export default function Edit({ data, isModalVisible, handleCancel, companyAPI, c
                         <Form.Item {...tailLayout}>
                             <Space size='middle' direction='horizontal'>
                                 <Button type="ghost" htmlType="reset" >
-                                    Clear Inputs
+                                    Reset
                                 </Button>
                                 <Button type="primary" htmlType="submit" loading={loading}>
                                     Submit

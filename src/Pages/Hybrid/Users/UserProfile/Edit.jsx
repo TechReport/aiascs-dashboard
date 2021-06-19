@@ -165,7 +165,7 @@ export default function EditUser({ data, isModalVisible, handleCancel, role, upd
                         <Form.Item {...tailLayout}>
                             <Space size='middle' direction='horizontal'>
                                 <Button type="ghost" htmlType="reset" >
-                                    Clear Inputs
+                                    Reset
                                 </Button>
                                 <Button type="primary" htmlType="submit" loading={loading}>
                                     Submit
