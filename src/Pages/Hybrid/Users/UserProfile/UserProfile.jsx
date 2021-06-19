@@ -61,6 +61,7 @@ export default function UserProfile(props) {
                 <EditUser
                     isModalVisible={editUserModal}
                     handleCancel={() => setEditUserModal(false)}
+                    updateUser={setUser}
                     data={user}
                 />
             </Affix>
