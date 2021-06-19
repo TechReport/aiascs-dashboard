@@ -1,8 +1,8 @@
-import { Settings } from "../../Pages/Settings";
+// import { Settings } from "../../Pages/Settings";
 
 import {
   // DesktopOutlined,
-  SettingOutlined,
+  //   SettingOutlined,
   UserOutlined,
   FundProjectionScreenOutlined,
   SafetyCertificateOutlined,
@@ -111,18 +111,18 @@ const adminRoutes = [
     key: 14,
     protected: true,
   },
-  {
-    name: "Settings",
-    component: Settings,
-    url: "/settings",
-    Icon: SettingOutlined,
-    comments: "Settings endpoint",
-    category: 2,
-    sidebar: true,
-    roles: ["ROLE_SUPER_ADMIN", "ROLE_MANUFACTURING_COMPANY_ADMIN"],
-    key: 50,
-    protected: true,
-  },
+  //   {
+  //     name: "Settings",
+  //     component: Settings,
+  //     url: "/settings",
+  //     Icon: SettingOutlined,
+  //     comments: "Settings endpoint",
+  //     category: 2,
+  //     sidebar: true,
+  //     roles: ["ROLE_SUPER_ADMIN", "ROLE_MANUFACTURING_COMPANY_ADMIN"],
+  //     key: 50,
+  //     protected: true,
+  //   },
 
   // Not in sidebar
   {
