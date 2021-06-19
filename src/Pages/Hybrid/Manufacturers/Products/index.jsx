@@ -4,9 +4,13 @@ import {
 } from '@ant-design/icons';
 import { Button, Modal } from "antd"
 import AddNewProduct from './AddNewProduct';
-import ProductList from './ProductList';
+// import ProductList from './ProductList';
+import ProductListNew from './ProductListNew';
 
-export default function Products() {
+export default function Products(props) {
+    // console.log(props.location.state)
+    // const [batch, setBatch] = useState()
+
     const [isModalVisible, setIsModalVisible] = useState(false)
     const [user] = useState(JSON.parse(sessionStorage.getItem('user')))
 
@@ -22,6 +26,16 @@ export default function Products() {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
+
+    // useEffect(() => {
+    //     if (props.location.state) {
+    //         // console.log(props.location.state.batch[0])
+    //         setBatch(props.location.state.batch[0])
+    //     }
+    //     return () => {
+    //         setBatch()
+    //     }
+    // }, [])
     // const data = [
     //     { title: 'Total Products Registered', body: '37 M', percent: '-5%', descriptions: 'Number of registered products' },
     //     { title: 'Total Batches', body: '132 k', percent: '+20%', descriptions: 'coming soon' },
@@ -59,7 +73,8 @@ export default function Products() {
                                 </div>
                             </div>
                             <div className="card-body">
-                                <ProductList companyId={user.companyId} />
+                                {/* <ProductList companyId={user.companyId} /> */}
+                                <ProductListNew companyId={user.companyId} batch={props.location.state} />
                             </div>
                         </div>
                     </div>

@@ -13,6 +13,40 @@ const productAPI = new ApiCore({
   deleteOne: true,
 });
 
+productAPI.createBatch = (batchInfo) => {
+  console.log(batchInfo);
+
+  return axios
+    .post("products/batches/", batchInfo)
+    .then((res) => {
+      return handleResponse(res);
+    })
+    .catch((err) => {
+      return handleError(err);
+    });
+};
+
+productAPI.getBatchesVSProducts = (companyId) => {
+  return axios
+    .get(`products/batchesVSProducts/${companyId}`)
+    .then((res) => {
+      return handleResponse(res);
+    })
+    .catch((err) => {
+      return handleError(err);
+    });
+};
+
+productAPI.getBatches = (companyId) => {
+  return axios
+    .get(`products/batches/${companyId}`)
+    .then((res) => {
+      return handleResponse(res);
+    })
+    .catch((err) => {
+      return handleError(err);
+    });
+};
 productAPI.getAdminStats = () => {
   return axios
     .get("products/adminstats")

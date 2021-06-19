@@ -59,16 +59,16 @@ const manRoutes = [
     key: 22,
     roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
     submenu: [
-      {
-        name: "All Products",
-        url: "/manufacturers/products",
-        component: Products,
-        key: 220,
-        roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
-      },
+      //   {
+      //     name: "All Products",
+      //     url: "/manufacturers/products",
+      //     component: Products,
+      //     key: 220,
+      //     roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+      //   },
       {
         name: "Batches",
-        url: "/manufacturers/products/batches",
+        url: "/manufacturers/batches",
         component: Batches,
         key: 221,
         roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
@@ -81,6 +81,14 @@ const manRoutes = [
         roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
       },
     ],
+  },
+  {
+    name: "All Products",
+    url: "/manufacturers/batches/products",
+    component: Products,
+    key: 220,
+    sidebar: false,
+    roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
   },
   {
     name: "Agents",
@@ -121,7 +129,8 @@ const manRoutes = [
   //   },
   {
     name: "Product",
-    url: "/manufacturers/products/:id",
+    // url: "/manufacturers/products/:id",
+    url: "/manufacturers/batches/products/:id",
     component: Product,
     sidebar: false,
     roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],

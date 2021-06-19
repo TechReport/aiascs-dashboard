@@ -11,7 +11,7 @@ import { useHistory } from 'react-router'
 import toBase64 from '../../../../Services/Utilities'
 import { ShowForRole } from '../../../../Components/Authentication/CheckPermission'
 
-export default function ProductList({ companyId, extra }) {
+export default function ProductList({ companyId, extra, batch }) {
     console.log('i wonder')
     console.log(companyId)
     const [products, setProducts] = useState({ loading: true, data: [] })
@@ -19,7 +19,11 @@ export default function ProductList({ companyId, extra }) {
     const hist = useHistory()
 
     function fetchProducts() {
-        const filter = { companyId, ...extra }
+        let filter = { companyId, ...extra }
+        console.log(batch)
+        if (batch) {
+            filter.batch = batch._id
+        }
         console.log(filter)
         productAPI.getAll('products/', '', filter)
             .then(res => {
