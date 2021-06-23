@@ -25,7 +25,8 @@ export default function Edit({ data, isModalVisible, handleCancel, companyAPI, c
         console.log(companyDetails)
         setLoading(true)
         setError({ status: false, message: '', descriptions: '' })
-        await companyAPI.updateOne(resource === 'agents' ? 'productAgent' : resource, companyDetails, data._id)
+        // await companyAPI.updateOne(resource === 'agents' ? 'productAgent' : resource, companyDetails, data._id)
+        await companyAPI.updateOne(resource, companyDetails, data._id)
             .then(res => {
                 console.log(res)
                 companyDetails = ''

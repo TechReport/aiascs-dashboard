@@ -15,7 +15,7 @@ export default function AddNewUser({ handleOk, companyId, type }) {
         case 'qualityController':
             role = ['ROLE_OPERATION_PERSONNEL_QC', 'ROLE_QUALITY_CONTROLLER_ADMIN']
             break;
-        case 'productAgent':
+        case 'agents':
             role = ['ROLE_OP_AGENT', 'ROLE_AGENT_COMPANY_ADMIN']
             break;
         default:
@@ -53,6 +53,9 @@ export default function AddNewUser({ handleOk, companyId, type }) {
         userDetails.companyId = companyId
         userDetails.location = location
         userDetails.onModel = type
+
+        if (type === 'agents')
+            userDetails.onModel = 'productAgent'
         // console.log(userDetails)
         setLoading(true)
 
@@ -79,6 +82,7 @@ export default function AddNewUser({ handleOk, companyId, type }) {
     const fetchRoles = async () => {
         setRoles({ loading: true, data: [] })
         let filter = { genericName: role }
+        console.log(filter)
         await userAPI.getAll('acc/roles', 'name _id genericName target', filter)
             .then(data => {
                 console.log(data)

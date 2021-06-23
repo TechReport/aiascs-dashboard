@@ -13,7 +13,7 @@ export default function AssignAdmin({ handleOk, companyId, setCompany, companyAP
         case 'qualityController':
             role = ['ROLE_QUALITY_CONTROLLER_ADMIN']
             break;
-        case 'productAgent':
+        case 'agents':
             role = ['ROLE_AGENT_COMPANY_ADMIN']
             break;
         default:
