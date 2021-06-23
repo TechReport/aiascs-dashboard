@@ -55,7 +55,7 @@ export default function AssignedAgents() {
                             {assignedCompanies.loading ?
                                 <Skeleton active />
                                 :
-                                <BootstrapTable options={{ onRowClick: (row) => hist.push(`products/${row._id}`, row) }} trStyle={{ padding: '0px', cursor: 'pointer' }} data={assignedCompanies.data} pagination search scrollTop='Top' striped hover searchPlaceholder='Search companies' tableHeaderClass='' >
+                                <BootstrapTable options={{ onRowClick: (row) => hist.push(`/agents/${row._id}`, row) }} trStyle={{ padding: '0px', cursor: 'pointer' }} data={assignedCompanies.data} pagination search scrollTop='Top' striped hover searchPlaceholder='Search companies' tableHeaderClass='' >
                                     <TableHeaderColumn dataField='name' isKey >Company Name</TableHeaderColumn>
                                     <TableHeaderColumn dataField='email' >Email</TableHeaderColumn>
                                     <TableHeaderColumn dataField='createdAt' dataSort={true} dataFormat={(cell) => moment(cell).format('DD-MM-YYYY')}  >Registered At</TableHeaderColumn>
