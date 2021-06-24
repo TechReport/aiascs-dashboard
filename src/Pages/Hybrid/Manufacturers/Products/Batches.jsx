@@ -154,7 +154,10 @@ export default function Batches() {
                                 placement='bottom'
                                 content={() =>
                                     <>
-                                        <div className="btn btn-outline-info btn-sm btn-block" onClick={() => hist.push('batches/products', batch)}>View Products</div>
+                                        <div className="btn btn-outline-info btn-sm btn-block" onClick={() => {
+                                            // make state payload resemble required data
+                                            hist.push('batches/products', { batch: [batch], _id: batch._id })
+                                        }}>View Products</div>
                                         <div className="btn btn-outline-danger btn-sm btn-block"
                                             onClick={() => {
                                                 setBatchToDelete(batch)
@@ -200,7 +203,10 @@ export default function Batches() {
     function renderActions(cell, row) {
         return (
             <>
-                <button className="btn btn-info btn-sm ml-2" onClick={() => hist.push('batches/products', row)}>View Products</button>
+                <button className="btn btn-info btn-sm ml-2" onClick={() => {
+                    console.log(row)
+                    // hist.push('batches/products', row)
+                }}>View Products</button>
                 <button className="btn btn-danger btn-sm ml-2">Delete</button>
             </>
         )

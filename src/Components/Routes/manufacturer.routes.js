@@ -133,7 +133,10 @@ const manRoutes = [
     url: "/manufacturers/batches/products/:id",
     component: Product,
     sidebar: false,
-    roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+    roles: [
+      "ROLE_MANUFACTURING_COMPANY_ADMIN",
+      "ROLE_QUALITY_CONTROLLER_ADMIN",
+    ],
     category: 1,
   },
   {

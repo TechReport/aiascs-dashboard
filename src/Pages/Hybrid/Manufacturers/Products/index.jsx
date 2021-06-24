@@ -6,6 +6,7 @@ import { Button, Modal } from "antd"
 import AddNewProduct from './AddNewProduct';
 // import ProductList from './ProductList';
 import ProductListNew from './ProductListNew';
+import { ShowForRole } from '../../../../Components/Authentication/CheckPermission';
 
 export default function Products(props) {
     // console.log(props.location.state)
@@ -46,39 +47,42 @@ export default function Products(props) {
             {/* <div className='row mt-4 mx-0' styl={{ width: '100%' }}>
                 {data.map(item => <DashboardWidgetCard item={item} />)}
             </div> */}
-            <div className="container-fluid mt-4">
-                <div className="actions">
-                    <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
-                        Add Products
+            <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN']}>
+                <div className="container-fluid mt-4">
+                    <div className="actions">
+                        <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
+                            Add Products
                         <AppstoreAddOutlined className='' />
-                    </Button>
-                    <Modal title="Add Products"
-                        visible={isModalVisible}
-                        onCancel={handleCancel}
-                        footer={null}
-                        destroyOnClose={true}>
-                        <AddNewProduct handleCancel={handleCancel} handleOk={handleOk} companyId={user.companyId} />
-                    </Modal>
+                        </Button>
+                        <Modal title="Add Products"
+                            visible={isModalVisible}
+                            onCancel={handleCancel}
+                            footer={null}
+                            destroyOnClose={true}>
+                            <AddNewProduct handleCancel={handleCancel} handleOk={handleOk} companyId={user.companyId} />
+                        </Modal>
+                    </div>
                 </div>
-            </div>
-
+            </ShowForRole>
             <div className="container-fluid mt-4">
-                <div className="row">
+                <ProductListNew companyId={props.location.state.company ? props.location.state.company._id : user.companyId} batch={props.location.state} company={props.location.state.company || user.companyId} />
+
+                {/* <div className="row">
                     <div className="col-xl-12">
                         <div className="card shadow">
                             <div className="card-header bg-white">
                                 <div className="title d-flex justify-content-between">
-                                    <h5 className='text-muted'>All Products</h5>
-                                    {/* <Tag color='gold' className='px-2 pt-2 pb-1' style={{ fontSize: '20px' }}>Total: 990</Tag> */}
+                                    <h5 className='text-mute'>Products in batch named "{props.location.state.batch[0].name}"</h5>
                                 </div>
                             </div>
                             <div className="card-body">
-                                {/* <ProductList companyId={user.companyId} /> */}
-                                <ProductListNew companyId={user.companyId} batch={props.location.state} />
+                                {console.log(props.location.state)}
+                                <ProductList companyId={user.companyId} />
+                                <ProductListNew companyId={props.location.state.company ? props.location.state.company._id : user.companyId} batch={props.location.state} />
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div >
     )
