@@ -1,16 +1,25 @@
+AGENTS
 [ ] association of agent to product
-[*] assocuation of agent to manufacturers
+[ ] agents operations in dashboard 
+[v] assign admin for agents not working
+[v] assocuation of agent to manufacturers
+[v] No need to see assign admin in agent page by manifacturer
 
+PRODUCTS
+[v] view products from all batches not working
+[ ] Redesign Product token
 [v] log data after any operation on product
+[v] Product frequency at dashboard should match company products
 
+USER
+[v] edit user
+[?] change password route
+[ ] forgot password
+[ ] reset password
+
+EXTRA
+[ ] Landing page
 [ ] notifications
 
-[ ] Recreating product token
-
-[v] edit user
-
-[?] change password route
-
-[ ] forgot password
-
-[ ] Redesign Product token
+DASHBOARD
+[v] edit company location not working
