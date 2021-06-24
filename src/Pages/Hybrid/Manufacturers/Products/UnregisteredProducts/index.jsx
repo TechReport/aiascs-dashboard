@@ -13,7 +13,7 @@ export default function UnregisteredProducts() {
     const hist = useHistory()
 
     const data = [
-        { title: 'Unregistered Products', body: unregisteredProducts.data.length, percent: '+8%', descriptions: 'The number of Unregistered products' },
+        { title: 'Unregistered Products', body: unregisteredProducts.data.length, percent: null, descriptions: 'The number of Unregistered products' },
     ]
 
     async function fetchUnregisteredProducts() {

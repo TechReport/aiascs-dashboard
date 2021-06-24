@@ -2,6 +2,7 @@ import { manufacturerAPI } from "../manufacturerAPI";
 
 import CompanyProfile from "../../../../Components/Company/Profile";
 import ProductList from "../Products/ProductList";
+import { ShowForRole } from "../../../../Components/Authentication/CheckPermission";
 
 export default function ManCompanyProfile(props) {
     return (
@@ -12,18 +13,20 @@ export default function ManCompanyProfile(props) {
                 resource='manufacture'
                 companyType='manufacture'
                 updateEvent='updateManufacturer' />
-            <div className="row mt-4">
-                <div className="col-6 ">
-                    <div className="card">
-                        <div className="h5 card-header bg-white border-0">
-                            Products
+            <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN']}>
+                <div className="row mt-4">
+                    <div className="col-6 ">
+                        <div className="card">
+                            <div className="h5 card-header bg-white border-0">
+                                Products
                         </div>
-                        <div className="card-body mt-n5 py-2 px-0">
-                            <ProductList companyId={props.location.state._id} />
+                            <div className="card-body mt-n5 py-2 px-0">
+                                <ProductList companyId={props.location.state._id} />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ShowForRole>
         </div >
     )
 }

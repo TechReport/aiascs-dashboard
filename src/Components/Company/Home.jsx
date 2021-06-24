@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import { DashboardWidgetCard } from '../Reusable'
+// import { DashboardWidgetCard } from '../Reusable'
 import {
     UserAddOutlined
 } from '@ant-design/icons';
 import { Button, Modal, Skeleton, Tag } from 'antd'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { useHistory } from 'react-router'
+import { ShowForRole } from '../Authentication/CheckPermission';
 
-export default function CompanyHome({ data, companies, resource, RegisterCompany, title }) {
+export default function CompanyHome({ companies, resource, RegisterCompany, title }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const hist = useHistory()
 
@@ -21,25 +22,27 @@ export default function CompanyHome({ data, companies, resource, RegisterCompany
 
     return (
         <div>
-            <div className='row mt-3 w-100' >
+            {/* <div className='row mt-3 w-100' >
                 {data.map(item => <DashboardWidgetCard item={item} />)}
-            </div>
+            </div> */}
 
             <div className="mt-4">
-                <div className="actions">
-                    <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
-                        {title}
-                        <UserAddOutlined className='' />
-                    </Button>
-                    <Modal title={title}
-                        // ""
-                        visible={isModalVisible}
-                        onCancel={handleCancel}
-                        footer={null}
-                        destroyOnClose={true}>
-                        <RegisterCompany />
-                    </Modal>
-                </div>
+                <ShowForRole allowedRoles={['ROLE_SUPER_ADMIN']}>
+                    <div className="actions">
+                        <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
+                            {title}
+                            <UserAddOutlined className='' />
+                        </Button>
+                        <Modal title={title}
+                            // ""
+                            visible={isModalVisible}
+                            onCancel={handleCancel}
+                            footer={null}
+                            destroyOnClose={true}>
+                            <RegisterCompany />
+                        </Modal>
+                    </div>
+                </ShowForRole>
             </div>
             <div className="mt-4">
                 <div className="row w-100">

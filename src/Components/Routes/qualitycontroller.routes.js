@@ -7,12 +7,16 @@ import {
 import { Users } from "../../Pages/Hybrid/Users";
 // import { Products, Product } from "../../Pages/Hybrid/Manufacturers";
 // import Batches from "../../Pages/Hybrid/Manufacturers/Products/Batches";
-import Products from "../../Pages/Hybrid/QualityControllers/Products";
+import AllProducts from "../../Pages/Hybrid/QualityControllers/Products";
+// import { Products } from "../../Pages/Hybrid/Manufacturers";
+
 import {
   Product,
+  Products,
   UnregisteredProducts,
 } from "../../Pages/Hybrid/Manufacturers";
 import Revoked from "../../Pages/Hybrid/QualityControllers/Products/Revoked";
+import Categories from "../../Pages/Hybrid/QualityControllers/Products/Categories";
 
 // import { Products, Users } from '../../Pages/Manufacturer';
 // import Agents from '../../Pages/Manufacturer/Agents';
@@ -43,25 +47,40 @@ const QCRoutes = [
       {
         name: "All Products",
         url: "/products",
-        component: Products,
+        component: AllProducts,
         key: 220,
+        roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
+      },
+      {
+        name: "Categorized",
+        url: "/products/category",
+        component: Categories,
+        key: 221,
         roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
       },
       {
         name: "Revoked",
         url: "/products/revoked",
         component: Revoked,
-        key: 221,
+        key: 222,
         roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
       },
       {
         name: "Unregistered",
         url: "/report/product",
         component: UnregisteredProducts,
-        key: 222,
+        key: 223,
         roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
       },
     ],
+  },
+  {
+    name: "Categorized",
+    url: "/products/category/batch",
+    component: Products,
+    key: 221,
+    sidebar: false,
+    roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
   },
   {
     name: "Reports",
@@ -79,6 +98,14 @@ const QCRoutes = [
   {
     name: "Product",
     url: "/products/:id",
+    component: Product,
+    sidebar: false,
+    roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
+    category: 1,
+  },
+  {
+    name: "Product",
+    url: "/products/category/products/:id",
     component: Product,
     sidebar: false,
     roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],

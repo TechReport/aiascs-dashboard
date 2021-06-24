@@ -16,7 +16,8 @@ export default function AgentsCompanyProfile(props) {
             <CompanyProfile
                 companyData={props.location.state}
                 companyAPI={agentsCompanyAPI}
-                companyType='productAgent'
+                companyType='agents'
+                // companyType='productAgent'
                 resource='agents'
                 updateEvent='updateAgents' />
         </div >

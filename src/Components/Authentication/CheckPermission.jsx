@@ -14,10 +14,8 @@ export default function ShowForPermission({ allowedPermissions, children }) {
 
 function ShowForRole({ allowedRoles, children }) {
     const { state } = useContext(AuthContext)
-    // console.log(state)
     // let isPermitted = state.currentUser.role.genericName === allowedRoles
     let isPermitted = allowedRoles.some(e => e === state.currentUser.role.genericName)
-    console.log(isPermitted)
 
     if (isPermitted) {
         return children;

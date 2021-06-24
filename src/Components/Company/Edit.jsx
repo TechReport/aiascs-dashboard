@@ -25,7 +25,8 @@ export default function Edit({ data, isModalVisible, handleCancel, companyAPI, c
         console.log(companyDetails)
         setLoading(true)
         setError({ status: false, message: '', descriptions: '' })
-        await companyAPI.updateOne(resource === 'agents' ? 'productAgent' : resource, companyDetails, data._id)
+        // await companyAPI.updateOne(resource === 'agents' ? 'productAgent' : resource, companyDetails, data._id)
+        await companyAPI.updateOne(resource, companyDetails, data._id)
             .then(res => {
                 console.log(res)
                 companyDetails = ''
@@ -72,41 +73,41 @@ export default function Edit({ data, isModalVisible, handleCancel, companyAPI, c
                             label="Company Name"
                             name="name"
                             initialValue={data.name}
-                            rules={[{ required: true, message: "Please input User's First Name!" }]}>
-                            <Input placeholder='Enter Manufacturing Company Name' />
+                            rules={[{ required: true, message: "Please input Companies Recognized Name!" }]}>
+                            <Input placeholder='Enter Company Name' />
                         </Form.Item>
                         <Form.Item
                             label="Registration No"
                             name="regno"
                             initialValue={data.regno}
-                            rules={[{ required: true, message: 'Please input your username!' }]}>
-                            <Input />
+                            rules={[{ required: true, message: 'Please input Companies Brela registration Number!' }]}>
+                            <Input placeholder='Enter Companies Brela Registation Number' />
                         </Form.Item>
                         <Form.Item
                             label="Email"
                             name="email"
                             initialValue={data.email}
-                            rules={[{ required: true, message: 'Please input your username!' }]}>
-                            <Input />
+                            rules={[{ required: true, message: 'Please input Companies valid Email!' }]}>
+                            <Input placeholder='Enter Company Email' />
                         </Form.Item>
                         <Form.Item
                             label="Phone Number"
                             name="phonenumber"
                             initialValue={data.phonenumber}
                             rules={[{ required: true, message: 'Please input your Phone number!' }]}>
-                            <Input type='number' />
+                            <Input type='number' placeholder='Input Companies Phone Number' />
                         </Form.Item>
-                        <Form.Item
+                        {/* <Form.Item
                             label="Location"
                             name="location"
                             rules={[{ required: true, message: 'Please input your location!' }]}>
                             <Input />
-                        </Form.Item>
+                        </Form.Item> */}
 
                         <Form.Item {...tailLayout}>
                             <Space size='middle' direction='horizontal'>
                                 <Button type="ghost" htmlType="reset" >
-                                    Clear Inputs
+                                    Reset
                                 </Button>
                                 <Button type="primary" htmlType="submit" loading={loading}>
                                     Submit

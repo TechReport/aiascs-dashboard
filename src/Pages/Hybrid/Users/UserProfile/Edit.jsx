@@ -3,7 +3,7 @@ import { Button, Input, Select, Radio, Space, Form, Alert, notification, Modal }
 
 import { userAPI } from '../userAPI';
 
-export default function EditUser({ data, isModalVisible, handleCancel, role }) {
+export default function EditUser({ data, isModalVisible, handleCancel, role, updateUser }) {
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
     const [loading, setLoading] = useState(false)
 
@@ -56,6 +56,8 @@ export default function EditUser({ data, isModalVisible, handleCancel, role }) {
         await userAPI.updateOne('user', { userDetails }, data._id)
             .then(res => {
                 userDetails = ''
+                console.log(res)
+                updateUser(res)
                 openNotification()
             })
             .catch(err => {
@@ -71,8 +73,15 @@ export default function EditUser({ data, isModalVisible, handleCancel, role }) {
 
     const openNotification = () => {
         notification.success({
-            message: 'User Updated Successfully',
-            placement: 'bottomLeft'
+            message: 'User Updated Successfully.',
+            placement: 'bottomLeft',
+            // onClose: () => {
+            //     notification.info({
+            //         message: 'Updated user information will be seen in new session.',
+            //         placement: 'bottomLeft',
+            //         duration: 0
+            //     });
+            // }
         });
     };
 
@@ -156,7 +165,7 @@ export default function EditUser({ data, isModalVisible, handleCancel, role }) {
                         <Form.Item {...tailLayout}>
                             <Space size='middle' direction='horizontal'>
                                 <Button type="ghost" htmlType="reset" >
-                                    Clear Inputs
+                                    Reset
                                 </Button>
                                 <Button type="primary" htmlType="submit" loading={loading}>
                                     Submit

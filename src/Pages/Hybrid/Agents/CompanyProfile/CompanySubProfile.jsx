@@ -5,11 +5,12 @@ import { Affix, Button, PageHeader, Tag, Popover } from "antd";
 
 import moment from 'moment';
 import {
-    EditOutlined,
+    // EditOutlined,
     PlusOutlined,
 } from '@ant-design/icons';
 import { agentsCompanyAPI } from '../agentsCompanyAPI';
 import { AuthContext } from '../../../../Context/AuthContext';
+import { ShowForRole } from '../../../../Components/Authentication/CheckPermission';
 
 export default function CompanySubProfile(props) {
     const { state } = useContext(AuthContext)
@@ -81,14 +82,16 @@ export default function CompanySubProfile(props) {
                                         <Popover content='view admin'>
                                             <Tag color='success' style={{ cursor: 'pointer' }} onClick={() => hist.replace(`/user/${agentCompany.admin._id}`, agentCompany.admin)}>{`${agentCompany.admin.firstName} ${agentCompany.admin.lastName}`}</Tag>
                                         </Popover>
-                                        <Button size='small' type='text' onClick={() => { }}><EditOutlined /></Button>
+                                        {/* <Button size='small' type='text' onClick={() => { }}><EditOutlined /></Button> */}
                                     </>
                                     :
                                     <>
                                         <Tag color='lime'>Not assigned</Tag>
-                                        <Popover content='Assign Admin'>
-                                            <Button size='small' type='text' onClick={() => { }}><PlusOutlined style={{ fontSize: '15px' }} /></Button>
-                                        </Popover>
+                                        <ShowForRole allowedRoles={['ROLE_SUPER_ADMIN']}>
+                                            <Popover content='Assign Admin'>
+                                                <Button size='small' type='text' onClick={() => { }}><PlusOutlined style={{ fontSize: '15px' }} /></Button>
+                                            </Popover>
+                                        </ShowForRole>
                                     </>
                                 }
                             </p>

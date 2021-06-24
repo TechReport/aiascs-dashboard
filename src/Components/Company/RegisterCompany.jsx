@@ -111,7 +111,7 @@ export default function RegisterCompany({ handlerAPI, resource, updateEvent }) {
             <Form.Item {...tailLayout}>
                 <Space size='middle' direction='horizontal'>
                     <Button type="ghost" htmlType="reset" >
-                        Clear Inputs
+                        Reset
                     </Button>
                     <Button type="primary" htmlType="submit" loading={loading}>
                         Submit

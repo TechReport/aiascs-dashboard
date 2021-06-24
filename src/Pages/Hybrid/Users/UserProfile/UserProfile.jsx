@@ -6,7 +6,7 @@ import {
     UserOutlined,
     ManOutlined,
     WomanOutlined,
-    EditOutlined
+    // EditOutlined
 } from '@ant-design/icons'
 import EditUser from './Edit'
 
@@ -20,9 +20,9 @@ export default function UserProfile(props) {
 
     const [editUserModal, setEditUserModal] = useState(false)
 
-    function assignCompany() {
-        alert('on development')
-    }
+    // function assignCompany() {
+    //     alert('on development')
+    // }
 
     async function deleteUser() {
         const deleteUser = window.confirm('Confirm to delete user')
@@ -61,6 +61,7 @@ export default function UserProfile(props) {
                 <EditUser
                     isModalVisible={editUserModal}
                     handleCancel={() => setEditUserModal(false)}
+                    updateUser={setUser}
                     data={user}
                 />
             </Affix>
@@ -81,7 +82,7 @@ export default function UserProfile(props) {
                                         :
                                         <>
                                             <Tag>Not Assigned</Tag>
-                                            <Button type='text' size='small' onClick={assignCompany}><EditOutlined /></Button>
+                                            {/* <Button type='text' size='small' onClick={assignCompany}><EditOutlined /></Button> */}
                                         </>
                                     }
                                 </p>

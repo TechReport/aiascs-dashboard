@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Button, Input, Select, Radio, Space, Form, Alert, notification } from 'antd';
 import { userAPI } from './userAPI'
 import eventemitter from '../../../Services/EventEmitter'
 import LocationSelect from './LocationSelect';
+import { AuthContext } from '../../../Context/AuthContext';
 
 export default function AddNewUser({ handleOk, role }) {
+    const { state } = useContext(AuthContext)
     const [gender, setGender] = useState('male')
     const [roles, setRoles] = useState({ loading: false, data: [] })
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
@@ -32,12 +34,16 @@ export default function AddNewUser({ handleOk, role }) {
             return setLocationError({ status: true, message: 'Please select location' })
         }
         userDetails.location = location
+        userDetails.companyId = state.currentUser.companyId
+        userDetails.onModel = state.currentUser.onModel
 
+        // console.log(state)
+        // console.log(userDetails)
         setLoading(true)
         setError({ status: false, message: '', descriptions: '' })
         await userAPI.post('user/register', { newUser: userDetails })
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 userDetails = ''
                 openNotification({ message: res.message })
                 eventemitter.emit('updateUsers')
@@ -172,7 +178,7 @@ export default function AddNewUser({ handleOk, role }) {
             <Form.Item {...tailLayout}>
                 <Space size='middle' direction='horizontal'>
                     <Button type="ghost" htmlType="reset" >
-                        Clear Inputs
+                        Reset
                     </Button>
                     <Button type="primary" htmlType="submit" loading={loading}>
                         Submit

@@ -1,4 +1,4 @@
-import { Button, Popover, Skeleton, Tag } from 'antd'
+import { Popover, Skeleton, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { productAPI } from './productAPI'
@@ -10,7 +10,13 @@ import moment from 'moment'
 import { useHistory } from 'react-router'
 import toBase64 from '../../../../Services/Utilities'
 import { ShowForRole } from '../../../../Components/Authentication/CheckPermission'
-
+/**
+ * ProductList Component
+ * @param {String} param0 companyId
+ * @param {String} param0 rest
+ * @returns component
+ * @deprecated
+ */
 export default function ProductList({ companyId, extra }) {
     console.log('i wonder')
     console.log(companyId)
@@ -46,29 +52,30 @@ export default function ProductList({ companyId, extra }) {
 
     return (
         <div className='row'>
-            <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN', 'ROLE_QUALITY_CONTROLLER_ADMIN']}>
-                <div className="col-xl-8">
+            <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN']}>
+                {/* <div className="col-xl-8"> */}
+                <div className="col">
                     {products.loading ?
                         <Skeleton active />
                         :
                         <BootstrapTable options={{ onRowClick: (row) => hist.push(`products/${row._id}`, row) }} trStyle={{ padding: '0px', cursor: 'pointer' }} data={products.data} pagination search scrollTop='Top' striped hover searchPlaceholder='Search products' trClassName='bg-inf ' tableHeaderClass='' >
                             <TableHeaderColumn dataField='name' isKey width='150'>Name</TableHeaderColumn>
                             <TableHeaderColumn dataField='qrcode' width='90' dataFormat={formatQRCode}>QR Code</TableHeaderColumn>
-                            <TableHeaderColumn dataField='isRevoked' width='90' dataFormat={(cell) => cell ? <Tag color='magenta'>True</Tag> : <Tag color='cyan'>False</Tag>}>Revoked ?</TableHeaderColumn>
+                            <TableHeaderColumn dataField='isRevoked' width='90' dataFormat={(cell) => cell ? <Tag color='magenta'>Invalid</Tag> : <Tag color='cyan'>Valid</Tag>}>Product Status</TableHeaderColumn>
                             <TableHeaderColumn dataField='createdAt' dataSort={true} dataFormat={(cell) => moment(cell).format('DD-MM-YYYY')} width='100' >Registered At</TableHeaderColumn>
                             <TableHeaderColumn dataField='expiry' dataFormat={(cell) => moment(cell).format('DD-MM-YYYY')} width='100' >Expiry</TableHeaderColumn>
                         </BootstrapTable>
                     }
                 </div>
             </ShowForRole>
-            <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN']}>
+            {/* <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN']}>
                 <div className="col-xl-4">
                     <div className="card">
                         <div className="card-body border-bottom">
                             <p>Total Scanned Products: <Tag color='gold'>{products.data.length}</Tag></p>
                             <p>Total Revoked Products: <Tag color='gold'>{products.data.length}</Tag></p>
                             <p>Total Expired Products: <Tag color='gold'>{products.data.length}</Tag></p>
-                            {/* <p>Total Products: <Tag color='gold'>{products.data.length}</Tag></p> */}
+                            <p>Total Products: <Tag color='gold'>{products.data.length}</Tag></p>
                         </div>
                         <div className="card-body">
                             Total Products: <Tag color='gold'>{products.data.length}</Tag>
@@ -81,7 +88,7 @@ export default function ProductList({ companyId, extra }) {
                         </div>
                     </div>
                 </div>
-            </ShowForRole>
+            </ShowForRole> */}
         </div>
     )
 }

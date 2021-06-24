@@ -1,8 +1,8 @@
-import { Settings } from "../../Pages/Settings";
+// import { Settings } from "../../Pages/Settings";
 
 import {
   // DesktopOutlined,
-  SettingOutlined,
+  //   SettingOutlined,
   UserOutlined,
   FundProjectionScreenOutlined,
   SafetyCertificateOutlined,
@@ -50,7 +50,7 @@ const adminRoutes = [
     comments: "Settings endpoint",
     category: 1,
     sidebar: true,
-    roles: ["ROLE_SUPER_ADMIN"],
+    roles: ["ROLE_SUPER_ADMIN", "ROLE_QUALITY_CONTROLLER_ADMIN"],
     key: 13,
     protected: true,
   },
@@ -111,18 +111,18 @@ const adminRoutes = [
     key: 14,
     protected: true,
   },
-  {
-    name: "Settings",
-    component: Settings,
-    url: "/settings",
-    Icon: SettingOutlined,
-    comments: "Settings endpoint",
-    category: 2,
-    sidebar: true,
-    roles: ["ROLE_SUPER_ADMIN", "ROLE_MANUFACTURING_COMPANY_ADMIN"],
-    key: 50,
-    protected: true,
-  },
+  //   {
+  //     name: "Settings",
+  //     component: Settings,
+  //     url: "/settings",
+  //     Icon: SettingOutlined,
+  //     comments: "Settings endpoint",
+  //     category: 2,
+  //     sidebar: true,
+  //     roles: ["ROLE_SUPER_ADMIN", "ROLE_MANUFACTURING_COMPANY_ADMIN"],
+  //     key: 50,
+  //     protected: true,
+  //   },
 
   // Not in sidebar
   {
@@ -130,7 +130,7 @@ const adminRoutes = [
     url: "/manage/manufacture/profile/:id",
     component: ManCompanyProfile,
     sidebar: false,
-    roles: ["ROLE_SUPER_ADMIN"],
+    roles: ["ROLE_SUPER_ADMIN", "ROLE_QUALITY_CONTROLLER_ADMIN"],
     category: 1,
   },
   {

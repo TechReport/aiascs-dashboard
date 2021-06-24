@@ -11,7 +11,7 @@ import moment from "moment";
 import Modal from "antd/lib/modal/Modal";
 import { userAPI } from '../../Pages/Hybrid/Users/userAPI';
 import AddNewUser from "./AddNewUser";
-import ShowForPermission from "../../Components/Authentication/CheckPermission";
+import ShowForPermission, { ShowForRole } from "../../Components/Authentication/CheckPermission";
 import AssignAdmin from "./AssignAdmin";
 import Users from "./Users";
 import eventEmitter from "../../Services/EventEmitter";
@@ -115,11 +115,12 @@ export default function CompanyProfile({ companyData, companyAPI, companyType, r
                     className="site-page-header bg-light"
                     onBack={() => hist.goBack()}
                     title={company.name}
-                    extra={<>
-                        <Button type='ghost' onClick={showEditModal} >Edit</Button>
-                        {/* <Button type='ghost' >Deactivate</Button> */}
-                        <Button type='danger' loading={loading} onClick={showDeleteCompanyModal}>Delete</Button>
-                    </>}
+                    extra={
+                        <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN', 'ROLE_SUPER_ADMIN']}>
+                            <Button type='ghost' onClick={showEditModal} >Edit</Button>
+                            {/* <Button type='ghost' >Deactivate</Button> */}
+                            <Button type='danger' loading={loading} onClick={showDeleteCompanyModal}>Delete</Button>
+                        </ShowForRole>}
                     subTitle={<Tag color='gold'>{company._id}</Tag>}
                 />
                 <Edit
@@ -167,14 +168,18 @@ export default function CompanyProfile({ companyData, companyAPI, companyType, r
                                         <Popover content='view admin'>
                                             <Tag color='success' style={{ cursor: 'pointer' }} onClick={() => hist.replace(`/user/${company.admin._id}`, company.admin)}>{`${company.admin.firstName} ${company.admin.lastName}`}</Tag>
                                         </Popover>
-                                        <Button size='small' type='text' onClick={() => setIsAssignAdminModalVisible(true)}><EditOutlined /></Button>
+                                        <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN', 'ROLE_SUPER_ADMIN']}>
+                                            <Button size='small' type='text' onClick={() => setIsAssignAdminModalVisible(true)}><EditOutlined /></Button>
+                                        </ShowForRole>
                                     </>
                                     :
                                     <>
                                         <Tag color='lime'>Not assigned</Tag>
-                                        <Popover content='Assign Admin'>
-                                            <Button size='small' type='text' onClick={() => setIsAssignAdminModalVisible(true)}><PlusOutlined style={{ fontSize: '15px' }} /></Button>
-                                        </Popover>
+                                        <ShowForRole allowedRoles={['ROLE_MANUFACTURING_COMPANY_ADMIN', 'ROLE_SUPER_ADMIN']}>
+                                            <Popover content='Assign Admin'>
+                                                <Button size='small' type='text' onClick={() => setIsAssignAdminModalVisible(true)}><PlusOutlined style={{ fontSize: '15px' }} /></Button>
+                                            </Popover>
+                                        </ShowForRole>
                                     </>
                                 }
                                 <Modal
@@ -208,7 +213,9 @@ export default function CompanyProfile({ companyData, companyAPI, companyType, r
                                     :
                                     <div className=''>
                                         <Tag color='lime'>Admin is Not assigned</Tag> <br />
-                                        <Button size='small' className='mt-2' type='primary' onClick={showAssignAdminModal}>Assign Admin</Button>
+                                        <ShowForRole allowedRoles={['ROLE_SUPER_ADMIN', 'ROLE_MANUFACTURING_COMPANY_ADMIN']}>
+                                            <Button size='small' className='mt-2' type='primary' onClick={showAssignAdminModal}>Assign Admin</Button>
+                                        </ShowForRole>
                                     </div>
                                 }
                             </div>
@@ -223,7 +230,7 @@ export default function CompanyProfile({ companyData, companyAPI, companyType, r
                             <div className='d-flex p-0'>
                                 <h5>Users</h5>
                                 <ShowForPermission allowedPermissions='createUser'>
-                                    <Button size='small' type='primary' className='ml-auto' onClick={() => setIsAddUserModalVisible(true)}>Add Users</Button>
+                                    {/*TODO <Button size='small' type='primary' className='ml-auto' onClick={() => setIsAddUserModalVisible(true)}>Add Users</Button> */}
 
                                     <Modal title="Add User"
                                         visible={isAddUserModalVisible}
