@@ -6,6 +6,7 @@ import {
 import { Button, Modal, Skeleton, Tag } from 'antd'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { useHistory } from 'react-router'
+import { ShowForRole } from '../Authentication/CheckPermission';
 
 export default function CompanyHome({ companies, resource, RegisterCompany, title }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -26,20 +27,22 @@ export default function CompanyHome({ companies, resource, RegisterCompany, titl
             </div> */}
 
             <div className="mt-4">
-                <div className="actions">
-                    <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
-                        {title}
-                        <UserAddOutlined className='' />
-                    </Button>
-                    <Modal title={title}
-                        // ""
-                        visible={isModalVisible}
-                        onCancel={handleCancel}
-                        footer={null}
-                        destroyOnClose={true}>
-                        <RegisterCompany />
-                    </Modal>
-                </div>
+                <ShowForRole allowedRoles={['ROLE_SUPER_ADMIN']}>
+                    <div className="actions">
+                        <Button type='ghost' size='middle' className='rounded-pill' onClick={showModal}>
+                            {title}
+                            <UserAddOutlined className='' />
+                        </Button>
+                        <Modal title={title}
+                            // ""
+                            visible={isModalVisible}
+                            onCancel={handleCancel}
+                            footer={null}
+                            destroyOnClose={true}>
+                            <RegisterCompany />
+                        </Modal>
+                    </div>
+                </ShowForRole>
             </div>
             <div className="mt-4">
                 <div className="row w-100">
