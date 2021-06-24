@@ -5,7 +5,7 @@ import { Affix, Button, PageHeader, Tag, Popover } from "antd";
 
 import moment from 'moment';
 import {
-    EditOutlined,
+    // EditOutlined,
     PlusOutlined,
 } from '@ant-design/icons';
 import { agentsCompanyAPI } from '../agentsCompanyAPI';

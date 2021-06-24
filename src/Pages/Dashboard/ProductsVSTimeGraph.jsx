@@ -30,6 +30,7 @@ export default function Graph1() {
     }
     useEffect(() => {
         getRequests()
+        // eslint-disable-next-line
     }, [])
 
     const options = {

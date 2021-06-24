@@ -23,6 +23,7 @@ export default function BatchList({ selectedCompany }) {
         return () => {
             setBatches()
         }
+        // eslint-disable-next-line
     }, [selectedCompany])
     const hist = useHistory()
 

@@ -6,7 +6,7 @@ import {
     UserOutlined,
     ManOutlined,
     WomanOutlined,
-    EditOutlined
+    // EditOutlined
 } from '@ant-design/icons'
 import EditUser from './Edit'
 
@@ -20,9 +20,9 @@ export default function UserProfile(props) {
 
     const [editUserModal, setEditUserModal] = useState(false)
 
-    function assignCompany() {
-        alert('on development')
-    }
+    // function assignCompany() {
+    //     alert('on development')
+    // }
 
     async function deleteUser() {
         const deleteUser = window.confirm('Confirm to delete user')

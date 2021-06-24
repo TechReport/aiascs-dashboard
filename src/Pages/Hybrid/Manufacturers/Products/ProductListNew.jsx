@@ -1,4 +1,4 @@
-import { Button, Popover, Skeleton, Tag } from 'antd'
+import { Popover, Skeleton, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { productAPI } from './productAPI'
