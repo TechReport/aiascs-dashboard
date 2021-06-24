@@ -185,7 +185,7 @@ export default function Batches() {
                         {batches.loading ?
                             <Skeleton active />
                             :
-                            <BootstrapTable data={batches.data} pagination search striped hover searchPlaceholder='Search batches' >
+                            <BootstrapTable options={{ onRowClick: (row) => hist.push('batches/products', row) }} data={batches.data} pagination search striped hover searchPlaceholder='Search batches' >
                                 <TableHeaderColumn dataField='_id' isKey width='250'>Batch Id</TableHeaderColumn>
                                 <TableHeaderColumn dataField='batch' dataFormat={(cell) => cell[0].name}>Name</TableHeaderColumn>
                                 <TableHeaderColumn dataField='productsCount' >Products</TableHeaderColumn>
