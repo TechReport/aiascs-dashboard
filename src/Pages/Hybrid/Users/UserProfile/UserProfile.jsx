@@ -82,7 +82,7 @@ export default function UserProfile(props) {
                                         :
                                         <>
                                             <Tag>Not Assigned</Tag>
-                                            <Button type='text' size='small' onClick={assignCompany}><EditOutlined /></Button>
+                                            {/* <Button type='text' size='small' onClick={assignCompany}><EditOutlined /></Button> */}
                                         </>
                                     }
                                 </p>
