@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ReactApexChart from 'react-apexcharts'
 import { manufacturerAPI } from '../Hybrid/Manufacturers/manufacturerAPI'
+import { AuthContext } from '../../Context/AuthContext'
 
 export default function Graph1() {
     const [categories, setCategories] = useState([])
     const [series, setSeries] = useState([])
 
+    const { state } = useContext(AuthContext)
 
     async function getRequests() {
-        await manufacturerAPI.getProductsVSTime()
+        let filter = {}
+        if (state.currentUser.companyId)
+            filter = { companyId: state.currentUser.companyId }
+
+        await manufacturerAPI.getProductsVSTime(filter)
             .then(response => {
                 let ser = []
                 let cat = []
@@ -70,7 +76,9 @@ export default function Graph1() {
     return (
         <div className="row">
             <div className="col">
-                {/* <Button onClick={getRequests}>reload</Button> */}
+                {/* <button onClick={getRequests}>reload</button> */}
+                {/* <button className="btn btn-info btn-sm" onClick={getRequests}>reload</button> */}
+
                 <ReactApexChart options={options} series={series} type="area" height={350} />
             </div>
             {/* <div className="col-4"> */}

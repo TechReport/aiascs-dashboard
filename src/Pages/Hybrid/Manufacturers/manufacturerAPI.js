@@ -49,9 +49,9 @@ manufacturerAPI.getUsers = async (companyId, select, count) => {
     });
 };
 
-manufacturerAPI.getProductsVSTime = async () => {
+manufacturerAPI.getProductsVSTime = async (filter) => {
   return await axios
-    .get("products/productVSTime/")
+    .get("products/productVSTime/", { params: filter })
     .then((res) => handleResponse(res))
     .catch((err) => handleError(err));
 };
