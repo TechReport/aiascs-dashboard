@@ -2,6 +2,7 @@ import {
   UserOutlined,
   FundProjectionScreenOutlined,
   RedEnvelopeOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 // import { Users } from '../../Pages/Manufacturer';
 import { Users } from "../../Pages/Hybrid/Users";
@@ -17,6 +18,7 @@ import {
 } from "../../Pages/Hybrid/Manufacturers";
 import Revoked from "../../Pages/Hybrid/QualityControllers/Products/Revoked";
 import Categories from "../../Pages/Hybrid/QualityControllers/Products/Categories";
+import { Settings } from "../../Pages/Settings";
 
 // import { Products, Users } from '../../Pages/Manufacturer';
 // import Agents from '../../Pages/Manufacturer/Agents';
@@ -92,6 +94,18 @@ const QCRoutes = [
     sidebar: true,
     roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
     key: 23,
+    protected: true,
+  },
+  {
+    name: "Settings",
+    component: Settings,
+    url: "/set",
+    Icon: SettingOutlined,
+    comments: "settings endpoint",
+    category: 1,
+    sidebar: true,
+    roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
+    key: 24,
     protected: true,
   },
 

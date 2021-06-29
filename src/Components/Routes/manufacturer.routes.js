@@ -1,4 +1,8 @@
-import { UserOutlined, FundProjectionScreenOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  FundProjectionScreenOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 // import { Products } from '../../Pages/Manufacturer';
 // import Agents from '../../Pages/Manufacturer/Agents';
 // import Product from '../../Pages/Manufacturer/Products/Product';
@@ -9,6 +13,7 @@ import Batches from "../../Pages/Hybrid/Manufacturers/Products/Batches";
 import AssignedAgents from "../../Pages/Hybrid/Agents/CompanyProfile/AssignedAgents";
 import AllAgents from "../../Pages/Hybrid/Agents/CompanyProfile/AllAgents";
 import CompanySubProfile from "../../Pages/Hybrid/Agents/CompanyProfile/CompanySubProfile";
+import { Settings } from "../../Pages/Settings";
 
 const manRoutes = [
   {
@@ -114,6 +119,18 @@ const manRoutes = [
         roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
       },
     ],
+  },
+  {
+    name: "Settings",
+    component: Settings,
+    url: "/sett",
+    Icon: SettingOutlined,
+    comments: "settings endpoint",
+    category: 1,
+    sidebar: true,
+    roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+    key: 24,
+    protected: true,
   },
   //   {
   //     name: "Agents",
