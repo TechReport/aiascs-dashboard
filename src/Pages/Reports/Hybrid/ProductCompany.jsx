@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment'
-import UdsmLogo from '../../Assets/logo_ud.png'
+import UdsmLogo from '../../../Assets/logo_ud.png'
 
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import ReactApexChart from 'react-apexcharts';
 
-import { reportsAPI } from './reportsApi'
+import { reportsAPI } from '../reportsApi'
 import { ConfigurationContext } from './configurations.context'
 import { Skeleton } from 'antd'
 

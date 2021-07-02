@@ -26,7 +26,7 @@ import {
 import { Agents } from "../../Pages/Hybrid/Agents";
 import AgentsCompanyProfile from "../../Pages/Hybrid/Agents/CompanyProfile";
 import Reports from "../../Pages/Reports";
-import ReportProfile from "../../Pages/Reports/profile1";
+// import ReportProfile from "../../Pages/Reports/profile1";
 import { Settings } from "../../Pages/Settings";
 
 const adminRoutes = [
@@ -88,17 +88,17 @@ const adminRoutes = [
     roles: ["ROLE_SUPER_ADMIN"],
     key: 16,
   },
-  {
-    name: "Reports",
-    component: ReportProfile,
-    url: "/reports/:id",
-    Icon: TeamOutlined,
-    comments: "agents endpoint",
-    category: 1,
-    sidebar: false,
-    roles: ["ROLE_SUPER_ADMIN"],
-    key: 16,
-  },
+  //   {
+  //     name: "Reports",
+  //     component: ReportProfile,
+  //     url: "/reports/:id",
+  //     Icon: TeamOutlined,
+  //     comments: "agents endpoint",
+  //     category: 1,
+  //     sidebar: false,
+  //     roles: ["ROLE_SUPER_ADMIN"],
+  //     key: 16,
+  //   },
   {
     name: "Unregistered Products",
     component: UnregisteredProducts,

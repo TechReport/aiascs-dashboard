@@ -1,23 +1,11 @@
-// import { Button } from 'antd'
-// import PreviewReport from './Preview'
-import PreviewReport from './PreviewReport'
-
-// import { jsPDF } from "jspdf";
-// import html2canvas from 'html2canvas'
-import { Empty, List, DatePicker, Form, Input, Button, Radio } from 'antd';
-
+import { Empty, List } from 'antd';
 import { useState } from 'react';
 import { ArrowRightOutlined } from '@ant-design/icons'
-// import LocationSelect from "../Hybrid/Users/LocationSelect";
-import reportCategories from './reportCategories';
-import Configurations from './Configurations';
-import { ConfigurationContextProvider } from './configurations.context';
 
-
-const { RangePicker } = DatePicker;
-
-// const { reportsAPI } = require('./reportsApi')
-
+import reportCategories from './Hybrid/reportCategories';
+import Configurations from './Hybrid/Configurations';
+import { ConfigurationContextProvider } from './Hybrid/configurations.context';
+import PreviewReport from './Hybrid/PreviewReport'
 
 export default function Reports() {
     const [selectedCategory, setSelectedCategory] = useState()
@@ -38,56 +26,6 @@ export default function Reports() {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
-
-
-    // const availableReports = [
-    //     {
-    //         title: 'Genuine vs Counterfeit Products',
-    //         descriptions: 'Click to View and generate all Reports on products registered on the sysytem'
-    //     },
-    //     {
-    //         title: 'ON SYSTEM USERS',
-    //         descriptions: 'Click to View and generate all Reports on products registered on the sysytem'
-    //     },
-    // ];
-    // const [reports, setReports] = useState({ loading: false, data: [] })
-
-
-    // async function fetchReports() {
-    //     setReports({ loading: true, data: [] })
-    //     await reportsAPI.getAll('reports/')
-    //         .then(data => {
-    //             console.log(data)
-    //             setReports({ loading: false, data: [] })
-    //         }).catch(error => {
-    //             console.log(error)
-    //             setReports({ loading: false, data: [] })
-    //         })
-    // }
-
-    // useEffect(() => {
-    //     fetchReports()
-    //     return () => {
-    //         setReports()
-    //     }
-    // }, [])
-
-    // function printReport() {
-    //     const input = document.getElementById('reportContents');
-    //     html2canvas(input)
-    //         .then((canvas) => {
-    //             const imgData = canvas.toDataURL('image/png');
-    //             const pdf = new jsPDF();
-    //             pdf.addImage(imgData, 'JPEG', 0, 0);
-    //             // pdf.output('dataurlnewwindow');
-    //             pdf.save("download.pdf");
-    //         })
-    //         ;
-    // }
-
-    // function alertClicked() {
-
-    // }
 
     return (
         <ConfigurationContextProvider >

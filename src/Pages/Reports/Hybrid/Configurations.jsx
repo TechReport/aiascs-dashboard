@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { DatePicker, Form, Switch } from 'antd';
-import LocationSelect from "../Hybrid/Users/LocationSelect";
+import LocationSelect from "../../Hybrid/Users/LocationSelect";
 import { ConfigurationContext } from './configurations.context';
 
 const { RangePicker } = DatePicker;
