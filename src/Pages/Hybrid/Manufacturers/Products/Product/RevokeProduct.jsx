@@ -30,7 +30,7 @@ export default function RevokeProduct({ revokeModalVisible, setRevokeModalVisibl
 
         setError({ status: '', data: '' })
         console.log(product)
-        qualityControllerAPI.revokeBatch(product.batchInfo, revokeReason)
+        qualityControllerAPI.revokeBatch(product.batch, revokeReason)
             .then(data => {
                 console.log(data)
                 message.success('Successfully Revoked Product')
@@ -60,7 +60,7 @@ export default function RevokeProduct({ revokeModalVisible, setRevokeModalVisibl
                     </tr>
                     <tr>
                         <td>Batch</td>
-                        <td><Tag color='green'>{product.batchInfoz.name}</Tag></td>
+                        <td><Tag color='green'>{product.batch.name}</Tag></td>
                     </tr>
                 </table>
                 <textarea value={revokeReason} onChange={(e) => setRevokeReason(e.target.value)} className='form-control mb-4' placeholder='Enter short descriptions on why revoking the product' rows='4'></textarea>

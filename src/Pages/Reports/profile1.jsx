@@ -50,7 +50,7 @@ export default function ReportProfile() {
         <div>
             <div className='container-fluid p-0'>
                 <div className="card" >
-                    <div className="card-body bg-dange" id='reportContents' styl={{ width: '210mm', minHeight: '297mm', marginLeft: 'auto', marginRight: 'auto' }}>
+                    <div className="card-body" id='reportContents' styl={{ width: '210mm', minHeight: '297mm', marginLeft: 'auto', marginRight: 'auto' }}>
                         <div className="titlebar d-flex justify-content-between">
                             <img src={UdsmLogo} className='img' alt='company logo' width='100px' />
                             <div className="descriptions text-right" >

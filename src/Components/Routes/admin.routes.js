@@ -1,5 +1,3 @@
-// import { Settings } from "../../Pages/Settings";
-
 import {
   // DesktopOutlined,
   //   SettingOutlined,
@@ -8,6 +6,7 @@ import {
   SafetyCertificateOutlined,
   AlertOutlined,
   TeamOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 // import { UserProfile } from "../../Pages/UserProfile";
 // import { ManCompanyProfile, Manufacturers, QualityControllers } from "../../Pages/SuperAdmin";
@@ -27,7 +26,8 @@ import {
 import { Agents } from "../../Pages/Hybrid/Agents";
 import AgentsCompanyProfile from "../../Pages/Hybrid/Agents/CompanyProfile";
 import Reports from "../../Pages/Reports";
-import ReportProfile from "../../Pages/Reports/profile1";
+// import ReportProfile from "../../Pages/Reports/profile1";
+import { Settings } from "../../Pages/Settings";
 
 const adminRoutes = [
   {
@@ -88,17 +88,17 @@ const adminRoutes = [
     roles: ["ROLE_SUPER_ADMIN"],
     key: 16,
   },
-  {
-    name: "Reports",
-    component: ReportProfile,
-    url: "/reports/:id",
-    Icon: TeamOutlined,
-    comments: "agents endpoint",
-    category: 1,
-    sidebar: false,
-    roles: ["ROLE_SUPER_ADMIN"],
-    key: 16,
-  },
+  //   {
+  //     name: "Reports",
+  //     component: ReportProfile,
+  //     url: "/reports/:id",
+  //     Icon: TeamOutlined,
+  //     comments: "agents endpoint",
+  //     category: 1,
+  //     sidebar: false,
+  //     roles: ["ROLE_SUPER_ADMIN"],
+  //     key: 16,
+  //   },
   {
     name: "Unregistered Products",
     component: UnregisteredProducts,
@@ -109,6 +109,18 @@ const adminRoutes = [
     sidebar: true,
     roles: ["ROLE_SUPER_ADMIN"],
     key: 14,
+    protected: true,
+  },
+  {
+    name: "Settings",
+    component: Settings,
+    url: "/settings",
+    Icon: SettingOutlined,
+    comments: "settings endpoint",
+    category: 1,
+    sidebar: true,
+    roles: ["ROLE_SUPER_ADMIN"],
+    key: 15,
     protected: true,
   },
   //   {

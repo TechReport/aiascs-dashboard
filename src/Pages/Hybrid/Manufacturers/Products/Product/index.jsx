@@ -1,4 +1,4 @@
-import { Affix, Button, PageHeader, Tag, Timeline, Tabs, message, Modal, Alert, Skeleton, Select, Empty } from "antd";
+import { Affix, Button, PageHeader, Tag, Timeline, Tabs, message, Modal, Alert, Skeleton, Select, Empty, Popover } from "antd";
 import {
     ClockCircleOutlined,
 } from '@ant-design/icons';
@@ -180,7 +180,21 @@ export default function Product(props) {
                                                     <Timeline.Item>
                                                         <div className="card">
                                                             <div className="card-body">
-                                                                <h5>{activity.title} Issued by <span className='text-info'>{`${activity.actor.firstName} ${activity.actor.lastName}`}</span></h5>
+                                                                <h5>{activity.title} Issued by <span className='text-info'>
+                                                                    <Popover
+                                                                        content={() => {
+                                                                            return (
+                                                                                <>
+                                                                                    <span>Email: {activity.actor.email}</span><br />
+                                                                                    <span>Position: {activity.position}</span><br />
+                                                                                    <Button onClick={() => hist.push(`/user/${activity.actor._id}`, activity.actor)}>View More</Button>
+                                                                                </>
+                                                                            )
+                                                                        }} title="Actor Details">
+                                                                        {`${activity.actor.firstName} ${activity.actor.lastName}`}
+                                                                    </Popover>
+                                                                </span>
+                                                                </h5>
                                                                 <p> {activity.descriptions}</p>
                                                                 <span className='text-muted'>{moment(activity.issuedAt).format('DD MMM, YYYY HH:mm:ss')} ({moment(activity.issuedAt).fromNow()})</span>
                                                             </div>
