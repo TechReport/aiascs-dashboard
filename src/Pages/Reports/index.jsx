@@ -13,7 +13,7 @@ export default function Reports() {
 
     const [isModalVisible, setIsModalVisible] = useState(false);
 
-    const [configurationsOBJ, setConfigurationsOBJ] = useState({ duration: '', location: {} })
+    // const [configurationsOBJ, setConfigurationsOBJ] = useState({ duration: '', location: {} })
 
     const showModal = () => {
         setIsModalVisible(true);

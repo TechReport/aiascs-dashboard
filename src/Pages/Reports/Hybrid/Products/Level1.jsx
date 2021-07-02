@@ -54,6 +54,7 @@ export default function Level1({ data, setLevelSelect }) {
             </BootstrapTable>
             {state.charts &&
                 <div className='mt-4'>
+                    {/* eslint-disable-next-line */}
                     <ReactApexChart options={states.options, { labels: labels }} series={series} type="pie" width='50%' />
                 </div>
             }

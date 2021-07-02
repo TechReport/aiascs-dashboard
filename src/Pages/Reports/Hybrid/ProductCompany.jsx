@@ -40,12 +40,13 @@ export default function ProductCompany() {
                 filter = {}
             })
     }
-
+    // eslint-disable-next-line
     useEffect(() => {
         getProductsVSCompany()
         return () => {
             setReports()
         }
+        // eslint-disable-next-line
     }, [])
 
     return (

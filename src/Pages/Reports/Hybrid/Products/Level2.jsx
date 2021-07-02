@@ -69,6 +69,7 @@ export default function Level2({ data, setLevelSelect }) {
         return () => {
             setProductBatches()
         }
+        // eslint-disable-next-line
     }, [data])
 
     useEffect(() => {
@@ -94,6 +95,7 @@ export default function Level2({ data, setLevelSelect }) {
             </BootstrapTable>
             {state.charts &&
                 <div className='mt-4'>
+                    {/* eslint-disable-next-line */}
                     <ReactApexChart options={states.options, { labels: labels }} series={series} type="pie" width='50%' />
                 </div>
             }

@@ -6,7 +6,7 @@ import { ConfigurationContext } from './configurations.context';
 const { RangePicker } = DatePicker;
 
 export default function Configurations({ location, duration, charts }) {
-    const [locationError, setLocationError] = useState({ status: false, message: '' })
+    const [locationError] = useState({ status: false, message: '' })
 
     const { state, dispatch } = useContext(ConfigurationContext)
 
