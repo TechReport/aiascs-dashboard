@@ -1,5 +1,5 @@
 import ProductCompany from './ProductCompany'
-
+import CounterfeitProducts from './CounterfeitProducts'
 
 const reportCategories = [
     {
@@ -14,10 +14,10 @@ const reportCategories = [
                 configurations: ['duration', 'charts']
             },
             {
-                title: 'Genuine vs Counterfeit Products',
+                title: 'Counterfeit Products',
                 descriptions: 'View and generate all Reports on products registered on the sysytem',
-                component: () => <div>hi there</div>,
-                configurations: ['duration', 'location']
+                component: CounterfeitProducts,
+                configurations: ['duration', 'location', 'charts']
             },
         ]
     },

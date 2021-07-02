@@ -9,6 +9,7 @@ export default function PreviewReport({ isModalVisible, handleCancel, handleOk, 
 
     function printReport() {
         const input = document.getElementById('reportContents');
+        document.getElementsByClassName('ignore')[0].classList.add('d-none')
         html2canvas(input)
             .then((canvas) => {
                 const imgData = canvas.toDataURL('image/png');
@@ -17,9 +18,10 @@ export default function PreviewReport({ isModalVisible, handleCancel, handleOk, 
                 // pdf.output('dataurlnewwindow');
                 pdf.save("download.pdf");
 
-                window.open(pdf.output('dataurlnewwindow'));
+                // window.open(pdf.output('dataurlnewwindow'));
+                document.getElementsByClassName('ignore')[0].classList.remove('d-none')
                 // pdf.autoPrint()
-                // handleOk()
+                handleOk()
             });
     }
 

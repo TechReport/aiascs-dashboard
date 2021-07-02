@@ -20,4 +20,11 @@ reportsAPI.productsVSCompany = async (filter) => {
     .catch((err) => handleError(err));
 };
 
+reportsAPI.productsVSBatch = async (filter, companyId) => {
+  return await axios
+    .get(`reports/productsvsbatch/${companyId}`, { params: filter })
+    .then((res) => handleResponse(res))
+    .catch((err) => handleError(err));
+};
+
 export { reportsAPI };

@@ -2,19 +2,21 @@ import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment'
 import UdsmLogo from '../../../Assets/logo_ud.png'
 
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
-import ReactApexChart from 'react-apexcharts';
-
 import { reportsAPI } from '../reportsApi'
 import { ConfigurationContext } from './configurations.context'
 import { Skeleton } from 'antd'
+import Level1 from './Products/Level1';
+import Level2 from './Products/Level2'
 
 export default function ProductCompany() {
     const [reports, setReports] = useState({ loading: false, data: [] })
-
     const { state } = useContext(ConfigurationContext)
-    console.log(state)
+    const [levelSelect, setLevelSelect] = useState({ index: 0, data: {} })
 
+    const titles = [
+        'Product Registration Report as per COmpany for the year ending 31/12/2020.',
+        'Product Registration Report as per COmpany for the year ending 31/12/2020.'
+    ]
     async function getProductsVSCompany() {
         let filter = {}
 
@@ -25,15 +27,7 @@ export default function ProductCompany() {
                 to: moment(state.duration[1]).format()
             }
         }
-        // if (state.location) {
-        //     console.log(moment(state.location[0]).format())
-        //     filter = {
-        //         ...filter,
-        //         location: state.location
-        //     }
-        // }
         setReports({ loading: true, data: [] })
-        console.log(filter)
 
         await reportsAPI.productsVSCompany(filter)
             .then(data => {
@@ -53,40 +47,7 @@ export default function ProductCompany() {
             setReports()
         }
     }, [])
-    const [series, setSeries] = useState([])
-    const [labels, setLabels] = useState([])
 
-    useEffect(() => {
-        setSeries(reports.data.map(item => item.count))
-        setLabels(reports.data.map(item => item.company))
-    }, [reports.data])
-
-    const states = {
-        series: [14, 23,],
-        options: {
-            chart: {
-                type: 'polarArea',
-            },
-            stroke: {
-                colors: ['#fff']
-            },
-            fill: {
-                opacity: 0.8
-            },
-
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 200
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }]
-        },
-    };
     return (
         reports.loading ?
             <Skeleton active round avatar />
@@ -105,26 +66,18 @@ export default function ProductCompany() {
                             </div>
                         </div>
                         <div className="title mt-4">
-                            <h6 className='mb-5 text-center h6 text-uppercase'>Re: <u>Product Registration Report as per COmpany for the year ending 31/12/2020.</u></h6>
+                            <h6 className='mb-5 text-center h6 text-uppercase'>Re: <u>{titles[levelSelect.index]}</u></h6>
                             <p><span className='font-weight-bold'>Start Date:</span> {state.duration ? moment(state.duration[0]).format('ddd DD, MMM YYYY') : 2020}</p>
                             <p><span className='font-weight-bold'>End Date:</span> {state.duration ? moment(state.duration[1]).format('ddd DD, MMM YYYY') : '-'}</p>
                         </div>
                         <div className="report-body">
-                            <BootstrapTable trStyle={{ padding: '0px', cursor: 'pointer' }} data={reports.data} striped hover >
-                                <TableHeaderColumn width='70' dataField='sn' dataFormat={(cell, row, extra, index) => index + 1} isKey>S/N</TableHeaderColumn>
-                                <TableHeaderColumn dataField='company' >Company Name</TableHeaderColumn>
-                                <TableHeaderColumn dataField='count' >Product Count</TableHeaderColumn>
-                                <TableHeaderColumn dataField='count' dataFormat={(cell, row, a, b) => {
-                                    let sum = reports.data.reduce((a, b) => +a + +b.count, 0);
-                                    return `${Math.round((cell / sum) * 100)} %`
-                                }}>Percentage Distribution</TableHeaderColumn>
-                            </BootstrapTable>
+                            {levelSelect.index === 0 &&
+                                <Level1 data={reports.data} setLevelSelect={setLevelSelect} />
+                            }
+                            {levelSelect.index === 1 &&
+                                <Level2 data={levelSelect.data} setLevelSelect={setLevelSelect} />
+                            }
                         </div>
-                        {state.charts &&
-                            <div className='mt-4'>
-                                <ReactApexChart options={states.options, { labels: labels }} series={series} type="pie" width='50%' />
-                            </div>
-                        }
                     </div>
                 </div>
             </div>
