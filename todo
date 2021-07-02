@@ -7,19 +7,20 @@ AGENTS
 
 PRODUCTS
 [v] view products from all batches not working
-[ ] Redesign Product token
+[v] Redesign Product token
 [v] log data after any operation on product
 [v] Product frequency at dashboard should match company products
 
 USER
 [v] edit user
-[?] change password route
+[v] change password route
 [ ] forgot password
 [ ] reset password
+
+DASHBOARD
+[v] edit company location not working
 
 EXTRA
 [ ] Landing page
 [ ] notifications
-
-DASHBOARD
-[v] edit company location not working
+[ ] as a super admin, you shouldnt be able to create a user for company, only admin at company creation
