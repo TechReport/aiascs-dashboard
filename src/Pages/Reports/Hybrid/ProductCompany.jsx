@@ -13,10 +13,11 @@ export default function ProductCompany() {
     const { state } = useContext(ConfigurationContext)
     const [levelSelect, setLevelSelect] = useState({ index: 0, data: {} })
 
-    const titles = [
-        'Product Registration Report as per COmpany for the year ending 31/12/2020.',
-        'Product Registration Report as per COmpany for the year ending 31/12/2020.'
-    ]
+    // const titles = [
+    //     'Product Registration Report as per COmpany for the year ending 31/12/2020.',
+    //     'Product Registration Report from ',
+    //     'Product Registration Report as per COmpany for the year ending 31/12/2020.'
+    // ]
     async function getProductsVSCompany() {
         let filter = {}
 
@@ -66,11 +67,7 @@ export default function ProductCompany() {
                                 <span className='h'>{moment(Date.now()).format('ddd DD, MMM YYYY')}</span>
                             </div>
                         </div>
-                        <div className="title mt-4">
-                            <h6 className='mb-5 text-center h6 text-uppercase'>Re: <u>{titles[levelSelect.index]}</u></h6>
-                            <p><span className='font-weight-bold'>Start Date:</span> {state.duration ? moment(state.duration[0]).format('ddd DD, MMM YYYY') : 2020}</p>
-                            <p><span className='font-weight-bold'>End Date:</span> {state.duration ? moment(state.duration[1]).format('ddd DD, MMM YYYY') : '-'}</p>
-                        </div>
+
                         <div className="report-body">
                             {levelSelect.index === 0 &&
                                 <Level1 data={reports.data} setLevelSelect={setLevelSelect} />
