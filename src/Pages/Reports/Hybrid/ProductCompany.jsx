@@ -7,6 +7,7 @@ import { ConfigurationContext } from './configurations.context'
 import { Skeleton } from 'antd'
 import Level1 from './Products/Level1';
 import Level2 from './Products/Level2'
+import Level3 from './Products/Level3'
 
 export default function ProductCompany() {
     const [reports, setReports] = useState({ loading: false, data: [] })
@@ -74,6 +75,9 @@ export default function ProductCompany() {
                             }
                             {levelSelect.index === 1 &&
                                 <Level2 data={levelSelect.data} setLevelSelect={setLevelSelect} />
+                            }
+                            {levelSelect.index === 2 &&
+                                <Level3 data={levelSelect.data} setLevelSelect={setLevelSelect} />
                             }
                         </div>
                     </div>

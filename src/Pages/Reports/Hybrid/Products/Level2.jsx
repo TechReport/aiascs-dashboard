@@ -8,6 +8,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 
 export default function Level2({ data, setLevelSelect }) {
+    // console.log(data)
     const { state } = useContext(ConfigurationContext)
     const [productBatches, setProductBatches] = useState({ loading: true, data: [] })
     const [title] = useState(
@@ -59,10 +60,10 @@ export default function Level2({ data, setLevelSelect }) {
 
         await reportsAPI.productsVSBatch(filter, data.companyId)
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setProductBatches({ loading: false, data })
             }).catch(error => {
-                console.log(error)
+                // console.log(error)
                 setProductBatches({ loading: false, data: [] })
             }).finally(() => {
                 filter = {}
@@ -94,7 +95,7 @@ export default function Level2({ data, setLevelSelect }) {
             </div>
             <p className='text-uppercase'><span className='font-weight-bold'>Company Name:</span> {data.company}</p>
             <Button className='mb-2 pb-3 ignore' onClick={() => { setLevelSelect({ index: 0, data: {} }) }} ><ArrowLeftOutlined className='' /> Back</Button>
-            <BootstrapTable trStyle={{ padding: '0px', cursor: 'pointer' }} data={productBatches.data} striped hover >
+            <BootstrapTable trStyle={{ padding: '0px', cursor: 'pointer' }} data={productBatches.data} striped hover options={{ onRowClick: (row) => setLevelSelect({ index: 2, data: { ...row, ...data } }) }} >
                 <TableHeaderColumn width='70' dataField='sn' dataFormat={(cell, row, extra, index) => index + 1} isKey>S/N</TableHeaderColumn>
                 <TableHeaderColumn dataField='batch' >Batch Name</TableHeaderColumn>
                 <TableHeaderColumn dataField='count' >Product Count</TableHeaderColumn>
