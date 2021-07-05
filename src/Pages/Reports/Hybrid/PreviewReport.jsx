@@ -13,7 +13,7 @@ export default function PreviewReport({ isModalVisible, handleCancel, handleOk, 
         html2canvas(input)
             .then((canvas) => {
                 const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF();
+                const pdf = new jsPDF("p", "mm", "a4");
                 pdf.addImage(imgData, 'JPEG', 20, 20);
                 // pdf.output('dataurlnewwindow');
                 pdf.save("download.pdf");

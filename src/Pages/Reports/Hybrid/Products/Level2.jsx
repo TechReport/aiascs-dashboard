@@ -8,8 +8,14 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 
 export default function Level2({ data, setLevelSelect }) {
+    // console.log(data)
     const { state } = useContext(ConfigurationContext)
     const [productBatches, setProductBatches] = useState({ loading: true, data: [] })
+    const [title] = useState(
+        state.duration ?
+            `Product Registration Report for ${data.company} from ${moment(state.duration[0]).format('MMMM DD, YYYY')} to ${moment(state.duration[1]).format('MMMM DD, YYYY')}` :
+            'Product Registration Report'
+    )
 
     const states = {
         series: [14, 23,],
@@ -54,10 +60,10 @@ export default function Level2({ data, setLevelSelect }) {
 
         await reportsAPI.productsVSBatch(filter, data.companyId)
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setProductBatches({ loading: false, data })
             }).catch(error => {
-                console.log(error)
+                // console.log(error)
                 setProductBatches({ loading: false, data: [] })
             }).finally(() => {
                 filter = {}
@@ -82,9 +88,14 @@ export default function Level2({ data, setLevelSelect }) {
     return (
         <>
             {/* <span className='h6'>Company Name: </span>{data.company} <br /><br /> */}
+            <div className="title mt-4">
+                <h6 className='mb-5 text-center h6 text-uppercase'>Re: <u>{title} </u></h6>
+                <p><span className='font-weight-bold'>Start Date:</span> {state.duration ? moment(state.duration[0]).format('ddd DD, MMM YYYY') : 2020}</p>
+                <p><span className='font-weight-bold'>End Date:</span> {state.duration ? moment(state.duration[1]).format('ddd DD, MMM YYYY') : '-'}</p>
+            </div>
             <p className='text-uppercase'><span className='font-weight-bold'>Company Name:</span> {data.company}</p>
             <Button className='mb-2 pb-3 ignore' onClick={() => { setLevelSelect({ index: 0, data: {} }) }} ><ArrowLeftOutlined className='' /> Back</Button>
-            <BootstrapTable trStyle={{ padding: '0px', cursor: 'pointer' }} data={productBatches.data} striped hover >
+            <BootstrapTable trStyle={{ padding: '0px', cursor: 'pointer' }} data={productBatches.data} striped hover options={{ onRowClick: (row) => setLevelSelect({ index: 2, data: { ...row, ...data } }) }} >
                 <TableHeaderColumn width='70' dataField='sn' dataFormat={(cell, row, extra, index) => index + 1} isKey>S/N</TableHeaderColumn>
                 <TableHeaderColumn dataField='batch' >Batch Name</TableHeaderColumn>
                 <TableHeaderColumn dataField='count' >Product Count</TableHeaderColumn>

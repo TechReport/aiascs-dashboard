@@ -2,6 +2,7 @@ import {
   UserOutlined,
   FundProjectionScreenOutlined,
   SettingOutlined,
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 // import { Products } from '../../Pages/Manufacturer';
 // import Agents from '../../Pages/Manufacturer/Agents';
@@ -14,6 +15,7 @@ import AssignedAgents from "../../Pages/Hybrid/Agents/CompanyProfile/AssignedAge
 import AllAgents from "../../Pages/Hybrid/Agents/CompanyProfile/AllAgents";
 import CompanySubProfile from "../../Pages/Hybrid/Agents/CompanyProfile/CompanySubProfile";
 import { Settings } from "../../Pages/Settings";
+import CompanyProfile from "../../Pages/Hybrid/CompanyProfile";
 
 const manRoutes = [
   {
@@ -119,6 +121,18 @@ const manRoutes = [
         roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
       },
     ],
+  },
+  {
+    name: "Profile",
+    component: CompanyProfile,
+    url: "/man/profile",
+    Icon: UsergroupAddOutlined,
+    comments: "Company Profile endpoint",
+    category: 1,
+    sidebar: true,
+    roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+    key: 25,
+    protected: true,
   },
   {
     name: "Settings",
