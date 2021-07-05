@@ -2,6 +2,7 @@ import {
   UserOutlined,
   FundProjectionScreenOutlined,
   SettingOutlined,
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 // import { Products } from '../../Pages/Manufacturer';
 // import Agents from '../../Pages/Manufacturer/Agents';
@@ -125,7 +126,7 @@ const manRoutes = [
     name: "Profile",
     component: CompanyProfile,
     url: "/man/profile",
-    Icon: SettingOutlined,
+    Icon: UsergroupAddOutlined,
     comments: "Company Profile endpoint",
     category: 1,
     sidebar: true,

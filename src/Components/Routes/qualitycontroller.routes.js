@@ -3,6 +3,7 @@ import {
   FundProjectionScreenOutlined,
   RedEnvelopeOutlined,
   SettingOutlined,
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 // import { Users } from '../../Pages/Manufacturer';
 import { Users } from "../../Pages/Hybrid/Users";
@@ -99,6 +100,18 @@ const QCRoutes = [
     protected: true,
   },
   {
+    name: "Profile",
+    component: CompanyProfile,
+    url: "/qc/profile",
+    Icon: UsergroupAddOutlined,
+    comments: "Companyy Profile endpoint",
+    category: 1,
+    sidebar: true,
+    roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
+    key: 25,
+    protected: true,
+  },
+  {
     name: "Settings",
     component: Settings,
     url: "/set",
@@ -108,18 +121,6 @@ const QCRoutes = [
     sidebar: true,
     roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
     key: 24,
-    protected: true,
-  },
-  {
-    name: "Profile",
-    component: CompanyProfile,
-    url: "/qc/profile",
-    Icon: SettingOutlined,
-    comments: "Companyy Profile endpoint",
-    category: 1,
-    sidebar: true,
-    roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
-    key: 25,
     protected: true,
   },
 
