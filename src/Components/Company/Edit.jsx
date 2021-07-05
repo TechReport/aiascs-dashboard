@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Input, Space, Form, Alert, notification, Modal } from 'antd';
+import eventEmitter from '../../Services/EventEmitter';
 
 export default function Edit({ data, isModalVisible, handleCancel, companyAPI, companyType, resource }) {
     const [error, setError] = useState({ status: false, message: '', descriptions: '' })
@@ -30,7 +31,7 @@ export default function Edit({ data, isModalVisible, handleCancel, companyAPI, c
             .then(res => {
                 console.log(res)
                 companyDetails = ''
-                // eventemitter.emit(updateEvent)
+                eventEmitter.emit('companyEdited')
                 openNotification()
             })
             .catch(err => {
@@ -58,7 +59,7 @@ export default function Edit({ data, isModalVisible, handleCancel, companyAPI, c
                     Register Company
                 <UserAddOutlined className='' />
                 </Button> */}
-                <Modal title="Register Manufacturing Company"
+                <Modal title='Edit Company'
                     visible={isModalVisible}
                     onCancel={handleCancel}
                     footer={null}
