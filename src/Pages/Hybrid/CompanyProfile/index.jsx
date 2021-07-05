@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { AuthContext } from '../../../Context/AuthContext'
 import ProfileTemplate from './Profile'
 import { manufacturerAPI } from '../Manufacturers/manufacturerAPI'
@@ -9,7 +9,7 @@ export default function CompanyProfile(props) {
     console.log(props.location.pathname)
     const { state } = useContext(AuthContext)
     console.log(state)
-    let companyAPI;
+    // let companyAPI;
 
     // useEffect(() => {
     //     switch (props.location.pathname) {

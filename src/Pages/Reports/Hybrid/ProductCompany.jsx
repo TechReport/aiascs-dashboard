@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment'
 // import UdsmLogo from '../../../Assets/logo_ud.png'
 import CoaTZ from '../../../Assets/logos/coatz.jpg'
-import { UserOutlined } from '@ant-design/icons'
+// import { UserOutlined } from '@ant-design/icons'
 
 import { reportsAPI } from '../reportsApi'
 import { ConfigurationContext } from './configurations.context'

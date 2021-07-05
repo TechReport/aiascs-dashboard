@@ -9,7 +9,7 @@ import {
 import moment from 'moment'
 import { useHistory } from 'react-router'
 import toBase64 from '../../../../Services/Utilities'
-import { ShowForRole } from '../../../../Components/Authentication/CheckPermission'
+// import { ShowForRole } from '../../../../Components/Authentication/CheckPermission'
 /**
  * ProductList Component
  * @param {String} param0 companyId
