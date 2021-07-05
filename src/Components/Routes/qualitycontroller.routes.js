@@ -16,9 +16,11 @@ import {
   Products,
   UnregisteredProducts,
 } from "../../Pages/Hybrid/Manufacturers";
-import Revoked from "../../Pages/Hybrid/QualityControllers/Products/Revoked";
+// import Revoked from "../../Pages/Hybrid/QualityControllers/Products/Revoked";
 import Categories from "../../Pages/Hybrid/QualityControllers/Products/Categories";
 import { Settings } from "../../Pages/Settings";
+import CompanyProfile from "../../Pages/Hybrid/CompanyProfile";
+import Reports from "../../Pages/Reports";
 
 // import { Products, Users } from '../../Pages/Manufacturer';
 // import Agents from '../../Pages/Manufacturer/Agents';
@@ -60,13 +62,13 @@ const QCRoutes = [
         key: 221,
         roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
       },
-      {
-        name: "Revoked",
-        url: "/products/revoked",
-        component: Revoked,
-        key: 222,
-        roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
-      },
+      //   {
+      //     name: "Revoked",
+      //     url: "/products/revoked",
+      //     component: Revoked,
+      //     key: 222,
+      //     roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
+      //   },
       {
         name: "Unregistered",
         url: "/report/product",
@@ -86,10 +88,10 @@ const QCRoutes = [
   },
   {
     name: "Reports",
-    component: Users,
-    url: "/reports",
+    component: Reports,
+    url: "/qc/reports",
     Icon: RedEnvelopeOutlined,
-    comments: "Users endpoint",
+    comments: "Reports endpoint",
     category: 1,
     sidebar: true,
     roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
@@ -106,6 +108,18 @@ const QCRoutes = [
     sidebar: true,
     roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
     key: 24,
+    protected: true,
+  },
+  {
+    name: "Profile",
+    component: CompanyProfile,
+    url: "/qc/profile",
+    Icon: SettingOutlined,
+    comments: "Companyy Profile endpoint",
+    category: 1,
+    sidebar: true,
+    roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
+    key: 25,
     protected: true,
   },
 

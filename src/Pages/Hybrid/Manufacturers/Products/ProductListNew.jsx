@@ -10,11 +10,13 @@ import moment from 'moment'
 import { useHistory } from 'react-router'
 import toBase64 from '../../../../Services/Utilities'
 import { ShowForRole } from '../../../../Components/Authentication/CheckPermission'
+import { reportsAPI } from '../../../Reports/reportsApi'
 
 export default function ProductList({ companyId, extra, batch, company }) {
     console.log('i wonder')
     console.log(companyId)
     const [products, setProducts] = useState({ loading: true, data: [] })
+    const [batchSummary, setBatchSummary] = useState({ loading: false, data: {} })
 
     const hist = useHistory()
 
@@ -40,13 +42,26 @@ export default function ProductList({ companyId, extra, batch, company }) {
         return fetchProducts()
     });
 
+    function fetchBatchSummary() {
+        reportsAPI.batchSummary({}, companyId, batch._id)
+            .then(data => {
+                // console.log(data)
+                setBatchSummary({ loading: false, data })
+            }).catch(error => {
+                // console.log(error)
+                setBatchSummary({ loading: false, data: [] })
+            })
+    }
+
     useEffect(() => {
         fetchProducts()
+        fetchBatchSummary()
         return () => {
             setProducts({ loading: false, data: [] })
         }
         // eslint-disable-next-line
     }, [])
+
 
     return (
         <div className='row'>
@@ -63,7 +78,7 @@ export default function ProductList({ companyId, extra, batch, company }) {
                                     </tr>
                                     <tr>
                                         <td>Batch Name</td>
-                                        <td><Tag color='gold'>{batch.batch[0].name}</Tag></td>
+                                        <td><Tag color='gold'>{batchSummary.data.batchName}</Tag></td>
                                     </tr>
                                     <tr>
                                         <td>Total Products</td>
@@ -71,15 +86,15 @@ export default function ProductList({ companyId, extra, batch, company }) {
                                     </tr>
                                     <tr>
                                         <td>Total Scanned Products</td>
-                                        <td><Tag color='gold'>{products.data.length}</Tag></td>
+                                        <td><Tag color='gold'>{batchSummary.data.scannedProducts}</Tag></td>
                                     </tr>
                                     <tr>
                                         <td>Total Revoked Products</td>
-                                        <td><Tag color='gold'>{products.data.length}</Tag></td>
+                                        <td><Tag color='gold'>{batchSummary.data.flaggedProducts}</Tag></td>
                                     </tr>
                                     <tr>
                                         <td>Total Expired Products</td>
-                                        <td><Tag color='gold'>{products.data.length}</Tag></td>
+                                        <td><Tag color='gold'>0</Tag></td>
                                     </tr>
                                 </tbody>
                             </table>

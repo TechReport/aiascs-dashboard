@@ -72,4 +72,15 @@ qualityControllerAPI.revokeBatch = async (batch, descriptions) => {
     });
 };
 
+qualityControllerAPI.updatePostalAddress = async (data, companyId) => {
+  return await axios
+    .patch(`qualitycontrollers/updatepostal/${companyId}`, data)
+    .then((res) => {
+      return handleResponse(res);
+    })
+    .catch((err) => {
+      return handleError(err);
+    });
+};
+
 export { qualityControllerAPI };
