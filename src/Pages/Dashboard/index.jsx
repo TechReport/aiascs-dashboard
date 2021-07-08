@@ -6,7 +6,7 @@ import { productAPI } from "../Hybrid/Manufacturers/Products/productAPI"
 import ProductsVSCompanyGraph from "./ProductsVSCompanyGraph"
 import ProductsVSTimeGraph from "./ProductsVSTimeGraph"
 import RegisteredVSUnregisteredProductGraph from "./registeredVSUnregisteredProductGraph"
-import VerifiedVSUnverifiedGraph from "./VerifiedVSUnverifiedGraph"
+// import VerifiedVSUnverifiedGraph from "./VerifiedVSUnverifiedGraph"
 
 export default function Dashboard() {
     const [stats, setStats] = useState({ loading: true, data: {} })

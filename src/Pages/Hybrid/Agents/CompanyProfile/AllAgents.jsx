@@ -1,22 +1,22 @@
-import { Button, Skeleton, Tag } from 'antd'
+import { Button, Skeleton } from 'antd'
 import Modal from 'antd/lib/modal/Modal'
 import moment from 'moment'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
-import { AuthContext } from '../../../../Context/AuthContext'
+// import { AuthContext } from '../../../../Context/AuthContext'
 import { agentsCompanyAPI } from '../agentsCompanyAPI'
 import RegisterCompany from '../../../../Components/Company/RegisterCompany';
 import eventEmitter from '../../../../Services/EventEmitter'
-import userEvent from '@testing-library/user-event'
+// import userEvent from '@testing-library/user-event'
 
 
 export default function AllAgents() {
     const hist = useHistory()
     const [agents, setAgents] = useState({ loading: false, data: [] })
     const [isModalVisible, setIsModalVisible] = useState(false)
-    const { state } = useContext(AuthContext)
+    // const { state } = useContext(AuthContext)
     // console.log(state.currentUser.companyId)
     function fetchAgents() {
         setAgents({ loading: true, data: [] })
@@ -86,43 +86,43 @@ export default function AllAgents() {
         </div>
     )
 
-    function formatAssociatedQN(cell, row) {
-        // console.log(cell)
-        // console.log(cell[0])
-        // console.log(state.currentUser.companyId)
-        // let as = cell.includes(item => item._id === state.currentUser.companyId)
-        // console.log(as)
-        // const arr = []
-        // arr.includes
-        if (cell.length === 0) {
-            return <Tag color='magenta'>Not associated</Tag>
-        } else {
-            return <Tag color='blue'>Associated</Tag>
+    // function formatAssociatedQN(cell, row) {
+    // console.log(cell)
+    // console.log(cell[0])
+    // console.log(state.currentUser.companyId)
+    // let as = cell.includes(item => item._id === state.currentUser.companyId)
+    // console.log(as)
+    // const arr = []
+    // arr.includes
+    // if (cell.length === 0) {
+    //     return <Tag color='magenta'>Not associated</Tag>
+    // } else {
+    //     return <Tag color='blue'>Associated</Tag>
 
-            // console.log(cell.includes({ _id: state.currentUser.companyId }))
-            // console.log('includes')
-        }
-        // let ar = []
-        // ar.incl
-        // console.log(cell)
-        // console.log(state.currentUser.companyId)
-        // return cell.includes({ _id: state.currentUser.companyId })
+    // console.log(cell.includes({ _id: state.currentUser.companyId }))
+    // console.log('includes')
+    // }
+    // let ar = []
+    // ar.incl
+    // console.log(cell)
+    // console.log(state.currentUser.companyId)
+    // return cell.includes({ _id: state.currentUser.companyId })
 
-        // return cell.contains(company => {
-        //     console.log(company._id)
-        //     if (company._id === state.currentUser.companyId) {
-        //         return (
-        //             <Tag color='gold'>Associated</Tag>
-        //         )
-        //     } else {
-        //         return <Tag color='magenta'>Not associated</Tag>
-        //     }
-        // })
-        // if (cell.length === 0) {
-        //     return <Tag color='magenta'>Not associated</Tag>
-        // } else {
+    // return cell.contains(company => {
+    //     console.log(company._id)
+    //     if (company._id === state.currentUser.companyId) {
+    //         return (
+    //             <Tag color='gold'>Associated</Tag>
+    //         )
+    //     } else {
+    //         return <Tag color='magenta'>Not associated</Tag>
+    //     }
+    // })
+    // if (cell.length === 0) {
+    //     return <Tag color='magenta'>Not associated</Tag>
+    // } else {
 
-        //     return cell.map(company => state.currentUser.companyId === company._id && <Tag color='gold'>Associated</Tag>)
-        // }
-    }
+    //     return cell.map(company => state.currentUser.companyId === company._id && <Tag color='gold'>Associated</Tag>)
+    // }
+    // }
 }
