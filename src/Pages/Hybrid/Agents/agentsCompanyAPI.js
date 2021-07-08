@@ -62,4 +62,25 @@ agentsCompanyAPI.getAssocatedToCompany = async (companyId) => {
     .catch((error) => handleError(error));
 };
 
+agentsCompanyAPI.assignProductsRange = async (
+  agentCompanyId,
+  manCompanyId,
+  productsRange
+) => {
+  return await axios
+    .post(`/agents/assignProductsRange/${agentCompanyId}`, {
+      productsRange,
+      manCompanyId,
+    })
+    .then((res) => handleResponse(res))
+    .catch((error) => handleError(error));
+};
+
+agentsCompanyAPI.getAssociatedProducts = async (companyId, manCompanyId) => {
+  return await axios
+    .get(`/agents/assignedProducts/${companyId}`, { params: { manCompanyId } })
+    .then((res) => handleResponse(res))
+    .catch((error) => handleError(error));
+};
+
 export { agentsCompanyAPI };

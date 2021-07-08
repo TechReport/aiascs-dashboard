@@ -86,12 +86,13 @@ export default function AllAgents() {
     )
 
     function formatAssociatedQN(cell, row) {
-        console.log(cell)
         if (cell.length === 0) {
             return <Tag color='magenta'>Not associated</Tag>
         } else {
-            console.log(cell.includes({ _id: state.currentUser.companyId }))
-            console.log('includes')
+            return <Tag color='blue'>Associated</Tag>
+
+            // console.log(cell.includes({ _id: state.currentUser.companyId }))
+            // console.log('includes')
         }
         // let ar = []
         // ar.incl
