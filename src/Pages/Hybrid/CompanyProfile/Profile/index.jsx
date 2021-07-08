@@ -18,7 +18,7 @@ import AssignAdmin from "../../../../Components/Company/AssignAdmin";
 // import Users from "./Users";
 import eventEmitter from "../../../../Services/EventEmitter";
 import Edit from "../../../../Components/Company/Edit";
-import LogoInput from './LogoInput'
+// import LogoInput from './LogoInput'
 // import EditAddress from "./EditAddress";
 
 /**
@@ -220,10 +220,10 @@ export default function ProfileTemplate({ companyAPI, companyType, resource, com
                                             </Modal>
                                         </p>
                                     </div>
-                                    <div className="col-3">
+                                    {/* <div className="col-3">
                                         <p><strong>Company Logo: </strong></p>
                                         <LogoInput companyId={company.data._id} logo={company.data.logo} />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>

@@ -34,4 +34,22 @@ reportsAPI.batchSummary = async (filter, companyId, batchId) => {
     .catch((err) => handleError(err));
 };
 
+reportsAPI.companiesWithRevokedProducts = async (filter) => {
+  return await axios
+    .get(`reports/companiesWithRevokedProducts`, {
+      params: { filter },
+    })
+    .then((res) => handleResponse(res))
+    .catch((err) => handleError(err));
+};
+
+reportsAPI.batchesWithCounterfeitProducts = async (filter, companyId) => {
+  return await axios
+    .get(`reports/batchesWithCounterfeitProducts`, {
+      params: { filter, companyId },
+    })
+    .then((res) => handleResponse(res))
+    .catch((err) => handleError(err));
+};
+
 export { reportsAPI };
