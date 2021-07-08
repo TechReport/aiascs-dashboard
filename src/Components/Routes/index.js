@@ -14,6 +14,7 @@ import {
 
 import { UserProfile } from "../../Pages/Hybrid/Users/UserProfile";
 import QCRoutes from "./qualitycontroller.routes";
+import agentRoutes from "./agent.routes";
 
 const sharedRoutes = [
   {
@@ -29,6 +30,7 @@ const sharedRoutes = [
       "ROLE_SUPER_ADMIN",
       "ROLE_MANUFACTURING_COMPANY_ADMIN",
       "ROLE_QUALITY_CONTROLLER_ADMIN",
+      "ROLE_AGENT_COMPANY_ADMIN",
     ],
   },
   {
@@ -60,7 +62,7 @@ const openRoutes = [
 
 // export default sharedRoutes.concat(manRoutes.concat(adminRoutes))
 export default sharedRoutes.concat(
-  manRoutes.concat(adminRoutes).concat(QCRoutes)
+  manRoutes.concat(adminRoutes).concat(QCRoutes).concat(agentRoutes)
 );
 // export default sharedRoutes.concat(adminRoutes)
 export { openRoutes };

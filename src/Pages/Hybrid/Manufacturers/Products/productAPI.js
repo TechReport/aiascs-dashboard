@@ -68,4 +68,12 @@ productAPI.activity = async (productID) => {
       return handleError(err);
     });
 };
+
+productAPI.fetchProductIDS = async (companyId) => {
+  return await axios
+    .get(`products/productIDs/${companyId}`)
+    .then((res) => handleResponse(res))
+    .catch((error) => handleError(error));
+};
+
 export { productAPI };

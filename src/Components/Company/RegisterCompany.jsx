@@ -69,20 +69,20 @@ export default function RegisterCompany({ handlerAPI, resource, updateEvent }) {
             <Form.Item
                 label="Company Name"
                 name="name"
-                rules={[{ required: true, message: "Please input User's First Name!" }]}>
+                rules={[{ required: true, message: "Please input Companies's Name!" }]}>
                 <Input placeholder='Enter Manufacturing Company Name' />
             </Form.Item>
             <Form.Item
                 label="Registration No"
                 name="regno"
-                rules={[{ required: true, message: 'Please input your username!' }]}>
+                rules={[{ required: true, message: 'Please input Registration Number!' }]}>
                 <Input placeholder='Enter Companies Registration Number' />
             </Form.Item>
             <Form.Item
                 label="Email"
                 name="email"
                 rules={[
-                    { required: true, message: 'Please input your Email!' },
+                    { required: true, message: 'Please input Companies Email!' },
                     {
                         pattern: /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                         message: "Invalid Email Format",
@@ -94,7 +94,7 @@ export default function RegisterCompany({ handlerAPI, resource, updateEvent }) {
                 label="Phone Number"
                 name="phonenumber"
                 rules={[
-                    { required: true, message: 'Please input your Phone number!' },
+                    { required: true, message: 'Please Enter Phone number!' },
                     {
                         pattern: /^[\d]{10,12}$/,
                         message: "Allowed format: 255626327561 or 0626327561",

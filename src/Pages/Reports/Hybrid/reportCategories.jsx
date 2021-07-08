@@ -11,42 +11,51 @@ const reportCategories = [
                 title: 'Company Products Distribution',
                 descriptions: 'Generate report on products-company distribution',
                 component: ProductCompany,
-                configurations: ['duration', 'charts']
+                configurations: ['duration', 'charts'],
+                allowed: ['ROLE_QUALITY_CONTROLLER_ADMIN', 'ROLE_SUPER_ADMIN']
+            },
+            {
+                title: 'Company Products Distribution',
+                descriptions: 'Generate report on products-company distribution',
+                component: () => ProductCompany({ startAt: 1 }),
+                configurations: ['duration', 'charts'],
+                allowed: ['ROLE_MANUFACTURING_COMPANY_ADMIN']
             },
             {
                 title: 'Counterfeit Products',
                 descriptions: 'View and generate all Reports on products registered on the sysytem',
                 component: CounterfeitProducts,
-                configurations: ['duration', 'location', 'charts']
+                configurations: ['duration', 'charts'],
+                allowed: ['ROLE_MANUFACTURING_COMPANY_ADMIN', 'ROLE_SUPER_ADMIN', 'ROLE_QUALITY_CONTROLLER_ADMIN']
             },
         ]
     },
-    {
-        index: 1,
-        title: 'COMPANIES',
-        descriptions: 'View and generate all Reports on products registered on the sysytem',
-        reports: [
-            // {
-            //     title: 'Genuine vs Counterfeit Products',
-            //     descriptions: 'View and generate all Reports on products registered on the sysytem',
-            //     component: () => <div>hi there</div>,
-            //     configurations: ['duration', 'charts']
-            // },
-        ]
-    },
-    {
-        index: 2,
-        title: 'ON SYSTEM USERS',
-        descriptions: 'View and generate all Reports on products registered on the sysytem',
-        reports: [
-            // {
-            //     title: 'Genuine vs Counterfeit Products',
-            //     descriptions: 'View and generate all Reports on products registered on the sysytem',
-            //     component: () => <div>hi there</div>,
-            //     configurations: ['duration', 'charts']
-            // },
-        ]
-    },
+    // {
+    //     index: 1,
+    //     title: 'COMPANIES',
+    //     descriptions: 'View and generate all Reports on products registered on the sysytem',
+    //     reports: [
+    //         // {
+    //         //     title: 'Genuine vs Counterfeit Products',
+    //         //     descriptions: 'View and generate all Reports on products registered on the sysytem',
+    //         //     component: () => <div>hi there</div>,
+    //         //     configurations: ['duration', 'charts']
+    //         // },
+    //     ]
+    // },
+    // {
+    //     index: 2,
+    //     title: 'ON SYSTEM USERS',
+    //     descriptions: 'View and generate all Reports on products registered on the sysytem',
+    //     reports: [
+    //         // {
+    //         //     title: 'Genuine vs Counterfeit Products',
+    //         //     descriptions: 'View and generate all Reports on products registered on the sysytem',
+    //         //     component: () => <div>hi there</div>,
+    //         //     configurations: ['duration', 'charts']
+    //         // },
+    //     ]
+    // },
 ];
 
 

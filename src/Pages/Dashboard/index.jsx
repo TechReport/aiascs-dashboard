@@ -97,9 +97,9 @@ export default function Dashboard() {
                     <div className="col-4">
                         <RegisteredVSUnregisteredProductGraph />
                     </div>
-                    <div className="col-4">
+                    {/* <div className="col-4">
                         <VerifiedVSUnverifiedGraph />
-                    </div>
+                    </div> */}
                     {/* <div className="col">
                         <div className="card shadow h-100">
                             <div className="card-header bg-white" style={{fontSize:'20px'}}>Registered Products</div>

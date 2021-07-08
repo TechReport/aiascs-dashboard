@@ -13,8 +13,8 @@ export default function Level2({ data, setLevelSelect }) {
     const [productBatches, setProductBatches] = useState({ loading: true, data: [] })
     const [title] = useState(
         state.duration ?
-            `Product Registration Report for ${data.company} from ${moment(state.duration[0]).format('MMMM DD, YYYY')} to ${moment(state.duration[1]).format('MMMM DD, YYYY')}` :
-            'Product Registration Report'
+            `Counterfeit Product Report Per Company  ${data.company || ''} from ${moment(state.duration[0]).format('MMMM DD, YYYY')} to ${moment(state.duration[1]).format('MMMM DD, YYYY')}` :
+            `Counterfeit Product Report Per Company ${data.company || ''}`
     )
 
     const states = {
@@ -47,6 +47,7 @@ export default function Level2({ data, setLevelSelect }) {
     const [labels, setLabels] = useState([])
 
     async function getProductsVSBatch() {
+        // console.log(data)
         let filter = {}
 
         if (state.duration) {
@@ -58,9 +59,9 @@ export default function Level2({ data, setLevelSelect }) {
         }
         setProductBatches({ loading: true, data: [] })
 
-        await reportsAPI.productsVSBatch(filter, data.companyId)
+        await reportsAPI.batchesWithCounterfeitProducts(filter, data.companyId)
             .then(data => {
-                // console.log(data)
+                console.log(data)
                 setProductBatches({ loading: false, data })
             }).catch(error => {
                 // console.log(error)
@@ -80,27 +81,26 @@ export default function Level2({ data, setLevelSelect }) {
 
     useEffect(() => {
         if (productBatches.data.length > 0) {
-            setSeries(productBatches.data.map(item => item.count))
-            setLabels(productBatches.data.map(item => item.batch))
+            setSeries(productBatches.data.map(item => item.total))
+            setLabels(productBatches.data.map(item => item.batchName))
         }
     }, [productBatches])
 
     return (
         <>
-            {/* <span className='h6'>Company Name: </span>{data.company} <br /><br /> */}
             <div className="title mt-4">
                 <h6 className='mb-5 text-center h6 text-uppercase'>Re: <u>{title} </u></h6>
                 <p><span className='font-weight-bold'>Start Date:</span> {state.duration ? moment(state.duration[0]).format('ddd DD, MMM YYYY') : 2020}</p>
                 <p><span className='font-weight-bold'>End Date:</span> {state.duration ? moment(state.duration[1]).format('ddd DD, MMM YYYY') : '-'}</p>
             </div>
-            <p className='text-uppercase'><span className='font-weight-bold'>Company Name:</span> {data.company}</p>
+            <p className='text-uppercase'><span className='font-weight-bold'>Company Name:</span> {data.companyName}</p>
             <Button className='mb-2 pb-3 ignore' onClick={() => { setLevelSelect({ index: 0, data: {} }) }} ><ArrowLeftOutlined className='' /> Back</Button>
-            <BootstrapTable trStyle={{ padding: '0px', cursor: 'pointer' }} data={productBatches.data} striped hover options={{ onRowClick: (row) => setLevelSelect({ index: 2, data: { ...row, ...data } }) }} >
+            <BootstrapTable trStyle={{ padding: '0px' }} data={productBatches.data} striped hover >
                 <TableHeaderColumn width='70' dataField='sn' dataFormat={(cell, row, extra, index) => index + 1} isKey>S/N</TableHeaderColumn>
-                <TableHeaderColumn dataField='batch' >Batch Name</TableHeaderColumn>
-                <TableHeaderColumn dataField='count' >Product Count</TableHeaderColumn>
-                <TableHeaderColumn dataField='count' dataFormat={(cell) => {
-                    let sum = productBatches.data.reduce((a, b) => +a + +b.count, 0);
+                <TableHeaderColumn dataField='batchName' >Batch Name</TableHeaderColumn>
+                <TableHeaderColumn dataField='total' >Product Count</TableHeaderColumn>
+                <TableHeaderColumn dataField='total' dataFormat={(cell) => {
+                    let sum = productBatches.data.reduce((a, b) => +a + +b.total, 0);
                     return `${Math.round((cell / sum) * 100)} %`
                 }}>Percentage Distribution</TableHeaderColumn>
             </BootstrapTable>

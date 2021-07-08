@@ -1,15 +1,16 @@
 import { Empty, List } from 'antd';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ArrowRightOutlined } from '@ant-design/icons'
 
 import reportCategories from './Hybrid/reportCategories';
 import Configurations from './Hybrid/Configurations';
 import { ConfigurationContextProvider } from './Hybrid/configurations.context';
 import PreviewReport from './Hybrid/PreviewReport'
-
+import { AuthContext } from '../../Context/AuthContext'
 export default function Reports() {
     const [selectedCategory, setSelectedCategory] = useState()
     const [selectedReport, setSelectedReport] = useState()
+    const { state } = useContext(AuthContext)
 
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -71,7 +72,10 @@ export default function Reports() {
                                             itemLayout="horizontal"
                                             dataSource={reportCategories[selectedCategory.index].reports}
                                             renderItem={item => (
+                                                item.allowed.includes(state.currentUser.role.genericName) &&
                                                 <List.Item className={selectedReport && selectedReport.title === item.title && `bg-light`} onClick={() => setSelectedReport(item)}>
+                                                    {console.log(item)}
+
                                                     <List.Item.Meta
                                                         title={item.title}
                                                         description={item.descriptions}
