@@ -64,6 +64,7 @@ export default function AssignProducts({ agentCompanyId, getAssociatedProducts }
 
     useEffect(() => {
         loadProductIDs()
+        // eslint-disable-next-line
     }, [])
 
     return (

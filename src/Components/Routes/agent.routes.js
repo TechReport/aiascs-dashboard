@@ -1,12 +1,12 @@
 import {
   UserOutlined,
   FundProjectionScreenOutlined,
-  SettingOutlined,
-  UsergroupAddOutlined,
+  //   SettingOutlined,
+  //   UsergroupAddOutlined,
 } from "@ant-design/icons";
 
 import { Users } from "../../Pages/Hybrid/Users";
-import { Products, Product } from "../../Pages/Hybrid/Manufacturers";
+import { Products } from "../../Pages/Hybrid/Manufacturers";
 import Batches from "../../Pages/Hybrid/Manufacturers/Products/Batches";
 
 const agentRoutes = [

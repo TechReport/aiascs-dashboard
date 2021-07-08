@@ -11,13 +11,22 @@ const reportCategories = [
                 title: 'Company Products Distribution',
                 descriptions: 'Generate report on products-company distribution',
                 component: ProductCompany,
-                configurations: ['duration', 'charts']
+                configurations: ['duration', 'charts'],
+                allowed: ['qc', 'ROLE_SUPER_ADMIN']
+            },
+            {
+                title: 'Company Products Distribution',
+                descriptions: 'Generate report on products-company distribution',
+                component: () => ProductCompany({ startAt: 1 }),
+                configurations: ['duration', 'charts'],
+                allowed: ['ROLE_MANUFACTURING_COMPANY_ADMIN']
             },
             {
                 title: 'Counterfeit Products',
                 descriptions: 'View and generate all Reports on products registered on the sysytem',
                 component: CounterfeitProducts,
-                configurations: ['duration', 'location', 'charts']
+                configurations: ['duration', 'location', 'charts'],
+                allowed: ['ROLE_MANUFACTURING_COMPANY_ADMIN', 'ROLE_SUPER_ADMIN']
             },
         ]
     },

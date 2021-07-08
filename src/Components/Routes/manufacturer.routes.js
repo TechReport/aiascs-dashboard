@@ -3,6 +3,7 @@ import {
   FundProjectionScreenOutlined,
   SettingOutlined,
   UsergroupAddOutlined,
+  TeamOutlined,
 } from "@ant-design/icons";
 // import { Products } from '../../Pages/Manufacturer';
 // import Agents from '../../Pages/Manufacturer/Agents';
@@ -16,6 +17,7 @@ import AllAgents from "../../Pages/Hybrid/Agents/CompanyProfile/AllAgents";
 import CompanySubProfile from "../../Pages/Hybrid/Agents/CompanyProfile/CompanySubProfile";
 import { Settings } from "../../Pages/Settings";
 import CompanyProfile from "../../Pages/Hybrid/CompanyProfile";
+import Reports from "../../Pages/Reports";
 
 const manRoutes = [
   {
@@ -113,13 +115,13 @@ const manRoutes = [
         key: 230,
         roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
       },
-      {
-        name: "Assigned Agents",
-        url: "/manufacturers/agents/assigned",
-        component: AssignedAgents,
-        key: 231,
-        roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
-      },
+      //   {
+      //     name: "Assigned Agents",
+      //     url: "/manufacturers/agents/assigned",
+      //     component: AssignedAgents,
+      //     key: 231,
+      //     roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+      //   },
     ],
   },
   {
@@ -133,6 +135,17 @@ const manRoutes = [
     roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
     key: 25,
     protected: true,
+  },
+  {
+    name: "Reports",
+    component: Reports,
+    url: "/man/reports",
+    Icon: TeamOutlined,
+    comments: "agents endpoint",
+    category: 1,
+    sidebar: true,
+    roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+    key: 16,
   },
   {
     name: "Settings",

@@ -8,7 +8,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 
 export default function Level2({ data, setLevelSelect }) {
-    // console.log(data)
+    console.log(data)
     const { state } = useContext(ConfigurationContext)
     const [productBatches, setProductBatches] = useState({ loading: true, data: [] })
     const [title] = useState(

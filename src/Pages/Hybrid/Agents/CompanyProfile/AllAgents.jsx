@@ -9,6 +9,7 @@ import { AuthContext } from '../../../../Context/AuthContext'
 import { agentsCompanyAPI } from '../agentsCompanyAPI'
 import RegisterCompany from '../../../../Components/Company/RegisterCompany';
 import eventEmitter from '../../../../Services/EventEmitter'
+import userEvent from '@testing-library/user-event'
 
 
 export default function AllAgents() {
@@ -16,7 +17,7 @@ export default function AllAgents() {
     const [agents, setAgents] = useState({ loading: false, data: [] })
     const [isModalVisible, setIsModalVisible] = useState(false)
     const { state } = useContext(AuthContext)
-
+    // console.log(state.currentUser.companyId)
     function fetchAgents() {
         setAgents({ loading: true, data: [] })
         agentsCompanyAPI.getAll('agents/all').then(data => {
@@ -74,8 +75,8 @@ export default function AllAgents() {
                                     {/* <TableHeaderColumn dataField='qrcode' width='90' dataFormat={formatQRCode}>QR Code</TableHeaderColumn> */}
                                     {/* <TableHeaderColumn dataField='isRevoked' width='90' dataFormat={(cell) => cell ? <Tag color='magenta'>True</Tag> : <Tag color='cyan'>False</Tag>}>Revoked ?</TableHeaderColumn> */}
                                     <TableHeaderColumn dataField='createdAt' dataSort={true} dataFormat={(cell) => moment(cell).format('DD-MM-YYYY')} widt='100' >Registered At</TableHeaderColumn>
-                                    <TableHeaderColumn dataField='expiry' dataFormat={(cell) => moment(cell).format('DD-MM-YYYY')} widt='100' >Associated At</TableHeaderColumn>
-                                    <TableHeaderColumn dataField='manufacture' dataFormat={formatAssociatedQN} widt='100' >Associated with your company?</TableHeaderColumn>
+                                    {/* <TableHeaderColumn dataField='expiry' dataFormat={(cell) => moment(cell).format('DD-MM-YYYY')} widt='100' >Associated At</TableHeaderColumn> */}
+                                    {/* <TableHeaderColumn dataField='manufacture' dataFormat={formatAssociatedQN} widt='100' >Associated with your company?</TableHeaderColumn> */}
                                 </BootstrapTable>
                             }
                         </div>
@@ -86,6 +87,13 @@ export default function AllAgents() {
     )
 
     function formatAssociatedQN(cell, row) {
+        // console.log(cell)
+        // console.log(cell[0])
+        // console.log(state.currentUser.companyId)
+        // let as = cell.includes(item => item._id === state.currentUser.companyId)
+        // console.log(as)
+        // const arr = []
+        // arr.includes
         if (cell.length === 0) {
             return <Tag color='magenta'>Not associated</Tag>
         } else {

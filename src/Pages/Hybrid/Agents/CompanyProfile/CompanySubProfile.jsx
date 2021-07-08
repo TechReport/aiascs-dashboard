@@ -23,6 +23,7 @@ export default function CompanySubProfile(props) {
     // console.log(state)
 
     const [agentsProductList, setAgentProductList] = useState({ loading: false, data: [] })
+    const [alreadyAssigned, setAlreadyAssigned] = useState(agentCompany.manufacture.some(item => item._id === state.currentUser.companyId))
 
     console.log(agentCompany)
 
@@ -44,6 +45,7 @@ export default function CompanySubProfile(props) {
             .then(data => {
                 console.log(data)
                 setAssociatedCompanies({ loading: false, data })
+                setAlreadyAssigned(true)
                 message.success('Agent assigned successfully')
             })
             .catch(error => {
@@ -64,6 +66,7 @@ export default function CompanySubProfile(props) {
 
     useEffect(() => {
         getAssociatedProducts()
+        // eslint-disable-next-line
     }, [])
     // useEffect(() => {
     //     fetchAssociatedCompanies()
@@ -80,13 +83,21 @@ export default function CompanySubProfile(props) {
                     onBack={() => hist.goBack()}
                     title={agentCompany.name}
                     extra={<>
-                        <Button loading={associatedCompanies.loading} type='ghost' onClick={() => assignToManCompany()} >Assign As Agent</Button>
+                        {/* {console.log(state.currentUser.companyId)} */}
+                        {/* {console.log(agentCompany.manufacture)} */}
+                        {alreadyAssigned ?
+                            <>
+                                <Button>Company Already Assigned</Button>
+                            </>
+                            :
+                            <Button loading={associatedCompanies.loading} type='ghost' onClick={() => assignToManCompany()} >Assign As Agent</Button>
+                        }
                         {/* <Button type='danger' onClick={() => { }}>Delete</Button> */}
                     </>}
                     subTitle={<Tag color='gold'>{agentCompany._id}</Tag>}
                 />
             </Affix>
-
+            {console.log(agentCompany)}
             <div className="card shadow-sm">
                 <div className="row w-100">
                     <div className="col-6 shadow-s">
@@ -96,7 +107,8 @@ export default function CompanySubProfile(props) {
                             <p><strong>Regisitration No: </strong>{agentCompany.regno}</p>
                             <p><strong>Email: </strong>{agentCompany.email}</p>
                             <p><strong>Phone Number: </strong>{agentCompany.phonenumber}</p>
-                            <p><strong>Location: </strong><span className='text-uppercase'>{agentCompany.location && `${agentCompany.location.region}, ${agentCompany.location.district}, ${agentCompany.location.ward}`}</span></p>
+                            {console.log(agentCompany.location)}
+                            <p><strong>Location: </strong><span className='text-uppercase'>{agentCompany.location && `${agentCompany.location.region || ''}, ${agentCompany.location.district || ''}, ${agentCompany.location.ward || ''}`}</span></p>
                             <p>
                                 <strong>Admin: </strong>
                                 {agentCompany.admin ?

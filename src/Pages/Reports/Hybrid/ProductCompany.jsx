@@ -13,7 +13,7 @@ import Level3 from './Products/Level3'
 // import Avatar from 'antd/lib/avatar/avatar'
 // import { AuthContext } from '../../../Context/AuthContext'
 
-export default function ProductCompany() {
+export default function ProductCompany({ startAt }) {
     const [reports, setReports] = useState({ loading: false, data: [] })
     const { state } = useContext(ConfigurationContext)
     const [levelSelect, setLevelSelect] = useState({ index: 0, data: {} })
@@ -52,6 +52,8 @@ export default function ProductCompany() {
     // eslint-disable-next-line
     useEffect(() => {
         getProductsVSCompany()
+        if (startAt)
+            setLevelSelect({ index: startAt, data: { company: companyDetails.name, companyId: companyDetails._id, count: 2 } })
         return () => {
             setReports()
         }
