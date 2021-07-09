@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import toBase64 from "../../../../../Services/Utilities";
 import { useHistory } from "react-router";
 // import package1 from '../../../../../Assets/package1.jpg'
-import package1 from '../../../../../Assets/package1.jpg'
+// import package1 from '../../../../../Assets/package1.jpg'
 import { productAPI } from "../productAPI";
 import { ShowForRole } from "../../../../../Components/Authentication/CheckPermission";
 // import ShowForPermission, { ShowForRole } from "../../../../../Components/Authentication/CheckPermission";
