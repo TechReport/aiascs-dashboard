@@ -1,8 +1,6 @@
 import { List, Avatar } from 'antd';
 import ErrorBoundary from 'antd/lib/alert/ErrorBoundary';
-import React, { useContext, useEffect } from 'react'
 import { UserOutlined } from '@ant-design/icons'
-import { NotificationContext } from '../../Context/NotificationContext';
 import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 // import { AuthContext } from '../../Context/AuthContext';

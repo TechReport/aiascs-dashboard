@@ -1,4 +1,4 @@
-import { Button, Tag, List, Avatar } from 'antd'
+import { List, Avatar } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import ErrorBoundary from '../../../Components/ErrorBoundary'
@@ -7,21 +7,22 @@ import { UserOutlined } from '@ant-design/icons'
 export default function Feedbacks() {
     const [feedbacks, setFeedbacks] = useState({ loading: false, data: [] })
     const [farmerFeedbacks, setFarmerFeedbacks] = useState([])
-    const [qcFeedbacks, setQcFeedbacks] = useState([])
+    // const [qcFeedbacks, setQcFeedbacks] = useState([])
 
 
     useEffect(() => {
         if (feedbacks.data.length > 0) {
             setFarmerFeedbacks(feedbacks.data.map(item => item.feedBackFrom === 'Farmer' && item))
             // setQcFeedbacks(
-            let msg = feedbacks.data.map(item => {
+            feedbacks.data.map(item => {
+                return item
                 // console.log(item.feedBackFrom)
                 // if (item.feedBackFrom === 'QualityController')
                 //     return item
                 // item.feedBackFrom === 'QualityController' ? item : ''
             })
 
-            console.log(msg)
+            // console.log(msg)
         }
     }, [feedbacks])
 

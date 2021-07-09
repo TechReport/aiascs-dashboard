@@ -7,7 +7,7 @@ import {
     BellOutlined
 } from '@ant-design/icons';
 
-import { Badge, Breadcrumb, Popover, Tag } from "antd";
+import { Badge, Popover, Tag } from "antd";
 import Notifications from "./Notifications";
 import ProfileOverview from "./ProfileOverview";
 import { NotificationContext } from "../../Context/NotificationContext";
