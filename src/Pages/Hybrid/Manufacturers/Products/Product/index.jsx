@@ -39,6 +39,7 @@ export default function Product(props) {
     // }
 
     async function getProductActivity() {
+        console.log(product)
         setProductActivity({ loading: true, data: [] })
         await productAPI.activity(product._id)
             .then(data => {
@@ -181,6 +182,7 @@ export default function Product(props) {
                                                         <div className="card">
                                                             <div className="card-body">
                                                                 <h5>{activity.title} Issued by <span className='text-info'>
+                                                                    {console.log(activity)}
                                                                     <Popover
                                                                         content={() => {
                                                                             return (

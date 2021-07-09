@@ -1,6 +1,6 @@
 import Avatar from "antd/lib/avatar/avatar";
 import { Header } from "antd/lib/layout/layout";
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 
 import {
     UserOutlined,
@@ -10,21 +10,24 @@ import {
 import { Badge, Breadcrumb, Popover, Tag } from "antd";
 import Notifications from "./Notifications";
 import ProfileOverview from "./ProfileOverview";
+import { NotificationContext } from "../../Context/NotificationContext";
 
 export default function Navbar() {
     const [visible, setVisible] = useState(false)
     const [userData] = useState(JSON.parse(sessionStorage.getItem('user')))
+
+    const { notifications } = useContext(NotificationContext)
 
     return (
         <Fragment>
             <Header className="site-layout-background bg-light" >
                 <div className='row bg-inf mr-n5 d-flex justify-content-between'>
                     <div className="bg-dange py-2">
-                        <Breadcrumb style={{ margin: '16px 0' }}>
+                        {/* <Breadcrumb style={{ margin: '16px 0' }}>
                             <Breadcrumb.Item>Home</Breadcrumb.Item>
                             <Breadcrumb.Item>List</Breadcrumb.Item>
                             <Breadcrumb.Item>App</Breadcrumb.Item>
-                        </Breadcrumb>
+                        </Breadcrumb> */}
                     </div>
 
                     {userData.companyId &&
@@ -35,10 +38,11 @@ export default function Navbar() {
                     <div className="px-3 pr-2">
                         <div className='float-left mr-3' style={{ cursor: 'pointer' }}>
                             <Popover
-                                content={<Notifications />}
+                                // trigger='click'
+                                content={<Notifications notifications={notifications} />}
                             >
                                 <BellOutlined style={{ fontSize: '18px' }} />
-                                <Badge count={0} />
+                                <Badge count={notifications.length} />
                             </Popover>
                         </div>
                         <Popover
