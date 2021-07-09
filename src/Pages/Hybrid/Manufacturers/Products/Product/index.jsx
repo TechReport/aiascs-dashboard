@@ -119,10 +119,12 @@ export default function Product(props) {
 
             <div className="card">
                 <div className="row">
+                    {/*
                     <div className="col-4">
                         <img src={package1} alt="" width='100%' />
                     </div>
-                    <div className="col-8">
+                    */}
+                    <div className="col-12">
                         <div className="row py-3">
                             <div className="col-6">
                                 <h5>Product Information</h5>
