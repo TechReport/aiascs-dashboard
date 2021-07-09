@@ -6,6 +6,7 @@ import { AuthContextProvider } from './Context/AuthContext';
 
 import 'antd/dist/antd.css';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
+import { NotificationContextProvider } from './Context/NotificationContext';
 
 const baseURL = process.env.NODE_ENV === 'production' ? 'https://secret-ridge-42311.herokuapp.com/api/v1/' : 'http://localhost:5400/api/v1/'
 
@@ -20,7 +21,9 @@ function App() {
     return (
         <BrowserRouter >
             <AuthContextProvider>
-                <MainLayout />
+                <NotificationContextProvider>
+                    <MainLayout />
+                </NotificationContextProvider>
             </AuthContextProvider>
         </BrowserRouter>
     );

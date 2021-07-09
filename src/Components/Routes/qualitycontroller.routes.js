@@ -22,6 +22,7 @@ import Categories from "../../Pages/Hybrid/QualityControllers/Products/Categorie
 import { Settings } from "../../Pages/Settings";
 import CompanyProfile from "../../Pages/Hybrid/CompanyProfile";
 import Reports from "../../Pages/Reports";
+import Feedbacks from "../../Pages/Hybrid/Feedbacks";
 
 // import { Products, Users } from '../../Pages/Manufacturer';
 // import Agents from '../../Pages/Manufacturer/Agents';
@@ -109,6 +110,18 @@ const QCRoutes = [
     sidebar: true,
     roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
     key: 25,
+    protected: true,
+  },
+  {
+    name: "Feedbacks",
+    component: Feedbacks,
+    url: "/feedbacks",
+    Icon: UsergroupAddOutlined,
+    comments: "Companyy Profile endpoint",
+    category: 1,
+    sidebar: true,
+    roles: ["ROLE_QUALITY_CONTROLLER_ADMIN"],
+    key: 29,
     protected: true,
   },
   {
