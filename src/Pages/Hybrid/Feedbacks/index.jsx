@@ -67,11 +67,10 @@ export default function Feedbacks() {
                     </div>
                 </div>
             </div>
-            <div className="col-6">
+            {/* <div className="col-6">
                 <div className="card">
                     <div className="card-header">
                         Feedback from Quality Controllers
-                        {/* <Button onClick={getFeedbacks} >fetch</Button> */}
                     </div>
                     <div className="card-body p-2" style={{ overflowY: 'auto', maxHeight: '80vh' }}>
                         <List
@@ -80,17 +79,17 @@ export default function Feedbacks() {
                             renderItem={item => (
                                 <List.Item>
                                     {console.log(item)}
-                                    {/* <List.Item.Meta
+                                    <List.Item.Meta
                                         avatar={<Avatar />}
                                         title={<a href="https://ant.design">{item.fromID}</a>}
                                         description={item.message && item.message.slice(2)}
-                                    /> */}
+                                    />
                                 </List.Item>
                             )}
                         />
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
