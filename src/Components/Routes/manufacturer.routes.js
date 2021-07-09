@@ -82,14 +82,14 @@ const manRoutes = [
         key: 221,
         roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
       },
-      {
-        name: "Reports",
-        url: "/manufacturers/report/product",
-        component: "Product",
-        key: 222,
-        sidebar:false,
-        roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
-      },
+//       {
+//         name: "Reports",
+//         url: "/manufacturers/report/product",
+//         component: "Product",
+//         key: 222,
+//         sidebar:false,
+//         roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+//       },
     ],
   },
   {
