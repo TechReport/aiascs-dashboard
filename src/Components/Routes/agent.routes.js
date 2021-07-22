@@ -6,8 +6,8 @@ import {
 } from "@ant-design/icons";
 
 import { Users } from "../../Pages/Hybrid/Users";
-import { Products } from "../../Pages/Hybrid/Manufacturers";
-import Batches from "../../Pages/Hybrid/Manufacturers/Products/Batches";
+import Products from "../../Pages/Hybrid/Agents/CompanyProfile/Products/index";
+// import Batches from "../../Pages/Hybrid/Manufacturers/Products/Batches";
 
 const agentRoutes = [
   {
@@ -22,47 +22,56 @@ const agentRoutes = [
     key: 20,
     protected: true,
   },
-
   {
     name: "Products",
-    Icon: FundProjectionScreenOutlined,
-    comments: "Products route",
-    category: 1,
-    sidebar: true,
-    key: 22,
-    roles: ["ROLE_AGENT_COMPANY_ADMIN"],
-    submenu: [
-      //   {
-      //     name: "All Products",
-      //     url: "/manufacturers/products",
-      //     component: Products,
-      //     key: 220,
-      //     roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
-      //   },
-      {
-        name: "Batches",
-        url: "/agent/product/batches",
-        component: Batches,
-        key: 221,
-        roles: ["ROLE_AGENT_COMPANY_ADMIN"],
-      },
-      {
-        name: "Reports",
-        url: "/agent/products/",
-        component: "Product",
-        key: 222,
-        roles: ["ROLE_AGENT_COMPANY_ADMIN"],
-      },
-    ],
-  },
-  {
-    name: "All Products",
-    url: "/manufacturers/batches/products",
+    url: "/agent/products/",
     component: Products,
-    key: 220,
-    sidebar: false,
+    Icon: FundProjectionScreenOutlined,
+    key: 222,
     roles: ["ROLE_AGENT_COMPANY_ADMIN"],
+    sidebar: true,
   },
+
+  //   {
+  //     name: "Products",
+  //     Icon: FundProjectionScreenOutlined,
+  //     comments: "Products route",
+  //     category: 1,
+  //     sidebar: false,
+  //     key: 22,
+  //     roles: ["ROLE_AGENT_COMPANY_ADMIN"],
+  //     submenu: [
+  //       //   {
+  //       //     name: "All Products",
+  //       //     url: "/manufacturers/products",
+  //       //     component: Products,
+  //       //     key: 220,
+  //       //     roles: ["ROLE_MANUFACTURING_COMPANY_ADMIN"],
+  //       //   },
+  //       {
+  //         name: "Batches",
+  //         url: "/agent/product/batches",
+  //         component: Batches,
+  //         key: 221,
+  //         roles: ["ROLE_AGENT_COMPANY_ADMIN"],
+  //       },
+  //       {
+  //         name: "Reports",
+  //         url: "/agent/products/",
+  //         component: Products,
+  //         key: 222,
+  //         roles: ["ROLE_AGENT_COMPANY_ADMIN"],
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     name: "All Products",
+  //     url: "/manufacturers/batches/products",
+  //     component: Products,
+  //     key: 220,
+  //     sidebar: false,
+  //     roles: ["ROLE_AGENT_COMPANY_ADMIN"],
+  //   },
 ];
 
 export default agentRoutes;
